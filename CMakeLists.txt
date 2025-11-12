@@ -85,4 +85,5 @@ target_link_libraries(circuits PRIVATE
         SDL3::SDL3
         glm::glm
         OpenGL::GL
+        glad::glad
 )
