@@ -87,8 +87,55 @@ namespace circuits {
         m_running = false;
     }
 
-    void Window::poll() {
-        //SDL_PollEvent();
+    bool Window::poll(Event& out) {
+        SDL_Event e;
+        if (!SDL_PollEvent(&e))
+            return false;
+
+        const auto mods = Modifiers{
+            .shift = (SDL_GetModState() & SDL_KMOD_SHIFT) != 0,
+            .ctrl  = (SDL_GetModState() & SDL_KMOD_CTRL)  != 0,
+            .alt   = (SDL_GetModState() & SDL_KMOD_ALT)   != 0,
+        };
+
+        switch (e.type) {
+            case SDL_EVENT_WINDOW_CLOSE_REQUESTED:
+                out = Event::WindowClose();
+                break;
+
+            case SDL_EVENT_WINDOW_RESIZED:
+                out = Event::WindowResize(e.window.data1, e.window.data2);
+                break;
+
+            case SDL_EVENT_KEY_DOWN:
+                out = Event::KeyDown(e.key.key, e.key.repeat != 0, mods);
+                break;
+
+            case SDL_EVENT_KEY_UP:
+                out = Event::KeyUp(e.key.key, mods);
+                break;
+
+            case SDL_EVENT_MOUSE_MOTION:
+                out = Event::MouseMove(e.motion.x, e.motion.y, e.motion.xrel, e.motion.yrel, mods);
+                break;
+
+            case SDL_EVENT_MOUSE_BUTTON_DOWN:
+                out = Event::MouseDown(e.button.button, e.button.x, e.button.y, mods);
+                break;
+
+            case SDL_EVENT_MOUSE_BUTTON_UP:
+                out = Event::MouseUp(e.button.button, e.button.x, e.button.y, mods);
+                break;
+
+            case SDL_EVENT_MOUSE_WHEEL:
+                out = Event::MouseWheel(e.wheel.x, e.wheel.y, mods);
+                break;
+
+            default:
+                return false;
+        }
+
+        return true;
     }
 
     void Window::swap() {

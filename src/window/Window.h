@@ -4,6 +4,8 @@
 #include <glm/vec2.hpp>
 #include <SDL3/SDL_video.h>
 
+#include "Event.h"
+
 namespace circuits {
 
     class Window {
@@ -20,7 +22,7 @@ namespace circuits {
         void resize(const glm::ivec2&) const;
 
         void close();
-        void poll();
+        static bool poll(Event&);
         void swap();
 
     private:

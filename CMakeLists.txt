@@ -70,8 +70,6 @@ add_executable(circuits
 
         src/window/Event.cpp
         src/window/Event.h
-        src/window/Key.cpp
-        src/window/Key.h
         src/window/Window.cpp
         src/window/Window.h
 
