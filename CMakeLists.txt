@@ -10,13 +10,24 @@ find_package(glm REQUIRED)
 
 add_subdirectory(libs/glad)
 
-add_executable(circuits src/main.cpp
+add_executable(circuits
+        src/base/IWidget.cpp
+        src/base/IWidget.h
+
         src/components/Gate.cpp
         src/components/Gate.h
         src/components/Toggle.cpp
         src/components/Toggle.h
         src/components/Bulb.cpp
         src/components/Bulb.h
+        src/components/Switch.cpp
+        src/components/Switch.h
+        src/components/Clock.cpp
+        src/components/Clock.h
+        src/components/Display.cpp
+        src/components/Display.h
+        src/components/Constant.cpp
+        src/components/Constant.h
 
         src/graphics/Texture.cpp
         src/graphics/Texture.h
@@ -33,8 +44,6 @@ add_executable(circuits src/main.cpp
         src/graphics/Vertex.cpp
         src/graphics/Vertex.h
 
-        src/ui/IWidget.cpp
-        src/ui/IWidget.h
         src/ui/layout/Column.cpp
         src/ui/layout/Column.h
         src/ui/layout/Row.cpp
@@ -51,6 +60,13 @@ add_executable(circuits src/main.cpp
         src/ui/widget/Divider.h
         src/ui/widget/Image.cpp
         src/ui/widget/Image.h
+        src/ui/Modifier.cpp
+        src/ui/Modifier.h
+        src/ui/Theme.cpp
+        src/ui/Theme.h
+
+        src/utils/Assets.cpp
+        src/utils/Assets.h
 
         src/window/Event.cpp
         src/window/Event.h
@@ -58,14 +74,10 @@ add_executable(circuits src/main.cpp
         src/window/Key.h
         src/window/Window.cpp
         src/window/Window.h
-        src/components/Switch.cpp
-        src/components/Switch.h
-        src/components/Clock.cpp
-        src/components/Clock.h
-        src/components/Display.cpp
-        src/components/Display.h
-        src/components/Constant.cpp
-        src/components/Constant.h
+
+        src/main.cpp
+
+
 )
 
 target_include_directories(circuits PUBLIC src)
