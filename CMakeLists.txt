@@ -78,6 +78,10 @@ add_executable(circuits
         src/window/Window.h
 
         src/main.cpp
+        src/simulator/screen/MainScreen.cpp
+        src/simulator/screen/MainScreen.h
+        src/base/IScreen.cpp
+        src/base/IScreen.h
 )
 
 target_include_directories(circuits PUBLIC src)

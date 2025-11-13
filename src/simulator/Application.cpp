@@ -1,18 +1,12 @@
 #include "Application.h"
 
-#include <format>
-#include <iostream>
-
-#include "glad/gl.h"
-#include "graphics/Color.h"
-
 namespace circuits {
 
-    const auto COLOR = Color(0xFFF09819);
-
-    Application::Application() : m_window("Circuits", glm::ivec2{800,600}){}
+    Application::Application() : m_window("Circuits", glm::ivec2{800,600}), m_screen(MainScreen()){}
 
     int Application::run() {
+        m_renderer.load();
+        m_screen.onInit();
         auto last_tile = Window::getTime();
         while (!m_window.isClosed()) {
             const auto now = Window::getTime();
@@ -27,24 +21,30 @@ namespace circuits {
                 }
             }
 
+            m_renderer.begin();
             onDraw();
+            m_renderer.end();
 
             m_window.swap();
         }
+        m_screen.onDeinit();
+        m_renderer.unload();
         return 0;
     }
 
     void Application::onUpdate(const float dt) {
-        std::cout << std::format("{:0.2f} fps",1.0 / dt) << std::endl;
+        m_screen.onUpdate(dt);
     }
 
     void Application::onDraw() {
-        glClearColor(COLOR.r(),COLOR.g(),COLOR.b(),COLOR.a());
-        glClear(GL_COLOR_BUFFER_BIT);
+        m_screen.onDraw(m_renderer);
     }
 
     void Application::onEvent(const Event& e) {
-
+        if (e.type == EventType::WindowResize) {
+            m_renderer.resize({e.window.width,e.window.height});
+        }
+        m_screen.onEvent(e);
     }
 
 }
