@@ -44,6 +44,9 @@ add_executable(circuits
         src/graphics/Vertex.cpp
         src/graphics/Vertex.h
 
+        src/simulator/Application.cpp
+        src/simulator/Application.h
+
         src/ui/layout/Column.cpp
         src/ui/layout/Column.h
         src/ui/layout/Row.cpp
@@ -74,8 +77,6 @@ add_executable(circuits
         src/window/Window.h
 
         src/main.cpp
-
-
 )
 
 target_include_directories(circuits PUBLIC src)

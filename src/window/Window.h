@@ -11,19 +11,24 @@ namespace circuits {
     class Window {
     public:
         Window();
+        Window(const char* title, const glm::ivec2& size);
         ~Window();
 
         [[nodiscard]] bool isClosed() const;
 
+        [[nodiscard]] const char* getTitle() const;
         [[nodiscard]] glm::ivec2 getPos() const;
         [[nodiscard]] glm::ivec2 getSize() const;
 
         void move(const glm::ivec2&) const;
         void resize(const glm::ivec2&) const;
+        void setTitle(const char*) const;
 
         void close();
         static bool poll(Event&);
-        void swap();
+        void swap() const;
+
+        static uint64_t getTime();
 
     private:
         static void initSDL();

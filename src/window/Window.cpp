@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <SDL3/SDL_init.h>
+#include <SDL3/SDL_timer.h>
 
 #include "glad/gl.h"
 
@@ -47,9 +48,11 @@ namespace circuits {
         SDL_GL_DestroyContext(m_context);
     }
 
-    Window::Window(){
+    Window::Window() : Window("Circuits", {640,480}){}
+
+    Window::Window(const char* title, const glm::ivec2& size) {
         initSDL();
-        m_window = SDL_CreateWindow("Circuits", 800, 600, SDL_WINDOW_OPENGL);
+        m_window = SDL_CreateWindow(title, size.x, size.y, SDL_WINDOW_OPENGL);
         initGL();
     }
 
@@ -61,6 +64,10 @@ namespace circuits {
 
     bool Window::isClosed() const {
         return !m_running;
+    }
+
+    const char* Window::getTitle() const {
+        return SDL_GetWindowTitle(m_window);
     }
 
     glm::ivec2 Window::getPos() const {
@@ -81,6 +88,10 @@ namespace circuits {
 
     void Window::resize(const glm::ivec2& size) const {
         SDL_SetWindowSize(m_window, size.x, size.y);
+    }
+
+    void Window::setTitle(const char* title) const {
+        SDL_SetWindowTitle(m_window,title);
     }
 
     void Window::close() {
@@ -138,8 +149,11 @@ namespace circuits {
         return true;
     }
 
-    void Window::swap() {
+    void Window::swap() const {
         SDL_GL_SwapWindow(m_window);
     }
 
+    uint64_t Window::getTime() {
+        return SDL_GetTicks();
+    }
 }
