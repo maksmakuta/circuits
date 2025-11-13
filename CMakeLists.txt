@@ -9,6 +9,7 @@ find_package(OpenGL REQUIRED)
 find_package(glm REQUIRED)
 
 add_subdirectory(libs/glad)
+add_subdirectory(libs/LodePNG)
 
 add_executable(circuits
         src/base/IWidget.cpp
@@ -85,4 +86,5 @@ target_link_libraries(circuits PRIVATE
         glm::glm
         OpenGL::GL
         glad::glad
+        LodePNG
 )

@@ -10,6 +10,7 @@
  - SDL3
  - GLM
  - GLAD (already included)
+ - lodePNG (already included)
 
 ## Author & License
 
