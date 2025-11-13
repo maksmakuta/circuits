@@ -4,8 +4,11 @@
 #include <iostream>
 
 #include "glad/gl.h"
+#include "graphics/Color.h"
 
 namespace circuits {
+
+    const auto COLOR = Color(0xFFF09819);
 
     Application::Application() : m_window("Circuits", glm::ivec2{800,600}){}
 
@@ -36,7 +39,7 @@ namespace circuits {
     }
 
     void Application::onDraw() {
-        glClearColor(0.85,0.85,0.85,1);
+        glClearColor(COLOR.r(),COLOR.g(),COLOR.b(),COLOR.a());
         glClear(GL_COLOR_BUFFER_BIT);
     }
 
