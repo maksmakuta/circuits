@@ -2,10 +2,46 @@
 
 namespace circuits {
 
+    const auto DEFAULT_SHADER_V = R"(
+        #version 460 core
+
+        layout(location = 0) in vec2 pos;
+        layout(location = 1) in vec2 uv;
+        layout(location = 2) in vec4 color;
+
+        uniform mat4 proj;
+
+        out vec2 v_uv;
+        out vec4 v_col;
+
+        void main(){
+            v_uv = uv;
+            v_col = col;
+            gl_Position = proj * vec4(pos, 0.0, 1.0);
+        }
+    )";
+
+    const auto DEFAULT_SHADER_F = R"(
+        #version 460 core
+
+        in vec2 v_uv;
+        in vec4 v_col;
+
+        out vec4 f_col;
+
+        void main(){
+            f_col = v_col;
+        }
+    )";
+
     void Shader::unload() {
         if (m_program)
             glDeleteProgram(m_program);
         m_program = 0;
+    }
+
+    bool Shader::loadDefault() {
+        return load(DEFAULT_SHADER_V,DEFAULT_SHADER_F);
     }
 
     bool Shader::load(const std::string& vertexSrc, const std::string& fragmentSrc) {

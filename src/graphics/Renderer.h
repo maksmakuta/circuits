@@ -96,6 +96,7 @@ namespace circuits {
         glm::mat4 m_projection{1.f};
         std::stack<State> m_states;
         std::vector<Vertex> m_vertices;
+        std::vector<uint32_t> m_indexes;
     };
 
 }

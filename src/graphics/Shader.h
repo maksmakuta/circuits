@@ -11,6 +11,7 @@ namespace circuits {
     public:
         Shader() = default;
 
+        bool loadDefault();
         bool load(const std::string& vertexSrc, const std::string& fragmentSrc);
         void unload();
 

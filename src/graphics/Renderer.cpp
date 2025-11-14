@@ -4,16 +4,19 @@
 
 namespace circuits {
 
+    constexpr auto MAX_BATCH_VERTICES = 2048;
+    constexpr auto MAX_BATCH_INDICES = 8192;
+
     Renderer::Renderer() = default;
     Renderer::~Renderer() = default;
 
     void Renderer::load() {
-        //load VAO, VBO, shader
+        m_shader.loadDefault();
         m_states.push({});
     }
 
     void Renderer::unload() {
-        //unload VAO, VBO, shader
+        m_shader.unload();
         m_states.pop();
     }
 
@@ -31,7 +34,8 @@ namespace circuits {
     }
 
     void Renderer::flush(){
-        //TODO(implement flush algorithm)
+        if (m_vertices.empty()) return;
+        m_vertices.clear();
     }
 
     void Renderer::newPath() {

@@ -6,6 +6,7 @@ namespace circuits {
 
     int Application::run() {
         m_renderer.load();
+        m_renderer.resize(m_window.getSize());
         m_screen.onInit();
         auto last_tile = Window::getTime();
         while (!m_window.isClosed()) {
