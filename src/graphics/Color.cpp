@@ -73,6 +73,10 @@ namespace circuits {
         return bytes[3] << 24 | bytes[0] << 16 | bytes[1] << 8 | bytes[2];
     }
 
+    glm::vec4 Color::asVec4() const {
+        return m_data;
+    }
+
     float Color::r() const { return m_data.r; }
     float Color::g() const { return m_data.g; }
     float Color::b() const { return m_data.b; }

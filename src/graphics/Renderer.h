@@ -1,10 +1,14 @@
 #ifndef CIRCUITS_RENDERER_H
 #define CIRCUITS_RENDERER_H
 
+#include <stack>
+
 #include "Color.h"
+#include "Font.h"
 #include "Path.h"
 #include "Shader.h"
 #include "Texture.h"
+#include "Vertex.h"
 
 namespace circuits {
 
@@ -32,16 +36,16 @@ namespace circuits {
 
         void begin();
         void end();
-
-        void beginPath();
-        void endPath();
+        void flush();
 
         void setColor(const Color&);
-        void setTexture(Texture);
+        void setColorGradient(const Color&,const Color&, float);
+        void setTexture(const Texture&);
         void setThickness(float thickness);
         void setStrokeCap(StrokeCap);
         void setStrokeJoint(StrokeJoint);
 
+        void newPath();
         void moveTo(const glm::vec2& point);
         void lineTo(const glm::vec2& point);
         void quadTo(const glm::vec2& c, const glm::vec2& p);
@@ -59,24 +63,39 @@ namespace circuits {
 
         void fill();
         void fill(const Color&);
+        void fill(const Color&, const Color&, float);
         void fill(const Texture&);
+        void fill(const Texture&, const Color&);
+        void fill(const Texture&, const glm::vec4&);
+        void fill(const Texture&, const glm::vec4&, const Color&);
+
         void stroke();
-        void stroke(const Color&, float thickness = 1.f);
+        void stroke(const Color&);
+        void stroke(float);
+        void stroke(const Color&, float = 1.f);
 
     private:
 
         struct State {
-            glm::vec4 fillColor   = {1, 1, 1, 1};
-            glm::vec4 strokeColor = {0, 0, 0, 1};
-            float strokeWidth     = 1.0f;
-            StrokeCap cap         = StrokeCap::Butt;
-            StrokeJoint joint     = StrokeJoint::Bevel;
-            Texture fillTexture   = {};
+            Color color1        = {0, 0, 0, 1};
+            Color color2        = {0, 0, 0, 1};
+            float width         = 1.0f;
+            float angle         = 0;
+            Texture texture     = {};
+            glm::vec4 uv        = {0,0,1,1};
+            StrokeCap cap       = StrokeCap::Butt;
+            StrokeJoint joint   = StrokeJoint::Bevel;
+            Font font           = {};
         };
 
+        GLuint m_vao = 0;
+        GLuint m_vbo = 0;
+        GLuint m_ibo = 0;
         Path m_path;
         Shader m_shader;
-        glm::mat4 m_projection;
+        glm::mat4 m_projection{1.f};
+        std::stack<State> m_states;
+        std::vector<Vertex> m_vertices;
     };
 
 }

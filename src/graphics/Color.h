@@ -30,6 +30,7 @@ namespace circuits {
 
         [[nodiscard]] float luminance() const;
         [[nodiscard]] uint32_t pack() const;
+        [[nodiscard]] glm::vec4 asVec4() const;
 
         [[nodiscard]] float r() const;
         [[nodiscard]] float g() const;
