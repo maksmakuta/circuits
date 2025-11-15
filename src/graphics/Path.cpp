@@ -62,7 +62,6 @@ namespace circuits {
 
     Path& Path::close() {
         if (!m_data.empty()) {
-            m_data.push_back(m_data.front());
             m_closed = true;
         }
         return *this;

@@ -212,7 +212,7 @@ namespace circuits {
         );
     }
 
-    void Renderer::stroke(const Color& c, float w){
+    void Renderer::stroke(const Color& c, const float w){
         if (m_path.size() < 2) {
             return;
         }

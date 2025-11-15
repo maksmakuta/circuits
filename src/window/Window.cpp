@@ -52,8 +52,18 @@ namespace circuits {
 
     Window::Window(const char* title, const glm::ivec2& size) {
         initSDL();
+
+        SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
+        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 6);
+        SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+        SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 1);
+        SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, 4);
+
         m_window = SDL_CreateWindow(title, size.x, size.y, SDL_WINDOW_OPENGL);
         initGL();
+
+        glEnable(GL_MULTISAMPLE);
     }
 
     Window::~Window() {

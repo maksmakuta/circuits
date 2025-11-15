@@ -61,7 +61,7 @@ namespace circuits {
         void circle(const glm::vec2& pos, float radius);
         void ellipse(const glm::vec2& pos, const glm::vec2& size);
 
-        void clear(const Color&);
+        static void clear(const Color&);
 
         void fill();
         void fill(const Color&);
