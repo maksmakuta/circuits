@@ -65,35 +65,7 @@ namespace circuits {
     }
 
     void Renderer::setColor(const Color& c){
-        m_states.top().color1 = c;
-    }
-
-    void Renderer::setGradientType(const bool is_linear) {
-        m_states.top().is_linear = is_linear;
-    }
-
-    void Renderer::setGradientColors(const Color& c1, const Color& c2) {
-        m_states.top().color2 = c2;
-        m_states.top().color1 = c1;
-    }
-
-    void Renderer::setGradientAngle(const float angle) {
-        m_states.top().angle = angle;
-    }
-
-    void Renderer::setGradientSize(const float s) {
-        m_states.top().width = s;
-    }
-
-    void Renderer::setGradientCenter(const glm::vec2& center) {
-        m_states.top().center = center;
-    }
-
-    void Renderer::setColorGradient(const Color& c1,const Color& c2, const glm::vec2& c, const float a){
-        m_states.top().color2 = c2;
-        m_states.top().color1 = c1;
-        m_states.top().angle = a;
-        m_states.top().center = c;
+        m_states.top().color = c;
     }
 
     void Renderer::setTexture(const Texture& t, int slot){
@@ -174,7 +146,7 @@ namespace circuits {
     }
 
     void Renderer::fill(){
-        fill(m_states.top().color1);
+        fill(m_states.top().color);
     }
 
     void Renderer::fill(const Color& c){
@@ -193,7 +165,7 @@ namespace circuits {
         fill(
             t,
             m_states.top().uv,
-            m_states.top().color1
+            m_states.top().color
         );
     }
 
@@ -209,7 +181,7 @@ namespace circuits {
         fill(
             t,
             u,
-            m_states.top().color1
+            m_states.top().color
         );
     }
 
@@ -217,32 +189,9 @@ namespace circuits {
         //TODO(implement fill algorithm: texture fill)
     }
 
-    void Renderer::fillGradient() {
-        const auto& state = m_states.top();
-        const auto op = state.is_linear ? 4 : 5;
-        const auto c = state.color1;
-        if (m_path.size() < 3) {
-            return;
-        }
-
-        m_shader.use();
-        m_shader.set("g_colorB",state.color2.asVec4());
-        m_shader.set("g_center",state.center);
-        m_shader.set("g_angle",state.angle);
-        m_shader.set("g_radius",state.width);
-
-        const auto base = m_path.points().front();
-        for (auto i = 1; i < m_path.size(); i++) {
-            m_vertices.emplace_back(base                , c.asVec4(), op);
-            m_vertices.emplace_back(m_path.points()[i-1], c.asVec4(), op);
-            m_vertices.emplace_back(m_path.points()[i]  , c.asVec4(), op);
-        }
-        flush();
-    }
-
     void Renderer::stroke(){
         stroke(
-            m_states.top().color1,
+            m_states.top().color,
             m_states.top().width
         );
     }
@@ -256,7 +205,7 @@ namespace circuits {
 
     void Renderer::stroke(const float w){
         stroke(
-            m_states.top().color1,
+            m_states.top().color,
             w
         );
     }

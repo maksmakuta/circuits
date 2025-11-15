@@ -38,10 +38,6 @@ namespace circuits {
         flat in uint v_op;
 
         uniform sampler2D images[16];
-        uniform vec4 g_colorB;
-        uniform vec2 g_center;
-        uniform float g_angle;
-        uniform float g_radius;
 
         out vec4 f_col;
 
@@ -55,16 +51,6 @@ namespace circuits {
                 f_col = vec4(mult.rgb, v_col.a);
             } else if(v_op == 3){
                 f_col = vec4(v_col.rgb, v_col.a * texture(images[v_tex],v_uv).r);
-            } else if(v_op == 4){
-                vec2 dir = vec2(cos(g_angle), sin(g_angle));
-                vec2 d = v_pos - g_center;
-                float t = dot(d, dir);
-                t = (t / g_radius) * 0.5 + 0.5;
-                f_col = mix(v_col, g_colorB, t);
-            } else if(v_op == 5){
-                float dist = length(v_pos - g_center);
-                float t = dist / g_radius;
-                f_col = mix(v_col, g_colorB, t);
             }else{
                 discard;
             }
