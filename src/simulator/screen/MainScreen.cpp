@@ -2,7 +2,9 @@
 
 namespace circuits {
 
-    void MainScreen::onInit() {}
+    void MainScreen::onInit() {
+  //      glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
+    }
 
     void MainScreen::onDeinit(){}
 
@@ -39,6 +41,9 @@ namespace circuits {
         r.setStrokeJoint(StrokeJoint::Round);
         r.path(p);
         r.stroke(Color(0xFF00FF00),15);
+
+        r.rect({200,300},{100,120},15);
+        r.stroke(Color(0xFFFFFF00),15);
     }
 
     void MainScreen::onUpdate(float dt){
