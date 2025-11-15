@@ -9,6 +9,7 @@ namespace circuits {
         Vertex() = default;
         explicit Vertex(const glm::vec2& p);
         Vertex(const glm::vec2& p,const glm::vec4& c);
+        Vertex(const glm::vec2& p,const glm::vec4& c, int op);
         Vertex(const glm::vec2& p, const glm::vec2& t, const glm::vec4& c);
 
         static void setupAttributes();

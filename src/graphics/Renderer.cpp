@@ -81,11 +81,15 @@ namespace circuits {
         m_states.top().angle = angle;
     }
 
+    void Renderer::setGradientSize(const float s) {
+        m_states.top().width = s;
+    }
+
     void Renderer::setGradientCenter(const glm::vec2& center) {
         m_states.top().center = center;
     }
 
-    void Renderer::setColorGradient(const Color& c1,const Color& c2, const glm::vec2& c, float a){
+    void Renderer::setColorGradient(const Color& c1,const Color& c2, const glm::vec2& c, const float a){
         m_states.top().color2 = c2;
         m_states.top().color1 = c1;
         m_states.top().angle = a;
@@ -185,10 +189,6 @@ namespace circuits {
         }
     }
 
-    void Renderer::fill(const Color&, const Color&, float){
-        //TODO(implement fill algorithm: gradient fill)
-    }
-
     void Renderer::fill(const Texture& t){
         fill(
             t,
@@ -215,6 +215,29 @@ namespace circuits {
 
     void Renderer::fill(const Texture&, const glm::vec4&, const Color&){
         //TODO(implement fill algorithm: texture fill)
+    }
+
+    void Renderer::fillGradient() {
+        const auto& state = m_states.top();
+        const auto op = state.is_linear ? 4 : 5;
+        const auto c = state.color1;
+        if (m_path.size() < 3) {
+            return;
+        }
+
+        m_shader.use();
+        m_shader.set("g_colorB",state.color2.asVec4());
+        m_shader.set("g_center",state.center);
+        m_shader.set("g_angle",state.angle);
+        m_shader.set("g_radius",state.width);
+
+        const auto base = m_path.points().front();
+        for (auto i = 1; i < m_path.size(); i++) {
+            m_vertices.emplace_back(base                , c.asVec4(), op);
+            m_vertices.emplace_back(m_path.points()[i-1], c.asVec4(), op);
+            m_vertices.emplace_back(m_path.points()[i]  , c.asVec4(), op);
+        }
+        flush();
     }
 
     void Renderer::stroke(){

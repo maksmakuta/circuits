@@ -60,12 +60,10 @@ namespace circuits {
                 vec2 d = v_pos - g_center;
                 float t = dot(d, dir);
                 t = (t / g_radius) * 0.5 + 0.5;
-                t = clamp(t, 0.0, 1.0);
                 f_col = mix(v_col, g_colorB, t);
             } else if(v_op == 5){
                 float dist = length(v_pos - g_center);
                 float t = dist / g_radius;
-                t = clamp(t, 0.0, 1.0);
                 f_col = mix(v_col, g_colorB, t);
             }else{
                 discard;
@@ -141,15 +139,15 @@ namespace circuits {
     }
 
     void Shader::set(const std::string& name, const glm::vec2& v) const {
-        glUniform2fv(glGetUniformLocation(m_program, name.c_str()), 1, &v.x);
+        glUniform2fv(glGetUniformLocation(m_program, name.c_str()), 1, &v[0]);
     }
 
     void Shader::set(const std::string& name, const glm::vec3& v) const {
-        glUniform3fv(glGetUniformLocation(m_program, name.c_str()), 1, &v.x);
+        glUniform3fv(glGetUniformLocation(m_program, name.c_str()), 1, &v[0]);
     }
 
     void Shader::set(const std::string& name, const glm::vec4& v) const {
-        glUniform4fv(glGetUniformLocation(m_program, name.c_str()), 1, &v.x);
+        glUniform4fv(glGetUniformLocation(m_program, name.c_str()), 1, &v[0]);
     }
 
     void Shader::set(const std::string& name, const glm::mat3& m) const {

@@ -3,47 +3,22 @@
 namespace circuits {
 
     void MainScreen::onInit() {
-  //      glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
+
     }
 
     void MainScreen::onDeinit(){}
 
     void MainScreen::onDraw(Renderer& r){
-        Renderer::clear(Color(0xFF808080));
+        Renderer::clear(Color(0xFF202020));
 
-        r.setStrokeCap(StrokeCap::Butt);
-        r.line({50,50}, {250,50});
-        r.stroke(Color(0xFF00FF00),15);
+        r.setGradientType(true);
+        r.setGradientAngle(glm::radians(69.f));
+        r.setGradientSize(300);
+        r.setGradientCenter({350,350});
+        r.setGradientColors(Color(0xFFFF0000), Color(0xFF00FFFF));
 
-        r.setStrokeCap(StrokeCap::Square);
-        r.line({50,100}, {250,100});
-        r.stroke(Color(0xFF00FF00),15);
-
-        r.setStrokeCap(StrokeCap::Round);
-        r.line({50,150}, {250,150});
-        r.stroke(Color(0xFF00FF00),15);
-
-        auto p = Path();
-        p.moveTo({50,50});
-        p.lineTo({150,50});
-        p.lineTo({100,75});
-        p.translate({300,0});
-        r.setStrokeJoint(StrokeJoint::Bevel);
-        r.path(p);
-        r.stroke(Color(0xFF00FF00),15);
-
-        p.translate({0,50});
-        r.setStrokeJoint(StrokeJoint::Miter);
-        r.path(p);
-        r.stroke(Color(0xFF00FF00),15);
-
-        p.translate({0,50});
-        r.setStrokeJoint(StrokeJoint::Round);
-        r.path(p);
-        r.stroke(Color(0xFF00FF00),15);
-
-        r.rect({200,300},{100,120},15);
-        r.stroke(Color(0xFFFFFF00),15);
+        r.rect({100,100},{400,400},50);
+        r.fillGradient();
     }
 
     void MainScreen::onUpdate(float dt){

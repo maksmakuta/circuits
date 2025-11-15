@@ -47,6 +47,7 @@ namespace circuits {
         void setGradientType(bool is_linear);
         void setGradientColors(const Color&,const Color&);
         void setGradientAngle(float);
+        void setGradientSize(float);
         void setGradientCenter(const glm::vec2&);
         void setColorGradient(const Color&,const Color&, const glm::vec2&, float);
 
@@ -71,11 +72,11 @@ namespace circuits {
 
         void fill();
         void fill(const Color&);
-        void fill(const Color&, const Color&, float);
         void fill(const Texture&);
         void fill(const Texture&, const Color&);
         void fill(const Texture&, const glm::vec4&);
         void fill(const Texture&, const glm::vec4&, const Color&);
+        void fillGradient();
 
         void stroke();
         void stroke(const Color&);
