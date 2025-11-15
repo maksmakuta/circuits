@@ -213,7 +213,26 @@ namespace circuits {
     }
 
     void Renderer::stroke(const Color& c, float w){
-        //TODO(implement stroke algorithm)
+        if (m_path.size() < 2) {
+            return;
+        }
+        const auto t = w / 2.f;
+
+        for (int i = 1; i < m_path.size(); i++) {
+            const auto a = m_path.points()[i-1];
+            const auto b = m_path.points()[i];
+            const auto d = glm::normalize(b - a);
+            const auto n = glm::vec2{d.y, -d.x};
+
+            m_vertices.emplace_back(a + n * t, c.asVec4());
+            m_vertices.emplace_back(a - n * t, c.asVec4());
+            m_vertices.emplace_back(b + n * t, c.asVec4());
+
+            m_vertices.emplace_back(a - n * t, c.asVec4());
+            m_vertices.emplace_back(b + n * t, c.asVec4());
+            m_vertices.emplace_back(b - n * t, c.asVec4());
+        }
+
     }
 
 }
