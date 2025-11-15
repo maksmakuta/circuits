@@ -4,18 +4,27 @@
 
 namespace circuits {
 
-    constexpr auto MAX_BATCH_VERTICES = 2048;
-    constexpr auto MAX_BATCH_INDICES = 8192;
-
     Renderer::Renderer() = default;
     Renderer::~Renderer() = default;
 
     void Renderer::load() {
+        glGenVertexArrays(1, &m_vao);
+        glBindVertexArray(m_vao);
+
+        glGenBuffers(1, &m_vbo);
+        glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
+
+        glBufferData(GL_ARRAY_BUFFER, 0, nullptr, GL_DYNAMIC_DRAW);
+
+        Vertex::setupAttributes();
+
         m_shader.loadDefault();
         m_states.push({});
     }
 
     void Renderer::unload() {
+        glDeleteVertexArrays(1, &m_vao);
+        glDeleteBuffers(1, &m_vbo);
         m_shader.unload();
         m_states.pop();
     }
@@ -23,6 +32,8 @@ namespace circuits {
     void Renderer::resize(const glm::ivec2& size) {
         const auto s = glm::vec2(size);
         m_projection = glm::ortho(0.0f, s.x, s.y,0.f);
+        m_shader.use();
+        m_shader.set("proj", m_projection);
     }
 
     void Renderer::begin(){
@@ -35,6 +46,13 @@ namespace circuits {
 
     void Renderer::flush(){
         if (m_vertices.empty()) return;
+
+        glBindVertexArray(m_vao);
+        glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
+        glBufferData(GL_ARRAY_BUFFER, static_cast<long>(m_vertices.size() * sizeof(Vertex)), m_vertices.data(), GL_DYNAMIC_DRAW);
+
+        glDrawArrays(GL_TRIANGLES, 0, static_cast<int>(m_vertices.size()));
+
         m_vertices.clear();
     }
 
@@ -120,12 +138,25 @@ namespace circuits {
         m_path = Path::ellipse(pos,size);
     }
 
+    void Renderer::clear(const Color& c) {
+        glClearColor(c.r(), c.g(), c.b(), c.a());
+        glClear(GL_COLOR_BUFFER_BIT);
+    }
+
     void Renderer::fill(){
         fill(m_states.top().color1);
     }
 
-    void Renderer::fill(const Color&){
-        //TODO(implement fill algorithm: 1 color fill)
+    void Renderer::fill(const Color& c){
+        if (m_path.size() < 3) {
+            return;
+        }
+        const auto base = m_path.points().front();
+        for (auto i = 1; i < m_path.size(); i++) {
+            m_vertices.emplace_back(base,c.asVec4());
+            m_vertices.emplace_back(m_path.points()[i-1],c.asVec4());
+            m_vertices.emplace_back(m_path.points()[i],c.asVec4());
+        }
     }
 
     void Renderer::fill(const Color&, const Color&, float){

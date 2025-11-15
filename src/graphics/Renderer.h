@@ -61,6 +61,8 @@ namespace circuits {
         void circle(const glm::vec2& pos, float radius);
         void ellipse(const glm::vec2& pos, const glm::vec2& size);
 
+        void clear(const Color&);
+
         void fill();
         void fill(const Color&);
         void fill(const Color&, const Color&, float);
@@ -90,7 +92,6 @@ namespace circuits {
 
         GLuint m_vao = 0;
         GLuint m_vbo = 0;
-        GLuint m_ibo = 0;
         Path m_path;
         Shader m_shader;
         glm::mat4 m_projection{1.f};

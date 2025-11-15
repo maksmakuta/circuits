@@ -17,9 +17,6 @@ namespace circuits {
             Event e;
             while(Window::poll(e)) {
                 onEvent(e);
-                if (e.type == EventType::WindowClose) {
-                    m_window.close();
-                }
             }
 
             m_renderer.begin();
@@ -44,6 +41,9 @@ namespace circuits {
     void Application::onEvent(const Event& e) {
         if (e.type == EventType::WindowResize) {
             m_renderer.resize({e.window.width,e.window.height});
+        }
+        if (e.type == EventType::WindowClose) {
+            m_window.close();
         }
         m_screen.onEvent(e);
     }
