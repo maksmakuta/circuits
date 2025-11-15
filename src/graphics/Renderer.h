@@ -40,7 +40,7 @@ namespace circuits {
 
         void setColor(const Color&);
         void setColorGradient(const Color&,const Color&, float);
-        void setTexture(const Texture&);
+        void setTexture(const Texture&, int slot = 0);
         void setThickness(float thickness);
         void setStrokeCap(StrokeCap);
         void setStrokeJoint(StrokeJoint);
@@ -74,7 +74,7 @@ namespace circuits {
         void stroke();
         void stroke(const Color&);
         void stroke(float);
-        void stroke(const Color&, float = 1.f);
+        void stroke(const Color&, float);
 
     private:
 

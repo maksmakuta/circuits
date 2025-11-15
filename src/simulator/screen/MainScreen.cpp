@@ -12,7 +12,7 @@ namespace circuits {
 
     void MainScreen::onDraw(Renderer& r){
         Renderer::clear(Color(0xFF808080));
-        r.rect({100,100}, {250,60}, {15,20,25,30});
+        r.rect({100,100}, {250,250});
         r.fill(Color(0xFF00FF00));
     }
 

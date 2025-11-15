@@ -13,9 +13,11 @@ namespace circuits {
 
         static void setupAttributes();
 
-        glm::vec2 pos   = {0.0f, 0.0f};
-        glm::vec2 uv    = {0.0f, 0.0f};
-        glm::vec4 color = {1.0f, 1.0f, 1.0f, 1.0f};
+        glm::i16vec2    pos   = {0.0f, 0.0f};
+        glm::u16vec2    uv    = {0.0f, 0.0f};
+        glm::u8vec4     color = {255, 255, 255, 255};
+        glm::uint       data  = 0;
+
     };
 
 }

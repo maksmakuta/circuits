@@ -12,13 +12,16 @@ namespace circuits {
         constexpr GLsizei stride = sizeof(Vertex);
 
         glEnableVertexAttribArray(0);
-        glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, stride, reinterpret_cast<void *>(offsetof(Vertex, pos)));
+        glVertexAttribPointer(0, 2, GL_SHORT, GL_FALSE, stride, reinterpret_cast<void *>(offsetof(Vertex, pos)));
 
         glEnableVertexAttribArray(1);
-        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, stride, reinterpret_cast<void *>(offsetof(Vertex, uv)));
+        glVertexAttribPointer(1, 2, GL_UNSIGNED_SHORT, GL_FALSE, stride, reinterpret_cast<void *>(offsetof(Vertex, uv)));
 
         glEnableVertexAttribArray(2);
-        glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, stride, reinterpret_cast<void *>(offsetof(Vertex, color)));
+        glVertexAttribPointer(2, 4, GL_UNSIGNED_BYTE, GL_FALSE, stride, reinterpret_cast<void *>(offsetof(Vertex, color)));
+
+        glEnableVertexAttribArray(3);
+        glVertexAttribPointer(3, 1, GL_UNSIGNED_INT, GL_FALSE, stride, reinterpret_cast<void *>(offsetof(Vertex, data)));
     }
 
 }

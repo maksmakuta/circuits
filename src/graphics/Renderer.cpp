@@ -70,7 +70,7 @@ namespace circuits {
         m_states.top().angle = angle;
     }
 
-    void Renderer::setTexture(const Texture& t){
+    void Renderer::setTexture(const Texture& t, int slot){
         m_states.top().texture = t;
     }
 
@@ -211,6 +211,14 @@ namespace circuits {
             w
         );
     }
+
+    struct Line {
+        Line(const glm::vec2& begin,const glm::vec2& end) : a(begin), b(end) {}
+
+
+
+        glm::vec2 a,b;
+    };
 
     void Renderer::stroke(const Color& c, const float w){
         if (m_path.size() < 2) {

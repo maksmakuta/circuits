@@ -8,15 +8,22 @@ namespace circuits {
         layout(location = 0) in vec2 pos;
         layout(location = 1) in vec2 uv;
         layout(location = 2) in vec4 col;
+        layout(location = 3) in uint dat;
 
         uniform mat4 proj;
 
+        out vec2 v_pos;
         out vec2 v_uv;
         out vec4 v_col;
+        flat out uint v_tex;
+        flat out uint v_op;
 
         void main(){
+            v_pos = pos;
             v_uv = uv;
             v_col = col;
+            v_op = dat & 0xFu;
+            v_tex = (dat >> 4) & 0xFu;
             gl_Position = proj * vec4(pos, 0.0, 1.0);
         }
     )";
@@ -24,13 +31,44 @@ namespace circuits {
     const auto DEFAULT_SHADER_F = R"(
         #version 460 core
 
+        in vec2 v_pos;
         in vec2 v_uv;
         in vec4 v_col;
+        flat in uint v_tex;
+        flat in uint v_op;
+
+        uniform sampler2D images[16];
+        uniform vec4 g_colorB;
+        uniform vec2 g_center;
+        uniform float g_angle;
+        uniform float g_radius;
 
         out vec4 f_col;
 
         void main(){
-            f_col = v_col;
+            if(v_op == 0){
+                f_col = v_col;
+            } else if(v_op == 1){
+                f_col = texture(images[v_tex],v_uv);
+            } else if(v_op == 2){
+                f_col = vec4((v_col * texture(images[v_tex],v_uv).rgb, v_col.a);
+            } else if(v_op == 3){
+                f_col = vec4(v_col.rgb, v_col.a * texture(images[v_tex],v_uv).r);
+            } else if(v_op == 4){
+                vec2 dir = vec2(cos(g_angle), sin(g_angle));
+                vec2 d = v_pos - g_center;
+                float t = dot(d, dir);
+                t = (t / g_radius) * 0.5 + 0.5;
+                t = clamp(t, 0.0, 1.0);
+                f_col = mix(v_col, g_colorB, t);
+            } else if(v_op == 5){
+                float dist = length(v_pos - g_center);
+                float t = dist / g_radius;
+                t = clamp(t, 0.0, 1.0);
+                f_col = mix(v_col, g_colorB, t);
+            }else{
+                discard;
+            }
         }
     )";
 
