@@ -51,7 +51,8 @@ namespace circuits {
             } else if(v_op == 1){
                 f_col = texture(images[v_tex],v_uv);
             } else if(v_op == 2){
-                f_col = vec4((v_col * texture(images[v_tex],v_uv).rgb, v_col.a);
+                vec4 mult = v_col * texture(images[v_tex],v_uv);
+                f_col = vec4(mult.rgb, v_col.a);
             } else if(v_op == 3){
                 f_col = vec4(v_col.rgb, v_col.a * texture(images[v_tex],v_uv).r);
             } else if(v_op == 4){

@@ -12,6 +12,8 @@ add_subdirectory(libs/glad)
 add_subdirectory(libs/LodePNG)
 
 add_executable(circuits
+        src/base/IScreen.cpp
+        src/base/IScreen.h
         src/base/IWidget.cpp
         src/base/IWidget.h
 
@@ -47,6 +49,8 @@ add_executable(circuits
 
         src/simulator/Application.cpp
         src/simulator/Application.h
+        src/simulator/screen/MainScreen.cpp
+        src/simulator/screen/MainScreen.h
 
         src/ui/layout/Column.cpp
         src/ui/layout/Column.h
@@ -78,10 +82,7 @@ add_executable(circuits
         src/window/Window.h
 
         src/main.cpp
-        src/simulator/screen/MainScreen.cpp
-        src/simulator/screen/MainScreen.h
-        src/base/IScreen.cpp
-        src/base/IScreen.h
+
 )
 
 target_include_directories(circuits PUBLIC src)

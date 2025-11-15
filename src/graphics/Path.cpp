@@ -73,6 +73,14 @@ namespace circuits {
         return *this;
     }
 
+    glm::vec2 Path::last() const{
+        return m_data.back();
+    }
+
+    glm::vec2 Path::first() const{
+        return m_data.front();
+    }
+
     Path& Path::translate(const glm::vec2& offset) {
         for (auto& p : m_data) p += offset;
         return *this;

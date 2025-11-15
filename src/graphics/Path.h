@@ -21,6 +21,7 @@ namespace circuits {
         Path& clear();
         [[nodiscard]] bool empty() const { return m_data.empty(); }
         [[nodiscard]] size_t size() const { return m_data.size(); }
+        [[nodiscard]] bool isClosed() const { return m_closed; }
 
         Path& translate(const glm::vec2& offset);
         Path& scale(const glm::vec2& s);
@@ -36,6 +37,9 @@ namespace circuits {
         [[nodiscard]] float length() const;
         [[nodiscard]] glm::vec2 positionAt(float t) const;
         [[nodiscard]] glm::vec2 directionAt(float t) const;
+
+        [[nodiscard]] glm::vec2 last() const;
+        [[nodiscard]] glm::vec2 first() const;
 
         static Path line(const glm::vec2& a, const glm::vec2& b);
         static Path rectangle(const glm::vec2& pos, const glm::vec2& size);

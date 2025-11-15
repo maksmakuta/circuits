@@ -1,5 +1,6 @@
 #include "Renderer.h"
 
+#include <Polyline2D.h>
 #include <glm/gtc/matrix_transform.hpp>
 
 namespace circuits {
@@ -64,10 +65,28 @@ namespace circuits {
         m_states.top().color1 = c;
     }
 
-    void Renderer::setColorGradient(const Color& c1,const Color& c2, const float angle) {
+    void Renderer::setGradientType(const bool is_linear) {
+        m_states.top().is_linear = is_linear;
+    }
+
+    void Renderer::setGradientColors(const Color& c1, const Color& c2) {
         m_states.top().color2 = c2;
         m_states.top().color1 = c1;
+    }
+
+    void Renderer::setGradientAngle(const float angle) {
         m_states.top().angle = angle;
+    }
+
+    void Renderer::setGradientCenter(const glm::vec2& center) {
+        m_states.top().center = center;
+    }
+
+    void Renderer::setColorGradient(const Color& c1,const Color& c2, const glm::vec2& c, float a){
+        m_states.top().color2 = c2;
+        m_states.top().color1 = c1;
+        m_states.top().angle = a;
+        m_states.top().center = c;
     }
 
     void Renderer::setTexture(const Texture& t, int slot){
@@ -108,6 +127,10 @@ namespace circuits {
 
     void Renderer::closePath() {
         m_path.close();
+    }
+
+    void Renderer::path(const Path& p) {
+        m_path = p;
     }
 
     void Renderer::line(const glm::vec2& a, const glm::vec2& b) {
@@ -212,35 +235,11 @@ namespace circuits {
         );
     }
 
-    struct Line {
-        Line(const glm::vec2& begin,const glm::vec2& end) : a(begin), b(end) {}
-
-
-
-        glm::vec2 a,b;
-    };
-
-    void Renderer::stroke(const Color& c, const float w){
-        if (m_path.size() < 2) {
-            return;
-        }
-        const auto t = w / 2.f;
-
-        for (int i = 1; i < m_path.size(); i++) {
-            const auto a = m_path.points()[i-1];
-            const auto b = m_path.points()[i];
-            const auto d = glm::normalize(b - a);
-            const auto n = glm::vec2{d.y, -d.x};
-
-            m_vertices.emplace_back(a + n * t, c.asVec4());
-            m_vertices.emplace_back(a - n * t, c.asVec4());
-            m_vertices.emplace_back(b + n * t, c.asVec4());
-
-            m_vertices.emplace_back(a - n * t, c.asVec4());
-            m_vertices.emplace_back(b + n * t, c.asVec4());
-            m_vertices.emplace_back(b - n * t, c.asVec4());
-        }
+    void Renderer::stroke(const Color& color, const float w){
+        const auto& path = m_path.points();
+        const auto& state = m_states.top();
 
     }
+
 
 }

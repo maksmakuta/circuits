@@ -39,11 +39,16 @@ namespace circuits {
         void flush();
 
         void setColor(const Color&);
-        void setColorGradient(const Color&,const Color&, float);
         void setTexture(const Texture&, int slot = 0);
         void setThickness(float thickness);
         void setStrokeCap(StrokeCap);
         void setStrokeJoint(StrokeJoint);
+
+        void setGradientType(bool is_linear);
+        void setGradientColors(const Color&,const Color&);
+        void setGradientAngle(float);
+        void setGradientCenter(const glm::vec2&);
+        void setColorGradient(const Color&,const Color&, const glm::vec2&, float);
 
         void newPath();
         void moveTo(const glm::vec2& point);
@@ -53,6 +58,7 @@ namespace circuits {
         void arcTo(const glm::vec2& center, float radius, float startAngle, float endAngle, bool ccw = false);
         void closePath();
 
+        void path(const Path& p);
         void line(const glm::vec2& a, const glm::vec2& b);
         void rect(const glm::vec2& pos, const glm::vec2& size);
         void rect(const glm::vec2& pos, const glm::vec2& size, float radius);
@@ -83,7 +89,9 @@ namespace circuits {
             Color color2        = {0, 0, 0, 1};
             float width         = 1.0f;
             float angle         = 0;
+            bool is_linear      = false;
             Texture texture     = {};
+            glm::vec2 center    = {0, 0};
             glm::vec4 uv        = {0,0,1,1};
             StrokeCap cap       = StrokeCap::Butt;
             StrokeJoint joint   = StrokeJoint::Bevel;
