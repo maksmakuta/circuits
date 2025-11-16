@@ -9,7 +9,7 @@ namespace circuits {
     public:
         void onInit() override;
         void onDeinit() override;
-        void onDraw() override;
+        void onDraw(Renderer&) override;
         void onUpdate(float dt) override;
         void onEvent(const Event &) override;
     };

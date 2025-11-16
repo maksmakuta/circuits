@@ -68,6 +68,8 @@ add_executable(circuits
         src/window/Window.h
 
         src/main.cpp
+        src/graphics/Renderer.cpp
+        src/graphics/Renderer.h
 
 )
 

@@ -10,7 +10,7 @@ namespace circuits {
 
     }
 
-    void MainScreen::onDraw(){
+    void MainScreen::onDraw(Renderer&){
 
     }
 

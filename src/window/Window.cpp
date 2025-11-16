@@ -35,9 +35,7 @@ namespace circuits {
         }
 
         SDL_GL_MakeCurrent(m_window, m_context);
-
         m_running = true;
-        std::cout << "OpenGL version: " << glGetString(GL_VERSION) << "\n";
     }
 
     void Window::deinitSDL() {
@@ -60,7 +58,7 @@ namespace circuits {
         SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 1);
         SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, 4);
 
-        m_window = SDL_CreateWindow(title, size.x, size.y, SDL_WINDOW_OPENGL);
+        m_window = SDL_CreateWindow(title, size.x, size.y, SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL);
         initGL();
 
         glEnable(GL_MULTISAMPLE);

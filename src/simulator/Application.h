@@ -1,6 +1,7 @@
 #ifndef CIRCUITS_APPLICATION_H
 #define CIRCUITS_APPLICATION_H
 
+#include "graphics/Renderer.h"
 #include "screen/MainScreen.h"
 #include "window/Window.h"
 
@@ -18,6 +19,7 @@ namespace circuits {
         void onEvent(const Event&);
 
         Window m_window;
+        Renderer m_renderer;
         MainScreen m_screen;
     };
 
