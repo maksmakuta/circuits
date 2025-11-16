@@ -90,7 +90,7 @@ namespace circuits {
     }
 
     glm::vec2 Path::boundsMin() const {
-        auto min = glm::vec2(0);
+        auto min = glm::vec2(16384);
         for (const auto& p : m_points) {
             min = glm::min(min, p);
         }

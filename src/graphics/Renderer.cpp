@@ -74,6 +74,7 @@ namespace circuits {
 
         m_shader.use();
         m_shader.set("op",m_paint);
+        m_shader.set("image",0);
 
         glBindVertexArray(m_vao);
         glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
@@ -285,8 +286,30 @@ namespace circuits {
         }
     }
 
-    void Renderer::fill(const Texture&, const glm::vec2&, const glm::vec2&) {
+    void Renderer::fill(const Texture& t, const glm::vec2& uv_min, const glm::vec2& uv_max) {
         setPaint(1);
+        setTexture(t);
+        if (m_path.size() < 3) {
+            std::cerr << "Can't fill empty path!" << std::endl;
+            return;
+        }
+
+        const auto bb_min = m_path.boundsMin();
+        const auto bb_max = m_path.boundsMax();
+        const auto size = bb_max - bb_min;
+
+        const auto toVertex = [&](const auto& point) {
+            const auto p = (point - bb_min) / size;
+            const auto u = glm::mix(uv_min, uv_max, p);
+            m_vertices.emplace_back(point, u, Color(0,0,0,0));
+        };
+
+        const auto base = m_path.points().front();
+        for (auto i = 1; i < m_path.size(); ++i) {
+            toVertex(base);
+            toVertex(m_path.points()[i-1]);
+            toVertex(m_path.points()[i]);
+        }
     }
 
     void Renderer::text(const std::string&, const glm::vec2&) {
@@ -589,5 +612,12 @@ namespace circuits {
         }
     }
 
-
+    void Renderer::setTexture(const Texture& t) {
+        if (m_tex != t.getHandle()) {
+            flush();
+            m_vertices.clear();
+            m_tex = t.getHandle();
+            t.bind();
+        }
+    }
 }

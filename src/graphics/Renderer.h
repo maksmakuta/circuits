@@ -70,13 +70,15 @@ namespace circuits {
         void path(const Path&);
 
         void fill(const Color&);
-        void fill(const Texture&, const glm::vec2&, const glm::vec2&);
+        void fill(const Texture&, const glm::vec2& = {0,0}, const glm::vec2& = {1,1});
         void stroke(const Color&, float);
         void text(const std::string&, const glm::vec2&);
     private:
         void setPaint(int);
+        void setTexture(const Texture&);
 
         int m_paint{0};
+        glm::uint m_tex{0};
         glm::uint m_vao{0};
         glm::uint m_vbo{0};
         Path m_path;

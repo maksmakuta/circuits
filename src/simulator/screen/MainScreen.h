@@ -12,6 +12,8 @@ namespace circuits {
         void onDraw(Renderer&) override;
         void onUpdate(float dt) override;
         void onEvent(const Event &) override;
+    private:
+        Texture texture;
     };
 
 }
