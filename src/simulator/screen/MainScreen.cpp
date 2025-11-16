@@ -3,7 +3,7 @@
 namespace circuits {
 
     void MainScreen::onInit() {
-
+    //    glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
     }
 
     void MainScreen::onDeinit() {

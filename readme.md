@@ -16,8 +16,8 @@
 ### Roadmap
 
  - [ ] Rendering subsystem (0.1.x)
-   - [ ] Shapes API
-   - [ ] Fill and stroke Renderer API
+   - [X] Shapes API
+   - [X] Fill and stroke Renderer API
    - [ ] Textures and images API
    - [ ] Text rendering API
  - [ ] Widget subsystem (0.2.x)

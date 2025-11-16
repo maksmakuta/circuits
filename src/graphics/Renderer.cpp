@@ -404,7 +404,7 @@ namespace circuits {
 
     }
 
-    void createJoint(std::vector<Vertex>& vertices,const Segment &segment1, const Segment&segment2,
+    void createJoint(std::vector<Vertex>& vertices,const Segment &segment1, const Segment& segment2,
         Joint jointStyle, glm::vec2 &end1, glm::vec2 &end2,glm::vec2 &nextStart1, glm::vec2 &nextStart2,
         const bool allowOverlap, const Color& color) {
 
@@ -478,9 +478,9 @@ namespace circuits {
             }
 
             if (jointStyle == Joint::Bevel) {
-                vertices.emplace_back(outer1->b, color.asVec4());
-                vertices.emplace_back(outer2->a, color.asVec4());
-                vertices.emplace_back(innerSec, color.asVec4());
+                vertices.emplace_back(outer1->b, color);
+                vertices.emplace_back(outer2->a, color);
+                vertices.emplace_back(innerSec, color);
             } else if (jointStyle == Joint::Round) {
                 createTriangleFan(vertices, innerSec, segment1.center.b, outer1->b, outer2->a, clockwise, color);
             } else {
