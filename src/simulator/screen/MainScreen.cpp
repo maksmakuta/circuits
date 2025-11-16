@@ -10,7 +10,12 @@ namespace circuits {
 
     }
 
-    void MainScreen::onDraw(Renderer&){
+    void MainScreen::onDraw(Renderer& r){
+        clear(0xFF202020);
+
+        r.rect({50,50},{125,125});
+        r.fill(Color(0xFFFF0000));
+        r.stroke(Color(0xFF00FF00),15);
 
     }
 

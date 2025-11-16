@@ -37,6 +37,9 @@ namespace circuits {
     }
 
     void Application::onEvent(const Event& e) {
+        if (e.type == EventType::WindowResize) {
+            m_renderer.resize(glm::ivec2{e.window.width, e.window.height});
+        }
         if (e.type == EventType::WindowClose) {
             m_window.close();
         }

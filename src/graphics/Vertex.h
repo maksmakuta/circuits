@@ -10,9 +10,10 @@ namespace circuits {
 
     struct Vertex {
         Vertex(const glm::vec2& pos, const Color& color);
-        Vertex(const glm::vec2& pos, const glm::vec2& uv);
+        Vertex(const glm::vec2& pos, const glm::vec2& uv, const Color& color = {});
 
         glm::vec2 pos;
+        glm::vec2 uv;
         glm::vec4 col;
     };
 

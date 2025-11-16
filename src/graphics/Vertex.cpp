@@ -3,9 +3,9 @@
 namespace circuits {
 
     Vertex::Vertex(const glm::vec2& pos, const Color& color)
-        : pos(pos), col(color.asVec4()) {}
+        : pos(pos), uv{0}, col(color.asVec4()) {}
 
-    Vertex::Vertex(const glm::vec2& pos, const glm::vec2& uv)
-        : pos(pos), col(uv, glm::vec2(0)) {}
+    Vertex::Vertex(const glm::vec2& pos, const glm::vec2& uv, const Color& color)
+        : pos(pos), uv(uv), col(color.asVec4()) {}
 
 }

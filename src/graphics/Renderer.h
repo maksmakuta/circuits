@@ -7,6 +7,7 @@
 #include "Color.h"
 #include "Font.h"
 #include "Path.h"
+#include "Shader.h"
 #include "Texture.h"
 #include "Vertex.h"
 
@@ -34,8 +35,8 @@ namespace circuits {
 
         void begin();
         void resize(const glm::vec2&);
-        void flush();
-        void end();
+        void flush() const;
+        void end() const;
 
         void newPath();
         void moveTo(const glm::vec2&);
@@ -73,14 +74,23 @@ namespace circuits {
         void stroke(const Color&, float);
         void text(const std::string&, const glm::vec2&);
     private:
+        void setPaint(int);
+
+        int m_paint{0};
         glm::uint m_vao{0};
         glm::uint m_vbo{0};
         Path m_path;
+        Shader m_shader;
         Cap m_cap = Cap::Butt;
         Joint m_joint = Joint::Bevel;
         std::vector<Vertex> m_vertices;
         glm::mat4 m_projection{1.f};
     };
+
+    void clear(const Color&);
+    void clear(const glm::vec4&);
+    void clear(const glm::vec3&);
+    void clear(glm::uint);
 
 }
 

@@ -1,6 +1,8 @@
 #include "Renderer.h"
 
+#include <iostream>
 #include <optional>
+#include <ostream>
 #include <glm/gtc/matrix_transform.hpp>
 
 #include "glad/gl.h"
@@ -9,6 +11,23 @@ namespace circuits {
 
     constexpr auto miterMinAngle = 0.349066;
     constexpr auto roundMinAngle = 0.174533;
+
+    void clear(const glm::uint c) {
+        clear(Color(c));
+    }
+
+    void clear(const Color& c) {
+        clear(c.asVec4());
+    }
+
+    void clear(const glm::vec4& c) {
+        clear(glm::vec3{c.r,c.g,c.b});
+    }
+
+    void clear(const glm::vec3& c) {
+        glClearColor(c.r, c.g, c.b, 1.0);
+        glClear(GL_COLOR_BUFFER_BIT);
+    }
 
     Renderer::Renderer() = default;
     Renderer::~Renderer() = default;
@@ -26,20 +45,49 @@ namespace circuits {
         glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), reinterpret_cast<void*>(offsetof(Vertex,pos)));
 
         glEnableVertexAttribArray(1);
-        glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), reinterpret_cast<void*>(offsetof(Vertex,col)));
+        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), reinterpret_cast<void*>(offsetof(Vertex,uv)));
+
+        glEnableVertexAttribArray(2);
+        glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), reinterpret_cast<void*>(offsetof(Vertex,col)));
+
+        m_shader.loadDefault();
+        m_shader.use();
     }
 
     void Renderer::unload() {
         glDeleteVertexArrays(1, &m_vao);
         glDeleteBuffers(1, &m_vbo);
+        m_shader.unload();
+        m_vao = m_vbo = 0;
     }
 
-    void Renderer::begin(){}
-    void Renderer::end(){}
-    void Renderer::flush(){}
+    void Renderer::begin() {
+        m_vertices.clear();
+    }
+
+    void Renderer::end() const {
+        flush();
+    }
+
+    void Renderer::flush() const {
+        if (m_vertices.empty()) return;
+
+        m_shader.use();
+        m_shader.set("op",m_paint);
+
+        glBindVertexArray(m_vao);
+        glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
+        glBufferData(GL_ARRAY_BUFFER, static_cast<long>(m_vertices.size() * sizeof(Vertex)), m_vertices.data(), GL_DYNAMIC_DRAW);
+
+        glDrawArrays(GL_TRIANGLES, 0, static_cast<int>(m_vertices.size()));
+
+    }
 
     void Renderer::resize(const glm::vec2& s) {
         m_projection = glm::ortho(0.f, s.x, s.y, 0.f);
+        m_shader.set("proj",m_projection);
+        const auto is = glm::ivec2(s);
+        glViewport(0,0,is.x,is.y);
     }
 
     void Renderer::newPath() {
@@ -223,7 +271,11 @@ namespace circuits {
     }
 
     void Renderer::fill(const Color& c) {
-        if (m_path.size() < 3) return;
+        setPaint(0);
+        if (m_path.size() < 3) {
+            std::cerr << "Can't fill empty path!" << std::endl;
+            return;
+        }
 
         const auto base = m_path.points().front();
         for (auto i = 1; i < m_path.size(); ++i) {
@@ -234,11 +286,11 @@ namespace circuits {
     }
 
     void Renderer::fill(const Texture&, const glm::vec2&, const glm::vec2&) {
-
+        setPaint(1);
     }
 
     void Renderer::text(const std::string&, const glm::vec2&) {
-
+        setPaint(2);
     }
 
     void Renderer::setFont(const Font&) {
@@ -438,6 +490,7 @@ namespace circuits {
     }
 
     void Renderer::stroke(const Color& color, const float w){
+        setPaint(0);
         const auto& path = m_path;
         const auto& points = path.points();
         const auto thickness = w / 2.f;
@@ -527,5 +580,14 @@ namespace circuits {
         }
 
     }
+
+    void Renderer::setPaint(const int p) {
+        if (m_paint != p) {
+            flush();
+            m_vertices.clear();
+            m_paint = p;
+        }
+    }
+
 
 }

@@ -24,7 +24,7 @@ namespace circuits {
 
     glm::uint Color::asHex() const{
         const auto c = glm::uvec4(m_color * 255.f);
-        return c.a << 24 | c.b << 16 | c.g << 8 | c.b;
+        return c.a << 24 | c.r << 16 | c.g << 8 | c.b;
     }
 
 }
