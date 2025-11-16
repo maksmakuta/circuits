@@ -1,0 +1,41 @@
+#ifndef CIRCUITS_FONT_H
+#define CIRCUITS_FONT_H
+
+#include <optional>
+#include <glm/vec4.hpp>
+
+#include "Texture.h"
+
+namespace circuits {
+
+    struct Glyph {
+        glm::vec2 size;
+        glm::vec2 offset;
+        float advance;
+        glm::vec4 uv;
+    };
+
+    class Font {
+    public:
+        Font() = default;
+
+        void load(const std::string&, int size);
+        void unload();
+
+        glm::vec2 textSize(const std::string&) const;
+
+        int getSize() const;
+        Texture getTexture() const;
+        std::optional<Glyph> getGlyph(uint32_t) const;
+
+    private:
+        int m_size{0};
+        Texture m_texture;
+        std::unordered_map<uint32_t, Glyph> m_glyphs;
+    };
+
+}
+
+
+
+#endif //CIRCUITS_FONT_H

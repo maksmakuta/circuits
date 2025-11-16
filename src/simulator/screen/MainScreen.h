@@ -13,7 +13,7 @@ namespace circuits {
         void onUpdate(float dt) override;
         void onEvent(const Event &) override;
     private:
-        Texture texture;
+        Font font;
     };
 
 }

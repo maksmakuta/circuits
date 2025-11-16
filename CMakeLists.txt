@@ -33,6 +33,21 @@ add_executable(circuits
         src/components/Constant.cpp
         src/components/Constant.h
 
+        src/graphics/Renderer.cpp
+        src/graphics/Renderer.h
+        src/graphics/Color.cpp
+        src/graphics/Color.h
+        src/graphics/Font.cpp
+        src/graphics/Font.h
+        src/graphics/Texture.cpp
+        src/graphics/Texture.h
+        src/graphics/Vertex.cpp
+        src/graphics/Vertex.h
+        src/graphics/Shader.cpp
+        src/graphics/Shader.h
+        src/graphics/Path.cpp
+        src/graphics/Path.h
+
         src/simulator/Application.cpp
         src/simulator/Application.h
         src/simulator/screen/MainScreen.cpp
@@ -68,8 +83,6 @@ add_executable(circuits
         src/window/Window.h
 
         src/main.cpp
-        src/graphics/Renderer.cpp
-        src/graphics/Renderer.h
 
 )
 

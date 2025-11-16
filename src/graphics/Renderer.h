@@ -52,9 +52,10 @@ namespace circuits {
         void rotate(float);
         void rotate(float, const glm::vec2&);
 
-        void setFont(const Font&);
         void setCap(const Cap&);
         void setJoint(const Joint&);
+
+        void text(const Font&, const std::string&, const glm::vec2&, const Color& c = Color(0xFFFFFFFF));
 
         void point(const glm::vec2&);
         void line(const glm::vec2&,const glm::vec2&);
@@ -72,7 +73,7 @@ namespace circuits {
         void fill(const Color&);
         void fill(const Texture&, const glm::vec2& = {0,0}, const glm::vec2& = {1,1});
         void stroke(const Color&, float);
-        void text(const std::string&, const glm::vec2&);
+
     private:
         void setPaint(int);
         void setTexture(const Texture&);
