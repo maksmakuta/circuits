@@ -9,11 +9,9 @@ namespace circuits {
     public:
         void onInit() override;
         void onDeinit() override;
-        void onDraw(Renderer &) override;
+        void onDraw() override;
         void onUpdate(float dt) override;
         void onEvent(const Event &) override;
-    private:
-        glm::vec2 mouse{0,0};
     };
 
 }

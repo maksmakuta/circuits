@@ -7,6 +7,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(SDL3 REQUIRED)
 find_package(OpenGL REQUIRED)
 find_package(glm REQUIRED)
+find_package(Freetype REQUIRED)
 
 add_subdirectory(libs/glad)
 add_subdirectory(libs/LodePNG)
@@ -31,21 +32,6 @@ add_executable(circuits
         src/components/Display.h
         src/components/Constant.cpp
         src/components/Constant.h
-
-        src/graphics/Texture.cpp
-        src/graphics/Texture.h
-        src/graphics/Shader.cpp
-        src/graphics/Shader.h
-        src/graphics/Renderer.cpp
-        src/graphics/Renderer.h
-        src/graphics/Path.cpp
-        src/graphics/Path.h
-        src/graphics/Font.cpp
-        src/graphics/Font.h
-        src/graphics/Color.cpp
-        src/graphics/Color.h
-        src/graphics/Vertex.cpp
-        src/graphics/Vertex.h
 
         src/simulator/Application.cpp
         src/simulator/Application.h
@@ -92,4 +78,5 @@ target_link_libraries(circuits PRIVATE
         OpenGL::GL
         glad::glad
         LodePNG
+        Freetype::Freetype
 )

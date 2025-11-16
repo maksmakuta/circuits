@@ -5,8 +5,6 @@ namespace circuits {
     Application::Application() : m_window("Circuits", glm::ivec2{800,600}), m_screen(MainScreen()){}
 
     int Application::run() {
-        m_renderer.load();
-        m_renderer.resize(m_window.getSize());
         m_screen.onInit();
         auto last_tile = Window::getTime();
         while (!m_window.isClosed()) {
@@ -19,14 +17,11 @@ namespace circuits {
                 onEvent(e);
             }
 
-            m_renderer.begin();
             onDraw();
-            m_renderer.end();
 
             m_window.swap();
         }
         m_screen.onDeinit();
-        m_renderer.unload();
         return 0;
     }
 
@@ -35,13 +30,10 @@ namespace circuits {
     }
 
     void Application::onDraw() {
-        m_screen.onDraw(m_renderer);
+        m_screen.onDraw();
     }
 
     void Application::onEvent(const Event& e) {
-        if (e.type == EventType::WindowResize) {
-            m_renderer.resize({e.window.width,e.window.height});
-        }
         if (e.type == EventType::WindowClose) {
             m_window.close();
         }

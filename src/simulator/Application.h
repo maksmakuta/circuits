@@ -19,7 +19,6 @@ namespace circuits {
 
         Window m_window;
         MainScreen m_screen;
-        Renderer m_renderer;
     };
 
 }
