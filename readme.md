@@ -15,13 +15,14 @@
 
 ### Roadmap
 
- - [ ] Rendering subsystem (0.1.x)
+ - [X] Rendering subsystem (0.1.x)
    - [X] Shapes API
    - [X] Fill and stroke Renderer API
-   - [ ] Textures and images API
-   - [ ] Text rendering API
+   - [X] Textures and images API
+   - [X] Text rendering API
  - [ ] Widget subsystem (0.2.x)
  - [ ] Component subsystem (0.3.x)
+ - [ ] Format for storing circuits (0.3.x - 0.4.x)
 
 ## Author & License
 
