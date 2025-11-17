@@ -13,13 +13,13 @@
 
 namespace circuits {
 
-    enum class Cap {
+    enum class Cap : uint8_t {
         Butt,
         Round,
         Square
     };
 
-    enum class Joint {
+    enum class Joint : uint8_t {
         Miter,
         Bevel,
         Round
@@ -54,6 +54,8 @@ namespace circuits {
 
         void setCap(const Cap&);
         void setJoint(const Joint&);
+        void setAlign(const Align&);
+        void setBaseline(const Baseline&);
 
         void text(const Font&, const std::string&, const glm::vec2&, const Color& c = Color(0xFFFFFFFF));
 
@@ -78,16 +80,18 @@ namespace circuits {
         void setPaint(int);
         void setTexture(const Texture&);
 
+        Path m_path;
         int m_paint{0};
+        Shader m_shader;
         glm::uint m_tex{0};
         glm::uint m_vao{0};
         glm::uint m_vbo{0};
-        Path m_path;
-        Shader m_shader;
         Cap m_cap = Cap::Butt;
         Joint m_joint = Joint::Bevel;
-        std::vector<Vertex> m_vertices;
+        Align m_align = Align::Right;
+        Baseline m_baseline = Baseline::Top;
         glm::mat4 m_projection{1.f};
+        std::vector<Vertex> m_vertices;
     };
 
     void clear(const Color&);

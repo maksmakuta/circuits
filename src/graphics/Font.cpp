@@ -107,14 +107,10 @@ namespace circuits {
 
         for (const char c : text) {
             if (c == '\n') {
-                h += static_cast<float>(m_size);
-                w = 0;
-                continue;
+                break;
             }
-
             auto g = getGlyph(static_cast<uint32_t>(c));
             if (!g) continue;
-
             w += g->advance;
         }
 

@@ -13,7 +13,10 @@ namespace circuits {
         void onUpdate(float dt) override;
         void onEvent(const Event &) override;
     private:
+        glm::ivec2 view{0};
         Font font;
+        Align align = Align::Left;
+        Baseline baseline = Baseline::Top;
     };
 
 }

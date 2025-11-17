@@ -320,24 +320,28 @@ namespace circuits {
 
         glm::vec2 cursor = pos;
 
-        for (const char ch : text)
-        {
+        if (m_align == Align::Center) {
+            cursor.x -= font.textSize(text).x / 2;
+        }else if (m_align == Align::Left) {
+            cursor.x -= font.textSize(text).x;
+        }
+
+        if (m_baseline == Baseline::Middle) {
+            cursor.y += font.textSize(text).y / 2;
+        } else if (m_baseline == Baseline::Bottom) {
+            cursor.y += font.textSize(text).y;
+        }
+
+        for (const char ch : text){
             if (ch == '\n') {
-                cursor.x = pos.x;
-                cursor.y += static_cast<float>(font.getSize());
-                continue;
+                break;
             }
 
             auto gopt = font.getGlyph(static_cast<uint32_t>(ch));
             if (!gopt.has_value())
                 continue;
 
-            const Glyph& g = gopt.value();
-
-            glm::vec2 size   = g.size;     // px
-            glm::vec2 offset = g.offset;   // bearing
-            float advance    = g.advance;  // px
-            glm::vec4 uv     = g.uv;       // uv coords
+            const auto&[size, offset, advance, uv] = gopt.value();
 
             glm::vec2 p0 = cursor + glm::vec2(offset.x, -offset.y);
             glm::vec2 p1 = p0 + glm::vec2(size.x, 0);
@@ -353,7 +357,6 @@ namespace circuits {
             m_vertices.emplace_back(p3, glm::vec2{ uv.z, uv.w }, c);
             m_vertices.emplace_back(p2, glm::vec2{ uv.x, uv.w }, c);
 
-            // move cursor forward
             cursor.x += advance;
         }
     }
@@ -365,6 +368,14 @@ namespace circuits {
 
     void Renderer::setJoint(const Joint& j) {
         m_joint = j;
+    }
+
+    void Renderer::setAlign(const Align& a) {
+        m_align = a;
+    }
+
+    void Renderer::setBaseline(const Baseline& b) {
+        m_baseline = b;
     }
 
     struct Line {
