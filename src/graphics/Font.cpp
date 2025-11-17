@@ -11,7 +11,7 @@ namespace circuits {
 
     void Font::load(const std::string& file, const int size) {
         unload();
-
+        const auto atlas_size = glm::ivec2(1024);
         m_size = size;
 
         FT_Library ft;
@@ -29,33 +29,31 @@ namespace circuits {
 
         FT_Set_Pixel_Sizes(face, 0, size);
 
-        const int first = 32;
-        const int last  = 126;
-        const int glyphCount = last - first + 1;
-
-        const int cols = 16;
-        const int rows = (glyphCount + cols - 1) / cols;
-
-        const int cellW = size * 2;
-        const int cellH = size * 2;
-
-        const int atlasW = cols * cellW;
-        const int atlasH = rows * cellH;
-
-        std::vector<uint8_t> atlas(atlasW * atlasH, 0);
+        std::vector<uint8_t> atlas(atlas_size.x * atlas_size.y, 0);
 
         glm::ivec2 pos{0};
         int h = 0;
-        for (uint32_t cp = first; cp <= last; ++cp){
+        for (uint32_t cp = 0; cp < 128; ++cp){
             if (FT_Load_Char(face, cp, FT_LOAD_RENDER)) {
+                continue;
+            }
+            if (FT_Get_Char_Index(face, cp) == 0) {
                 continue;
             }
 
             const auto g = face->glyph;
+
             h = std::max<int>(h,g->bitmap.rows);
+
+            if (pos.x + g->bitmap.width + 1 > atlas_size.x) {
+                pos.x = 1;
+                pos.y += h;
+                h = 0;
+            }
+
             for (int y = 0; y < g->bitmap.rows; ++y) {
                 for (int x = 0; x < g->bitmap.width; ++x) {
-                    atlas[(pos.y + y) * atlasW + (pos.x + x)] =
+                    atlas[(pos.y + y) * atlas_size.x + (pos.x + x)] =
                         g->bitmap.buffer[y * g->bitmap.pitch + x];
                 }
             }
@@ -66,24 +64,18 @@ namespace circuits {
             glyph.offset = { g->bitmap_left, g->bitmap_top };
             glyph.advance = static_cast<float>(g->advance.x >> 6);
 
-            float u0 = static_cast<float>(pos.x) / static_cast<float>(atlasW);
-            float v0 = static_cast<float>(pos.y) / static_cast<float>(atlasH);
-            float u1 = static_cast<float>(pos.x + g->bitmap.width)  / static_cast<float>(atlasW);
-            float v1 = static_cast<float>(pos.y + g->bitmap.rows)   / static_cast<float>(atlasH);
+            float u0 = static_cast<float>(pos.x) / static_cast<float>(atlas_size.x);
+            float v0 = static_cast<float>(pos.y) / static_cast<float>(atlas_size.y);
+            float u1 = static_cast<float>(pos.x + g->bitmap.width)  / static_cast<float>(atlas_size.x);
+            float v1 = static_cast<float>(pos.y + g->bitmap.rows)   / static_cast<float>(atlas_size.y);
             glyph.uv = { u0, v0, u1, v1 };
 
             m_glyphs[cp] = glyph;
 
-            if (pos.x + g->bitmap.width + 1 > atlasW) {
-                pos.x = 0;
-                pos.y += h;
-                h = 0;
-            }else {
-                pos.x += static_cast<int>(g->bitmap.width) + 1;
-            }
+            pos.x += static_cast<int>(g->bitmap.width) + 1;
         }
 
-        m_texture.load(atlas, { atlasW, atlasH }, GL_RED);
+        m_texture.load(atlas, atlas_size, GL_RED);
 
         FT_Done_Face(face);
         FT_Done_FreeType(ft);
