@@ -13,10 +13,10 @@ add_subdirectory(libs/glad)
 add_subdirectory(libs/LodePNG)
 
 add_executable(circuits
-        src/base/IScreen.cpp
-        src/base/IScreen.h
-        src/base/IWidget.cpp
-        src/base/IWidget.h
+        src/base/interface/IScreen.cpp
+        src/base/interface/IScreen.h
+        src/base/interface/IWidget.cpp
+        src/base/interface/IWidget.h
 
         src/components/Gate.cpp
         src/components/Gate.h
@@ -83,6 +83,12 @@ add_executable(circuits
         src/window/Window.h
 
         src/main.cpp
+        src/base/Position.cpp
+        src/base/Position.h
+        src/base/Size.cpp
+        src/base/Size.h
+        src/base/Rect.cpp
+        src/base/Rect.h
 
 )
 

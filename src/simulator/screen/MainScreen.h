@@ -1,7 +1,7 @@
 #ifndef CIRCUITS_MAINSCREEN_H
 #define CIRCUITS_MAINSCREEN_H
 
-#include "base/IScreen.h"
+#include "../../base/interface/IScreen.h"
 
 namespace circuits {
 
