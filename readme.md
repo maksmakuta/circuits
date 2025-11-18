@@ -15,12 +15,20 @@
 
 ### Roadmap
 
- - [X] Rendering subsystem (0.1.x)
+ - [X] Rendering subsystem (0.1.x, done)
    - [X] Shapes API
    - [X] Fill and stroke Renderer API
    - [X] Textures and images API
    - [X] Text rendering API
- - [ ] Widget subsystem (0.2.x)
+ - [ ] Widget subsystem (0.2.x, in progress)
+   - [ ] IWidget interface
+   - [ ] Widgets implementation (maybe extended in future)
+     - [ ] Label
+     - [ ] Button
+     - [ ] Image
+   - [ ] Layouts implementation
+     - [ ] Column
+     - [ ] Row
  - [ ] Component subsystem (0.3.x)
  - [ ] Format for storing circuits (0.3.x - 0.4.x)
 
