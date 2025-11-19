@@ -29,12 +29,18 @@ namespace circuits {
             onError("Cannot create OpenGL context");
             return;
         }
+
+        if (!SDL_GL_SetSwapInterval(1)) {
+            std::fprintf(stderr, "Warning: could not set swap interval: %s\n", SDL_GetError());
+        }
+
         if (!gladLoadGL(SDL_GL_GetProcAddress)) {
             onError("Cannot load GLAD");
             return;
         }
 
         SDL_GL_MakeCurrent(m_window, m_context);
+
         m_running = true;
     }
 

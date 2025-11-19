@@ -17,6 +17,7 @@ namespace circuits {
         explicit Rect(const glm::ivec4&);
 
         [[nodiscard]] glm::vec2 getCenter() const;
+        [[nodiscard]] bool in(const glm::ivec2& vec) const;
 
         Position position;
         Size size;

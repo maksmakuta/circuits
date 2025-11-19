@@ -18,6 +18,13 @@ add_executable(circuits
         src/base/interface/IWidget.cpp
         src/base/interface/IWidget.h
 
+        src/base/Position.cpp
+        src/base/Position.h
+        src/base/Size.cpp
+        src/base/Size.h
+        src/base/Rect.cpp
+        src/base/Rect.h
+
         src/components/Gate.cpp
         src/components/Gate.h
         src/components/Toggle.cpp
@@ -83,13 +90,10 @@ add_executable(circuits
         src/window/Window.h
 
         src/main.cpp
-        src/base/Position.cpp
-        src/base/Position.h
-        src/base/Size.cpp
-        src/base/Size.h
-        src/base/Rect.cpp
-        src/base/Rect.h
-
+        src/rx/State.h
+        src/rx/Computed.h
+        src/simulator/screen/MainVM.cpp
+        src/simulator/screen/MainVM.h
 )
 
 target_include_directories(circuits PUBLIC src)
