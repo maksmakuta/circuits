@@ -1,8 +1,6 @@
 #ifndef CIRCUITS_COMPUTED_H
 #define CIRCUITS_COMPUTED_H
 
-#include <functional>
-
 #include "State.h"
 
 namespace circuits {

@@ -3,6 +3,8 @@
 
 #include "base/Rect.h"
 #include "graphics/Renderer.h"
+#include "ui/Modifier.h"
+#include "ui/Theme.h"
 #include "window/Event.h"
 
 namespace circuits {
@@ -16,6 +18,10 @@ namespace circuits {
         virtual void onDraw(Renderer&) = 0;
         virtual void onUpdate(float dt) = 0;
         virtual void onEvent(const Event& e) = 0;
+
+        Rect rectangle;
+        Modifier modifier;
+        ThemePtr theme;
     };
 
 }
