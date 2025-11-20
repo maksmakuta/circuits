@@ -49,6 +49,7 @@ add_executable(circuits
         src/window/Window.h
 
         src/main.cpp
+        src/utils/OpenSans_Regular_ttf.h
 )
 
 target_include_directories(circuits PUBLIC src)

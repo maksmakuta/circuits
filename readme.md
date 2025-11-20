@@ -32,6 +32,10 @@
  - [ ] Component subsystem (0.3.x)
  - [ ] Format for storing circuits (0.3.x - 0.4.x)
 
+### Thanks to
+
+ [Steve Matteson](https://www.1001fonts.com/users/stevematteson/): OpenSans font (Apache 2.0 License)
+
 ## Author & License
 
  Maks Makuta  

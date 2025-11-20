@@ -3,6 +3,7 @@
 #include <iostream>
 
 #include "glad/gl.h"
+#include "utils/OpenSans_Regular_ttf.h"
 
 namespace circuits {
 
@@ -36,18 +37,15 @@ namespace circuits {
     void Font::loadDefault(const int size) {
         unload();
         m_size = size;
-/*
+
         FT_Library ft;
         if (FT_Init_FreeType(&ft) != 0) {
             std::cerr << "FreeType: Failed to initialize\n";
             return;
         }
 
-        const auto* ttf_data  = &_binary_opensans_regular_ttf_start;
-        const auto  ttf_size  = reinterpret_cast<long>(&_binary_opensans_regular_ttf_size);
-
         FT_Face face;
-        if (FT_New_Memory_Face(ft, ttf_data, ttf_size, 0, &face) != 0) {
+        if (FT_New_Memory_Face(ft, OpenSans_Regular_ttf, OpenSans_Regular_ttf_len, 0, &face) != 0) {
             std::cerr << "FreeType: Failed to load default font" << std::endl;
             FT_Done_FreeType(ft);
             return;
@@ -59,7 +57,6 @@ namespace circuits {
 
         FT_Done_Face(face);
         FT_Done_FreeType(ft);
-*/
     }
 
     void Font::unload() {
