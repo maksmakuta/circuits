@@ -14,8 +14,6 @@ namespace circuits {
         void onUpdate(float dt) override;
         void onEvent(const Event &) override;
     private:
-        glm::vec2 view{0};
-        Font font;
         MainVM viewmodel;
     };
 

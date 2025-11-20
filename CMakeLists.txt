@@ -15,15 +15,6 @@ add_subdirectory(libs/LodePNG)
 add_executable(circuits
         src/base/interface/IScreen.cpp
         src/base/interface/IScreen.h
-        src/base/interface/IWidget.cpp
-        src/base/interface/IWidget.h
-
-        src/base/Position.cpp
-        src/base/Position.h
-        src/base/Size.cpp
-        src/base/Size.h
-        src/base/Rect.cpp
-        src/base/Rect.h
 
         src/components/Gate.cpp
         src/components/Gate.h
@@ -59,27 +50,8 @@ add_executable(circuits
         src/simulator/Application.h
         src/simulator/screen/MainScreen.cpp
         src/simulator/screen/MainScreen.h
-
-        src/ui/layout/Column.cpp
-        src/ui/layout/Column.h
-        src/ui/layout/Row.cpp
-        src/ui/layout/Row.h
-        src/ui/widget/Button.cpp
-        src/ui/widget/Button.h
-        src/ui/widget/Label.cpp
-        src/ui/widget/Label.h
-        src/ui/widget/Input.cpp
-        src/ui/widget/Input.h
-        src/ui/widget/Progress.cpp
-        src/ui/widget/Progress.h
-        src/ui/widget/Divider.cpp
-        src/ui/widget/Divider.h
-        src/ui/widget/Image.cpp
-        src/ui/widget/Image.h
-        src/ui/Modifier.cpp
-        src/ui/Modifier.h
-        src/ui/Theme.cpp
-        src/ui/Theme.h
+        src/simulator/screen/MainVM.cpp
+        src/simulator/screen/MainVM.h
 
         src/utils/Assets.cpp
         src/utils/Assets.h
@@ -90,10 +62,6 @@ add_executable(circuits
         src/window/Window.h
 
         src/main.cpp
-        src/rx/State.h
-        src/rx/Computed.h
-        src/simulator/screen/MainVM.cpp
-        src/simulator/screen/MainVM.h
 )
 
 target_include_directories(circuits PUBLIC src)
