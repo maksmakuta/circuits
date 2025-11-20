@@ -11,6 +11,7 @@ find_package(Freetype REQUIRED)
 
 add_subdirectory(libs/glad)
 add_subdirectory(libs/LodePNG)
+add_subdirectory(libs/OpenSans_ettf)
 
 add_executable(circuits
         src/base/interface/IScreen.h
@@ -49,7 +50,7 @@ add_executable(circuits
         src/window/Window.h
 
         src/main.cpp
-        src/utils/OpenSans_Regular_ttf.hpp
+        libs/OpenSans_ettf/OpenSans_Regular_ttf.hpp
         src/base/interface/IViewmodel.h
         src/base/interface/IWidget.h
 )
@@ -62,4 +63,5 @@ target_link_libraries(circuits PRIVATE
         glad::glad
         LodePNG
         Freetype::Freetype
+        open_sans_data
 )
