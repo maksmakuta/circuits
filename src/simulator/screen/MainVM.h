@@ -1,11 +1,13 @@
 #ifndef CIRCUITS_MAINVM_H
 #define CIRCUITS_MAINVM_H
 
+#include "base/interface/IViewmodel.h"
+
 namespace circuits {
 
-    class MainVM {
+    class MainVM final : public IViewmodel{
     public:
-        MainVM() = default;
+        MainVM();
     };
 
 }

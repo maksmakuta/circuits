@@ -7,7 +7,7 @@ namespace circuits {
     void MainScreen::onDeinit() {}
 
     void MainScreen::onDraw(Renderer& r) {
-        clear(0xFF202020);
+        clear(getContext()->theme->background);
     }
 
     void MainScreen::onUpdate(float dt){ }

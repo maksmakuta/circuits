@@ -3,7 +3,7 @@
 #include <iostream>
 
 #include "glad/gl.h"
-#include "utils/OpenSans_Regular_ttf.h"
+#include "utils/OpenSans_Regular_ttf.hpp"
 
 namespace circuits {
 
