@@ -1,17 +1,15 @@
 #include "Font.h"
 
-#include <ft2build.h>
 #include <iostream>
 
 #include "glad/gl.h"
 
-#include FT_FREETYPE_H
-
 namespace circuits {
+
+    constexpr auto atlas_size = glm::ivec2(1024);
 
     void Font::load(const std::string& file, const int size) {
         unload();
-        const auto atlas_size = glm::ivec2(1024);
         m_size = size;
 
         FT_Library ft;
@@ -29,6 +27,59 @@ namespace circuits {
 
         FT_Set_Pixel_Sizes(face, 0, size);
 
+        build(face);
+
+        FT_Done_Face(face);
+        FT_Done_FreeType(ft);
+    }
+
+    void Font::loadDefault(const int size) {
+        unload();
+        m_size = size;
+/*
+        FT_Library ft;
+        if (FT_Init_FreeType(&ft) != 0) {
+            std::cerr << "FreeType: Failed to initialize\n";
+            return;
+        }
+
+        const auto* ttf_data  = &_binary_opensans_regular_ttf_start;
+        const auto  ttf_size  = reinterpret_cast<long>(&_binary_opensans_regular_ttf_size);
+
+        FT_Face face;
+        if (FT_New_Memory_Face(ft, ttf_data, ttf_size, 0, &face) != 0) {
+            std::cerr << "FreeType: Failed to load default font" << std::endl;
+            FT_Done_FreeType(ft);
+            return;
+        }
+
+        FT_Set_Pixel_Sizes(face, 0, size);
+
+        build(face);
+
+        FT_Done_Face(face);
+        FT_Done_FreeType(ft);
+*/
+    }
+
+    void Font::unload() {
+        m_texture.unload();
+        m_glyphs.clear();
+        m_size = 0;
+    }
+
+    Texture Font::getTexture() const {
+        return m_texture;
+    }
+
+    std::optional<Glyph> Font::getGlyph(const uint32_t code) const {
+        if (m_glyphs.contains(code)) {
+            return m_glyphs.at(code);
+        }
+        return std::nullopt;
+    }
+
+    void Font::build(const FT_Face& face) {
         std::vector<uint8_t> atlas(atlas_size.x * atlas_size.y, 0);
 
         glm::ivec2 pos{0};
@@ -43,7 +94,7 @@ namespace circuits {
 
             const auto g = face->glyph;
 
-            h = std::max<int>(h,g->bitmap.rows);
+            h = std::max(h,static_cast<int>(g->bitmap.rows));
 
             if (pos.x + g->bitmap.width + 1 > atlas_size.x) {
                 pos.x = 1;
@@ -77,25 +128,6 @@ namespace circuits {
 
         m_texture.load(atlas, atlas_size, GL_RED);
 
-        FT_Done_Face(face);
-        FT_Done_FreeType(ft);
-    }
-
-    void Font::unload() {
-        m_texture.unload();
-        m_glyphs.clear();
-        m_size = 0;
-    }
-
-    Texture Font::getTexture() const {
-        return m_texture;
-    }
-
-    std::optional<Glyph> Font::getGlyph(const uint32_t code) const {
-        if (m_glyphs.contains(code)) {
-            return m_glyphs.at(code);
-        }
-        return std::nullopt;
     }
 
     int Font::getSize() const {

@@ -3,6 +3,7 @@
 
 #include "graphics/Renderer.h"
 #include "window/Event.h"
+#include "base/Context.h"
 
 namespace circuits {
 
@@ -15,6 +16,17 @@ namespace circuits {
         virtual void onDraw(Renderer&) = 0;
         virtual void onUpdate(float dt) = 0;
         virtual void onEvent(const Event&) = 0;
+
+        void setContext(const std::shared_ptr<Context>& inContext) {
+            m_context = inContext;
+        }
+
+        const std::shared_ptr<Context>& getContext() {
+            return m_context;
+        }
+
+    private:
+        ContextPtr m_context = nullptr;
     };
 
 }

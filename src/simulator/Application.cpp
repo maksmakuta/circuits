@@ -2,7 +2,10 @@
 
 namespace circuits {
 
-    Application::Application() : m_window("Circuits", glm::ivec2{800,600}), m_screen(MainScreen()){}
+    Application::Application() : m_window("Circuits", glm::ivec2{800,600}),
+        m_screen(MainScreen()), m_context(std::make_shared<Context>()) {
+        m_screen.setContext(m_context);
+    }
 
     int Application::run() {
         m_renderer.load();
@@ -25,6 +28,7 @@ namespace circuits {
         }
         m_screen.onDeinit();
         m_renderer.unload();
+        m_context->unload();
         return 0;
     }
 
