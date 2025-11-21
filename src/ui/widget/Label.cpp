@@ -11,6 +11,10 @@ namespace circuits {
     }
 
     void Label::onDraw(Renderer& r){
+        // this for layout debug (temporary code)
+        r.rect(m_pos,m_size);
+        r.stroke(Color(0xFF00FF00),1);
+
         r.text(
             getContext()->font,
             m_text,

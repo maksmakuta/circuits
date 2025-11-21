@@ -35,6 +35,8 @@ namespace circuits {
         uint32_t m_flags{0};
     };
 
+    using WidgetPtr = std::shared_ptr<IWidget>;
+
 }
 
 #endif //CIRCUITS_IWIDGET_H
