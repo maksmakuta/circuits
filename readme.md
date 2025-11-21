@@ -21,14 +21,17 @@
    - [X] Textures and images API
    - [X] Text rendering API
  - [ ] Widget subsystem (0.2.x, in progress)
-   - [ ] IWidget interface
+   - [X] IWidget interface
    - [ ] Widgets implementation (maybe extended in future)
      - [ ] Label
      - [ ] Button
      - [ ] Image
+     - [ ] Input
+     - [ ] Switch
    - [ ] Layouts implementation
      - [ ] Column
      - [ ] Row
+     - [ ] Grid
  - [ ] Component subsystem (0.3.x)
  - [ ] Format for storing circuits (0.3.x - 0.4.x)
 

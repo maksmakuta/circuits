@@ -15,6 +15,8 @@ add_subdirectory(libs/OpenSans_ettf)
 
 add_executable(circuits
         src/base/interface/IScreen.h
+        src/base/interface/IViewmodel.h
+        src/base/interface/IWidget.h
 
         src/base/Context.cpp
         src/base/Context.h
@@ -50,9 +52,6 @@ add_executable(circuits
         src/window/Window.h
 
         src/main.cpp
-        libs/OpenSans_ettf/OpenSans_Regular_ttf.hpp
-        src/base/interface/IViewmodel.h
-        src/base/interface/IWidget.h
 )
 
 target_include_directories(circuits PUBLIC src)
