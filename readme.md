@@ -22,14 +22,14 @@
    - [X] Text rendering API
  - [ ] Widget subsystem (0.2.x, in progress)
    - [X] IWidget interface
-   - [ ] Widgets implementation (maybe extended in future)
-     - [ ] Label
+   - [ ] Widgets:
+     - [X] Label
      - [ ] Button
      - [ ] Image
      - [ ] Input
      - [ ] Switch
-   - [ ] Layouts implementation
-     - [ ] Column
+   - [ ] Layouts:
+     - [X] Column
      - [ ] Row
      - [ ] Grid
  - [ ] Component subsystem (0.3.x)
