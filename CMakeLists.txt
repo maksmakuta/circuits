@@ -56,6 +56,12 @@ add_executable(circuits
         src/ui/widget/Label.h
         src/ui/layout/Column.cpp
         src/ui/layout/Column.h
+        src/ui/Modifier.cpp
+        src/ui/Modifier.h
+        src/enums/Align.h
+        src/enums/Baseline.h
+        src/enums/Cap.h
+        src/enums/Joint.h
 )
 
 target_include_directories(circuits PUBLIC src)

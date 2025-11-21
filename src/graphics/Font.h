@@ -11,18 +11,6 @@
 
 namespace circuits {
 
-    enum class Align : uint8_t {
-        Left,
-        Center,
-        Right
-    };
-
-    enum class Baseline : uint8_t {
-        Top,
-        Middle,
-        Bottom
-    };
-
     struct Glyph {
         glm::vec2 size;
         glm::vec2 offset;

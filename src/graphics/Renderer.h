@@ -11,19 +11,14 @@
 #include "Texture.h"
 #include "Vertex.h"
 
+#include "enums/Align.h"
+#include "enums/Baseline.h"
+#include "enums/Cap.h"
+#include "enums/Joint.h"
+
 namespace circuits {
 
-    enum class Cap : uint8_t {
-        Butt,
-        Round,
-        Square
-    };
 
-    enum class Joint : uint8_t {
-        Miter,
-        Bevel,
-        Round
-    };
 
     class Renderer {
     public:
