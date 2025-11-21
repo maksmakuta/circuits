@@ -62,6 +62,7 @@ add_executable(circuits
         src/enums/Baseline.h
         src/enums/Cap.h
         src/enums/Joint.h
+        src/enums/SizeType.h
 )
 
 target_include_directories(circuits PUBLIC src)
