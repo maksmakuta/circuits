@@ -4,11 +4,12 @@ namespace circuits {
 
     Application::Application() : m_window("Circuits", glm::ivec2{800,600}),
         m_screen(MainScreen()), m_context(std::make_shared<Context>()) {
-        m_screen.setContext(m_context);
     }
 
     int Application::run() {
         m_renderer.load();
+        m_screen.setContext(m_context);
+        m_screen.onEvent(Event::WindowResize(m_window.getSize().x,m_window.getSize().y));
         m_screen.onInit();
         auto last_tile = Window::getTime();
         while (!m_window.isClosed()) {

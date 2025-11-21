@@ -5,7 +5,7 @@ namespace circuits {
 
     class IViewmodel {
     public:
-        virtual ~IViewmodel() {}
+        virtual ~IViewmodel() = default;
     };
 
 }

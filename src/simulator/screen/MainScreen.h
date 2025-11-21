@@ -3,18 +3,22 @@
 
 #include "MainVM.h"
 #include "base/interface/IScreen.h"
+#include "ui/widget/Label.h"
 
 namespace circuits {
 
-    class MainScreen final : public IScreen{
+    class MainScreen final : public IScreen<MainVM>{
     public:
+        MainScreen();
+
         void onInit() override;
         void onDeinit() override;
         void onDraw(Renderer&) override;
         void onUpdate(float dt) override;
         void onEvent(const Event &) override;
     private:
-        MainVM viewmodel;
+        glm::ivec2 m_view{0};
+        std::unique_ptr<Label> m_text = nullptr;
     };
 
 }

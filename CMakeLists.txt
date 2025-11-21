@@ -52,6 +52,8 @@ add_executable(circuits
         src/window/Window.h
 
         src/main.cpp
+        src/ui/widget/Label.cpp
+        src/ui/widget/Label.h
 )
 
 target_include_directories(circuits PUBLIC src)
