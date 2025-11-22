@@ -7,7 +7,7 @@ namespace circuits {
 
     class Label final : public IWidget{
     public:
-        explicit Label(std::string  = "");
+        explicit Label(std::string  = "", const Modifier& = {});
 
         glm::ivec2 onMeasure(const glm::ivec2 &max_size) override;
         void onDraw(Renderer &) override;

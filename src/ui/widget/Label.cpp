@@ -4,22 +4,22 @@
 
 namespace circuits {
 
-    Label::Label(std::string t) : IWidget(), m_text(std::move(t)){}
+    Label::Label(std::string t, const Modifier& m) : IWidget(m), m_text(std::move(t)){}
 
     glm::ivec2 Label::onMeasure(const glm::ivec2 &max_size){
-        return getContext()->font.textSize(m_text);
+        return getContext()->getFont().textSize(m_text);
     }
 
     void Label::onDraw(Renderer& r){
         // this for layout debug (temporary code)
-        r.rect(m_pos,m_size);
+        r.rect(m_rect.pos,m_rect.size);
         r.stroke(Color(0xFF00FF00),1);
 
         r.text(
-            getContext()->font,
+            getContext()->getFont(),
             m_text,
-            m_pos + glm::ivec2{0,getContext()->font.getSize()},
-            getContext()->theme->text);
+            m_rect.pos + glm::ivec2{0,getContext()->getFont().getSize()},
+            getContext()->getTheme()->text);
     }
 
     void Label::setText(const std::string& t) {
