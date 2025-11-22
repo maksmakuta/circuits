@@ -16,6 +16,7 @@ namespace circuits {
     using ThemePtr = std::shared_ptr<Theme>;
 
     ThemePtr getTheme(bool is_dark = false);
+    ThemePtr getSystemTheme(bool* value = nullptr);
 
 }
 

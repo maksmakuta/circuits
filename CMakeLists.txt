@@ -65,6 +65,8 @@ add_executable(circuits
         src/enums/SizeType.h
         src/base/Rect.cpp
         src/base/Rect.h
+        src/ui/UI.cpp
+        src/ui/UI.h
 )
 
 target_include_directories(circuits PUBLIC src)

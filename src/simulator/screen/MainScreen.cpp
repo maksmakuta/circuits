@@ -1,24 +1,27 @@
 #include "MainScreen.h"
 
+#include "ui/UI.h"
+
 namespace circuits {
 
     MainScreen::MainScreen() {
-        m_list = std::make_unique<Column>(std::initializer_list<WidgetPtr>{
-            std::make_shared<Label>("Hello"),
-            std::make_shared<Label>("World")
+        m_list = column({
+            label("Hello"),
+            label("World")
         });
     }
 
     void MainScreen::onInit() {
         m_list->setContext(getContext());
         const auto size = m_list->onMeasure({});
-        m_list->onLayout(m_view / 2 - size / 2, size);
+        const auto view_rect = Rect({},m_view);
+        m_list->onLayout(Rect({},size).centeredIn(view_rect));
     }
 
     void MainScreen::onDeinit() {}
 
     void MainScreen::onDraw(Renderer& r) {
-        clear(getContext()->theme->background);
+        clear(getContext()->getTheme()->background);
         m_list->onDraw(r);
     }
 

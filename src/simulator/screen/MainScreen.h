@@ -3,8 +3,7 @@
 
 #include "MainVM.h"
 #include "base/interface/IScreen.h"
-#include "ui/layout/Column.h"
-#include "ui/widget/Label.h"
+#include "base/interface/IWidget.h"
 
 namespace circuits {
 
@@ -19,7 +18,7 @@ namespace circuits {
         void onEvent(const Event &) override;
     private:
         glm::ivec2 m_view{0};
-        std::unique_ptr<Column> m_list = nullptr;
+        WidgetPtr m_list = nullptr;
     };
 
 }

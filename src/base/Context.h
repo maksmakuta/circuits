@@ -7,12 +7,17 @@
 namespace circuits {
 
     struct Context {
+        explicit Context(int font_size = 32);
+
+        void switchTheme();
+        void unload();
+
+        const ThemePtr& getTheme() const;
+        const Font& getFont() const;
+    protected:
         ThemePtr theme;
         Font font;
-
-        explicit Context(bool is_dark_theme = false, int font_size = 32);
-
-        void unload();
+        bool is_dark{false};
     };
 
     using ContextPtr = std::shared_ptr<Context>;

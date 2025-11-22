@@ -1,5 +1,7 @@
 #include "Theme.h"
 
+#include <SDL3/SDL_video.h>
+
 namespace circuits {
 
     ThemePtr getTheme(const bool is_dark) {
@@ -15,6 +17,14 @@ namespace circuits {
             Color(0xFF0066CC),
             Color(0xFF000000)
         );
+    }
+
+    ThemePtr getSystemTheme(bool* value) {
+        const auto theme = SDL_GetSystemTheme() == SDL_SYSTEM_THEME_DARK;
+        if (value != nullptr) {
+            *value = theme;
+        }
+        return getTheme(theme);
     }
 
 }
