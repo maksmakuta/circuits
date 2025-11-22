@@ -63,6 +63,8 @@ add_executable(circuits
         src/enums/Cap.h
         src/enums/Joint.h
         src/enums/SizeType.h
+        src/base/Rect.cpp
+        src/base/Rect.h
 )
 
 target_include_directories(circuits PUBLIC src)
