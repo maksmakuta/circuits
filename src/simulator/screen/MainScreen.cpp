@@ -1,5 +1,8 @@
 #include "MainScreen.h"
 
+#include <iostream>
+#include <ostream>
+
 #include "ui/UI.h"
 
 namespace circuits {
@@ -12,7 +15,8 @@ namespace circuits {
             column({
                     label("Click"),
                     label("Me"),
-                })
+                }),
+                []{ std::cout << "Hello world!" << std::endl; }
             )
         });
     }

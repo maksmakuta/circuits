@@ -37,11 +37,18 @@ namespace circuits {
     void Button::onEvent(const Event &event) {
         IWidget::onEvent(event);
 
-        if (event.type == EventType::MouseMove) {
+        if(event.type == EventType::MouseMove) {
             const auto mouse = glm::ivec2(event.mouseMove.x, event.mouseMove.y);
             is_hovered = m_rect.contains(mouse);
         }else {
             is_hovered = false;
+        }
+
+        if (event.type == EventType::MouseDown) {
+            const auto mouse = glm::ivec2(event.mouseMove.x, event.mouseMove.y);
+            if (m_rect.contains(mouse) && m_callback) {
+                m_callback();
+            }
         }
     }
 }
