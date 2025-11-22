@@ -5,6 +5,8 @@
 #include "window/Event.h"
 #include "base/Context.h"
 
+#include "IViewmodel.h"
+
 namespace circuits {
 
     template<class VM>

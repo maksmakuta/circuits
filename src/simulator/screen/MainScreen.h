@@ -1,9 +1,10 @@
 #ifndef CIRCUITS_MAINSCREEN_H
 #define CIRCUITS_MAINSCREEN_H
 
-#include "MainVM.h"
 #include "base/interface/IScreen.h"
-#include "base/interface/IWidget.h"
+#include "ui/layout/Column.h"
+
+#include "MainVM.h"
 
 namespace circuits {
 
@@ -18,7 +19,7 @@ namespace circuits {
         void onEvent(const Event &) override;
     private:
         glm::ivec2 m_view{0};
-        WidgetPtr m_list = nullptr;
+        std::shared_ptr<Column> m_list = nullptr;
     };
 
 }

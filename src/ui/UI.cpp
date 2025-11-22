@@ -5,15 +5,15 @@
 
 namespace circuits {
 
-    WidgetPtr label(const std::string& text, const Modifier& m) {
-        return std::make_shared<Label>(text,m);
-    }
-
-    WidgetPtr column(const WidgetList& list, const Modifier& m) {
+    std::shared_ptr<Column> column(const WidgetList& list, const Modifier& m) {
         return std::make_shared<Column>(list,m);
     }
 
-    WidgetPtr button(const WidgetPtr& view, const ButtonCallback& callback,const Modifier& m) {
+    std::shared_ptr<Label> label(const std::string& text, const Modifier& m) {
+        return std::make_shared<Label>(text,m);
+    }
+
+    std::shared_ptr<Button> button(const WidgetPtr& view, const ButtonCallback& callback,const Modifier& m) {
         return std::make_shared<Button>(view,callback,m);
     }
 
