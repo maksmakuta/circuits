@@ -13,6 +13,7 @@ namespace circuits {
         glm::ivec2 onMeasure(const glm::ivec2 &max_size) override;
         void onLayout(const Rect&) override;
         void onDraw(Renderer &) override;
+        void onEvent(const Event &) override;
     private:
         std::vector<WidgetPtr> m_widgets;
     };

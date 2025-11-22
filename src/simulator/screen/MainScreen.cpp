@@ -7,7 +7,13 @@ namespace circuits {
     MainScreen::MainScreen() {
         m_list = column({
             label("Hello"),
-            label("World")
+            label("World"),
+            button(
+            column({
+                    label("Click"),
+                    label("Me"),
+                })
+            )
         });
     }
 
@@ -31,6 +37,7 @@ namespace circuits {
         if (e.type == EventType::WindowResize) {
             m_view = glm::ivec2(e.window.width, e.window.height);
         }
+        m_list->onEvent(e);
     }
 
 }

@@ -44,4 +44,12 @@ namespace circuits {
         }
     }
 
+    void Column::onEvent(const Event &event) {
+        IWidget::onEvent(event);
+        for (const auto &widget : m_widgets) {
+            if (widget) {
+                widget->onEvent(event);
+            }
+        }
+    }
 }

@@ -13,4 +13,8 @@ namespace circuits {
         return std::make_shared<Column>(list,m);
     }
 
+    WidgetPtr button(const WidgetPtr& view, const ButtonCallback& callback,const Modifier& m) {
+        return std::make_shared<Button>(view,callback,m);
+    }
+
 }

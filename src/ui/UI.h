@@ -3,6 +3,7 @@
 
 #include "Modifier.h"
 #include "base/interface/IWidget.h"
+#include "widget/Button.h"
 
 namespace circuits {
 
@@ -10,6 +11,7 @@ namespace circuits {
 
     WidgetPtr label(const std::string& text, const Modifier& = {});
     WidgetPtr column(const WidgetList& list, const Modifier& = {});
+    WidgetPtr button(const WidgetPtr& view, const ButtonCallback& callback = {},const Modifier& = {});
 
 }
 

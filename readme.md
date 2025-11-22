@@ -24,7 +24,7 @@
    - [X] IWidget interface
    - [ ] Widgets:
      - [X] Label
-     - [ ] Button
+     - [X] Button
      - [ ] Image
      - [ ] Input
      - [ ] Switch
