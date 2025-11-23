@@ -14,6 +14,9 @@ add_subdirectory(libs/LodePNG)
 add_subdirectory(libs/OpenSans_ettf)
 
 add_executable(circuits
+        src/core/IScreen.h
+        src/core/IViewmodel.h
+
         src/enums/Align.h
         src/enums/Baseline.h
         src/enums/Cap.h
@@ -34,20 +37,23 @@ add_executable(circuits
         src/graphics/Path.cpp
         src/graphics/Path.h
 
+        src/simulator/screen/MainScreen.cpp
+        src/simulator/screen/MainScreen.h
+        src/simulator/screen/MainVM.cpp
+        src/simulator/screen/MainVM.h
+        src/simulator/Application.cpp
+        src/simulator/Application.h
+
         src/window/Event.cpp
         src/window/Event.h
         src/window/Window.cpp
         src/window/Window.h
 
         src/main.cpp
-        src/simulator/Application.cpp
-        src/simulator/Application.h
-        src/core/IScreen.h
-        src/simulator/screen/MainScreen.cpp
-        src/simulator/screen/MainScreen.h
-        src/simulator/screen/MainVM.cpp
-        src/simulator/screen/MainVM.h
-        src/core/IViewmodel.h
+        src/ui/Modifier.cpp
+        src/ui/Modifier.h
+        src/enums/Gravity.h
+        src/enums/SizeUnit.h
 )
 
 target_include_directories(circuits PUBLIC src)

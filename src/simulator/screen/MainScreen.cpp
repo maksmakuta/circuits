@@ -1,16 +1,13 @@
 #include "MainScreen.h"
 
-#include <iomanip>
-#include <iostream>
-
 namespace circuits {
 
     void MainScreen::onInit(){
-        std::cout << "MainScreen::onInit" << std::endl;
+
     }
 
     void MainScreen::onDeinit(){
-        std::cout << "MainScreen::onDeinit" << std::endl;
+
     }
 
     void MainScreen::onDraw(Renderer &){
@@ -18,11 +15,17 @@ namespace circuits {
     }
 
     void MainScreen::onUpdate(const float dt){
-        std::cout << "Delta time: " << std::fixed << std::setprecision(2) << dt << std::endl;
+
     }
 
-    void MainScreen::onEvent(const Event& ){
-        std::cout << "MainScreen::onEvent()" << std::endl;
+    void MainScreen::onEvent(const Event& e){
+        if (e.type == EventType::WindowResize) {
+            onResize({e.window.width, e.window.height});
+        }
+    }
+
+    void MainScreen::onResize(const glm::ivec2& size) {
+
     }
 
 }

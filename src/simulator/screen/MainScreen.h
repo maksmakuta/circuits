@@ -13,6 +13,8 @@ namespace circuits {
         void onDraw(Renderer &) override;
         void onUpdate(float) override;
         void onEvent(const Event &) override;
+    private:
+        void onResize(const glm::ivec2& size);
     };
 
 }
