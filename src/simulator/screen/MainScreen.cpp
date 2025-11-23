@@ -6,29 +6,16 @@
 
 namespace circuits {
 
-    MainScreen::MainScreen() {
-        m_list = column({
-            label("Hello"),
-            label("World"),
-            button(
-                label("Click me"),
-                []{ std::cout << "Hello world!" << std::endl; }
-            )
-        });
-    }
+    MainScreen::MainScreen() {}
 
     void MainScreen::onInit() {
-        m_list->setContext(getContext());
-        const auto size = m_list->onMeasure({});
-        const auto view_rect = Rect({},m_view);
-        m_list->onLayout(Rect({},size).centeredIn(view_rect));
+
     }
 
     void MainScreen::onDeinit() {}
 
     void MainScreen::onDraw(Renderer& r) {
         clear(getContext()->getTheme()->background);
-        m_list->onDraw(r);
     }
 
     void MainScreen::onUpdate(float dt){ }
@@ -37,7 +24,6 @@ namespace circuits {
         if (e.type == EventType::WindowResize) {
             m_view = glm::ivec2(e.window.width, e.window.height);
         }
-        m_list->onEvent(e);
     }
 
 }

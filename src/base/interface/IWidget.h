@@ -14,7 +14,7 @@ namespace circuits {
         explicit IWidget(const Modifier& m = {}) : m_modifier(m) {}
         virtual ~IWidget() = default;
 
-        virtual glm::ivec2 onMeasure(const glm::ivec2& max_size) = 0;
+        virtual glm::ivec2 onMeasure(const glm::ivec2& parent_size) = 0;
         virtual void onLayout(const Rect& r) {
             m_rect = r;
         }
@@ -28,6 +28,10 @@ namespace circuits {
 
         [[nodiscard]] ContextPtr getContext() const {
             return m_context;
+        }
+
+        [[nodiscard]] Modifier getModifier() const {
+            return m_modifier;
         }
 
     protected:

@@ -20,6 +20,14 @@ add_executable(circuits
 
         src/base/Context.cpp
         src/base/Context.h
+        src/base/Rect.cpp
+        src/base/Rect.h
+
+        src/enums/Align.h
+        src/enums/Baseline.h
+        src/enums/Cap.h
+        src/enums/Joint.h
+        src/enums/SizeType.h
 
         src/graphics/Renderer.cpp
         src/graphics/Renderer.h
@@ -43,8 +51,12 @@ add_executable(circuits
         src/simulator/Application.cpp
         src/simulator/Application.h
 
+        src/ui/Modifier.cpp
+        src/ui/Modifier.h
         src/ui/Theme.cpp
         src/ui/Theme.h
+        src/ui/UI.cpp
+        src/ui/UI.h
 
         src/window/Event.cpp
         src/window/Event.h
@@ -52,23 +64,6 @@ add_executable(circuits
         src/window/Window.h
 
         src/main.cpp
-        src/ui/widget/Label.cpp
-        src/ui/widget/Label.h
-        src/ui/layout/Column.cpp
-        src/ui/layout/Column.h
-        src/ui/Modifier.cpp
-        src/ui/Modifier.h
-        src/enums/Align.h
-        src/enums/Baseline.h
-        src/enums/Cap.h
-        src/enums/Joint.h
-        src/enums/SizeType.h
-        src/base/Rect.cpp
-        src/base/Rect.h
-        src/ui/UI.cpp
-        src/ui/UI.h
-        src/ui/widget/Button.cpp
-        src/ui/widget/Button.h
 )
 
 target_include_directories(circuits PUBLIC src)

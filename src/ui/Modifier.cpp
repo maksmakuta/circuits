@@ -1,7 +1,6 @@
 #include "Modifier.h"
 
 namespace circuits {
-
     Dimensions::Dimensions(const SizeType t)
         : width{t,0}, height{t,0} {}
 

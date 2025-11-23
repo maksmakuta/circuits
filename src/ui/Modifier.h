@@ -5,6 +5,7 @@
 #include <glm/vec3.hpp>
 #include <glm/vec4.hpp>
 
+#include "base/Rect.h"
 #include "enums/Align.h"
 #include "enums/Baseline.h"
 #include "enums/SizeType.h"
