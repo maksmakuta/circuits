@@ -27,7 +27,7 @@ namespace circuits {
         Modifier& fillHeight();
 
         Modifier& asParent(float percent);
-        Modifier& asParent(float percent_v,float percent_h);
+        Modifier& asParent(float percent_h,float percent_v);
         Modifier& asParent(const glm::vec2& percent);
         Modifier& asWidth(float percent);
         Modifier& asHeight(float percent);
