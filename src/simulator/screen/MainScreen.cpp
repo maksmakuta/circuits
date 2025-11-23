@@ -1,5 +1,7 @@
 #include "MainScreen.h"
 
+#include "ui/theme/ThemeManager.h"
+
 namespace circuits {
 
     void MainScreen::onInit(){
@@ -11,7 +13,7 @@ namespace circuits {
     }
 
     void MainScreen::onDraw(Renderer &){
-        clear(0xFF00FF00);
+        clear(ThemeManager::current().palette.background);
     }
 
     void MainScreen::onUpdate(const float dt){

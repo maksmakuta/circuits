@@ -1,6 +1,7 @@
 #include "Application.h"
 
 #include "screen/MainScreen.h"
+#include "ui/theme/ThemeManager.h"
 
 namespace circuits {
 
@@ -28,6 +29,7 @@ namespace circuits {
     int Application::run() {
         m_window.swap();
         m_renderer.load();
+        ThemeManager::setTheme(ThemeManager::getDarkTheme());
         m_screen->onInit();
         while (!m_window.isClosed()) {
             updateDelta();

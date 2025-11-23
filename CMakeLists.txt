@@ -16,11 +16,19 @@ add_subdirectory(libs/OpenSans_ettf)
 add_executable(circuits
         src/core/IScreen.h
         src/core/IViewmodel.h
+        src/core/IWidget.h
+        src/core/Modifier.cpp
+        src/core/Modifier.h
+        src/core/Rect.cpp
+        src/core/Rect.h
 
         src/enums/Align.h
         src/enums/Baseline.h
         src/enums/Cap.h
+        src/enums/Gravity.h
         src/enums/Joint.h
+        src/enums/SizeUnit.h
+        src/enums/SystemTheme.h
 
         src/graphics/Renderer.cpp
         src/graphics/Renderer.h
@@ -44,21 +52,22 @@ add_executable(circuits
         src/simulator/Application.cpp
         src/simulator/Application.h
 
+        src/ui/theme/Theme.cpp
+        src/ui/theme/Theme.h
+        src/ui/theme/ThemeManager.cpp
+        src/ui/theme/ThemeManager.h
+        src/ui/widget/Label.cpp
+        src/ui/widget/Label.h
+        src/ui/UI.cpp
+        src/ui/UI.h
+
         src/window/Event.cpp
         src/window/Event.h
         src/window/Window.cpp
         src/window/Window.h
 
         src/main.cpp
-        src/ui/Modifier.cpp
-        src/ui/Modifier.h
-        src/enums/Gravity.h
-        src/enums/SizeUnit.h
-        src/ui/UI.cpp
-        src/ui/UI.h
-        src/core/IWidget.h
-        src/core/Rect.cpp
-        src/core/Rect.h
+        src/enums/State.h
 )
 
 target_include_directories(circuits PUBLIC src)

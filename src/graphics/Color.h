@@ -14,6 +14,8 @@ namespace circuits {
         explicit Color(const glm::vec4& color);
         explicit Color(float r, float g, float b, float a = 1.f);
 
+        static Color fromBytes(int r, int g, int b, int a = 255);
+
         [[nodiscard]] glm::vec4 asVec4() const;
         [[nodiscard]] glm::vec3 asVec3() const;
         [[nodiscard]] glm::uint asHex() const;

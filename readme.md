@@ -21,9 +21,12 @@
    - [X] Textures and images API
    - [X] Text rendering API
  - [ ] Widget subsystem (0.2.x, in progress)
-   - [ ] IWidget interface
+   - [X] IWidget interface
+   - [X] Theming
+     - [X] Light/Dark themes
+     - [X] Check system themes (where is possible)
    - [ ] Widgets:
-     - [ ] Label
+     - [X] Label
      - [ ] Button
      - [ ] Image
      - [ ] Input

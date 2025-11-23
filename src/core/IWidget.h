@@ -1,10 +1,12 @@
 #ifndef CIRCUITS_IWIDGET_H
 #define CIRCUITS_IWIDGET_H
 
+#include <memory>
+
 #include "Rect.h"
 
 #include "graphics/Renderer.h"
-#include "ui/Modifier.h"
+#include "Modifier.h"
 #include "window/Event.h"
 
 namespace circuits {
@@ -39,6 +41,8 @@ namespace circuits {
         Modifier m_modifier;
         Rect m_rect;
     };
+
+    using WidgetPtr = std::shared_ptr<IWidget>;
 
 }
 

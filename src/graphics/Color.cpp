@@ -6,6 +6,14 @@ namespace circuits {
     Color::Color(const glm::vec4& color) : m_color(color) {}
     Color::Color(const float r, const float g, const float b, const float a) : Color(glm::vec4(r, g, b, a)) {}
 
+    Color Color::fromBytes(const int r, const int g, const int b, const int a) {
+        const auto rf = static_cast<float>(r) / 255.f;
+        const auto gf = static_cast<float>(g) / 255.f;
+        const auto bf = static_cast<float>(b) / 255.f;
+        const auto af = static_cast<float>(a) / 255.f;
+        return Color{rf,gf,bf,af};
+    }
+
     Color::Color(const glm::uint color) {
         const auto a = (color >> 24) & 0xFF;
         const auto r = (color >> 16) & 0xFF;
