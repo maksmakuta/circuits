@@ -2,6 +2,20 @@
 
 namespace circuits {
 
+    Margin::Margin() = default;
+
+    Margin::Margin(const int v)
+        : Margin{v, v, v, v} {}
+
+    Margin::Margin(const int x, const int y)
+        : Margin{x, y, x, y} {}
+
+    Margin::Margin(const int top, const int side, const int bottom)
+        : Margin{top, side, bottom, side} {}
+
+    Margin::Margin(const int top, const int left, const int bottom, const int right)
+        : top(top), left(left), bottom(bottom), right(right) {}
+
     Modifier& Modifier::fillParent(){
         m_params.width = SizeValue(SizeUnit::Fill);
         m_params.height = SizeValue(SizeUnit::Fill);
@@ -79,73 +93,83 @@ namespace circuits {
     }
 
     Modifier& Modifier::padding(const int p) {
-        m_padding = glm::ivec4(p);
+        m_padding = Padding(p);
         return *this;
     }
 
     Modifier& Modifier::padding(const int vert, const int horiz) {
-        m_padding = glm::ivec4(vert, horiz, vert, horiz);
+        m_padding = Padding(vert, horiz);
         return *this;
     }
 
-    Modifier& Modifier::padding(const int top, const int sides, const int bottom) {
-        m_padding = glm::ivec4(top, sides, bottom, sides);
+    Modifier& Modifier::padding(const int top, const int side, const int bottom) {
+        m_padding = Padding(top, side, bottom);
         return *this;
     }
 
     Modifier& Modifier::padding(const int top, const int right, const int bottom, const int left) {
-        m_padding = glm::ivec4(top, right, bottom, left);
+        m_padding = Padding(top, right, bottom, left);
         return *this;
     }
 
-    Modifier& Modifier::padding(const glm::vec2& p) {
-        m_padding = glm::ivec4(p.x, p.y, p.x, p.y);
-        return *this;
+    Modifier& Modifier::padding(const glm::ivec2& p) {
+        return padding(p.x, p.y);
     }
 
-    Modifier& Modifier::padding(const glm::vec3& p) {
-        m_padding = {p.x, p.y, p.z, p.y};
-        return *this;
+    Modifier& Modifier::padding(const glm::ivec3& p) {
+        return padding(p.x, p.y, p.z);
     }
 
-    Modifier& Modifier::padding(const glm::vec4& p) {
-        m_padding = p;
-        return *this;
+    Modifier& Modifier::padding(const glm::ivec4& p) {
+        return padding(p.x, p.y, p.z, p.w);
     }
 
     Modifier& Modifier::margin(const int m) {
-        m_margin = glm::ivec4(m);
+        m_margin = Margin(m);
         return *this;
     }
 
     Modifier& Modifier::margin(const int vert, const int horiz) {
-        m_margin = glm::ivec4(vert, horiz, vert, horiz);
+        m_margin = Margin(vert, horiz);
         return *this;
     }
 
-    Modifier& Modifier::margin(const int top, const int sides, const int bottom) {
-        m_margin = glm::ivec4(top, sides, bottom, sides);
+    Modifier& Modifier::margin(const int top, const int side, const int bottom) {
+        m_margin = Margin(top, side, bottom);
         return *this;
     }
 
     Modifier& Modifier::margin(const int top, const int right, const int bottom, const int left) {
-        m_margin = glm::ivec4(top, right, bottom, left);
+        m_margin = Margin(top, right, bottom, left);
         return *this;
     }
 
-    Modifier& Modifier::margin(const glm::vec2& m) {
-        m_margin = glm::ivec4(m.x,m.y,m.x,m.y);
-        return *this;
+    Modifier& Modifier::margin(const glm::ivec2& m) {
+        return margin(m.x, m.y);
     }
 
-    Modifier& Modifier::margin(const glm::vec3& m) {
-        m_margin = glm::ivec4(m.x,m.y,m.z,m.y);
-        return *this;
+    Modifier& Modifier::margin(const glm::ivec3& m) {
+        return margin(m.x, m.y, m.z);
     }
 
-    Modifier& Modifier::margin(const glm::vec4& m) {
-        m_margin = m;
-        return *this;
+    Modifier& Modifier::margin(const glm::ivec4& m) {
+        return margin(m.x, m.y, m.z, m.w);
+    }
+
+    SizeParams Modifier::getParams() const {
+        return m_params;
+    }
+
+    Gravity Modifier::getGravity() const {
+        return m_gravity;
+    }
+
+    Padding Modifier::getPadding() const {
+        return m_padding;
+    }
+
+    Margin Modifier::getMargin() const {
+        return m_margin;
     }
 
 }

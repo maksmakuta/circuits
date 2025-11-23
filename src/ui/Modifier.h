@@ -19,6 +19,18 @@ namespace circuits {
         SizeValue width, height;
     };
 
+    struct Margin {
+        Margin();
+        explicit Margin(int v);
+        Margin(int x, int y);
+        Margin(int top, int side, int bottom);
+        Margin(int top, int left, int bottom, int right);
+
+        int top{0}, left{0}, bottom{0}, right{0};
+    };
+
+    using Padding = Margin;
+
     struct Modifier {
         Modifier() = default;
 
@@ -44,23 +56,28 @@ namespace circuits {
         Modifier& padding(int vert, int horiz);
         Modifier& padding(int top, int sides, int bottom);
         Modifier& padding(int top, int right, int bottom, int left);
-        Modifier& padding(const glm::vec2& p);
-        Modifier& padding(const glm::vec3& p);
-        Modifier& padding(const glm::vec4& p);
+        Modifier& padding(const glm::ivec2& p);
+        Modifier& padding(const glm::ivec3& p);
+        Modifier& padding(const glm::ivec4& p);
 
         Modifier& margin(int m);
         Modifier& margin(int vert, int horiz);
-        Modifier& margin(int top, int sides, int bottom);
+        Modifier& margin(int top, int side, int bottom);
         Modifier& margin(int top, int right, int bottom, int left);
-        Modifier& margin(const glm::vec2& m);
-        Modifier& margin(const glm::vec3& m);
-        Modifier& margin(const glm::vec4& m);
+        Modifier& margin(const glm::ivec2& m);
+        Modifier& margin(const glm::ivec3& m);
+        Modifier& margin(const glm::ivec4& m);
+
+        [[nodiscard]] SizeParams getParams() const;
+        [[nodiscard]] Gravity getGravity() const;
+        [[nodiscard]] Padding getPadding() const;
+        [[nodiscard]] Margin getMargin() const;
 
     private:
-        SizeParams m_params;
         Gravity m_gravity = Gravity::None;
-        glm::ivec4 m_padding{0};
-        glm::ivec4 m_margin{0};
+        SizeParams m_params;
+        Padding m_padding;
+        Margin m_margin;
     };
 
 }

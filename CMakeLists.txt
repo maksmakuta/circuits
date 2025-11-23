@@ -54,6 +54,11 @@ add_executable(circuits
         src/ui/Modifier.h
         src/enums/Gravity.h
         src/enums/SizeUnit.h
+        src/ui/UI.cpp
+        src/ui/UI.h
+        src/core/IWidget.h
+        src/core/Rect.cpp
+        src/core/Rect.h
 )
 
 target_include_directories(circuits PUBLIC src)

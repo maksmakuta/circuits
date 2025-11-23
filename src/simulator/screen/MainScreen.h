@@ -1,8 +1,8 @@
 #ifndef CIRCUITS_MAINSCREEN_H
 #define CIRCUITS_MAINSCREEN_H
 
-#include "core/IScreen.h"
 #include "MainVM.h"
+#include "core/IScreen.h"
 
 namespace circuits {
 
@@ -15,6 +15,8 @@ namespace circuits {
         void onEvent(const Event &) override;
     private:
         void onResize(const glm::ivec2& size);
+
+        MainVM viewmodel;
     };
 
 }
