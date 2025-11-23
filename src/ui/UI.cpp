@@ -1,5 +1,7 @@
 #include "UI.h"
 
+#include "theme/ThemeManager.h"
+
 namespace circuits {
 
     WidgetPtr Label(std::string text, Modifier mod){
@@ -53,6 +55,5 @@ namespace circuits {
     WidgetPtr box(const WidgetList& list, Modifier mod){
         return nullptr;
     }
-
 
 }

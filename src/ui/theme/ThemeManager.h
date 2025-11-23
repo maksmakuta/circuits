@@ -21,7 +21,7 @@ namespace circuits {
 
         static ThemeManager& instance();
 
-        SystemTheme currentTheme = getSystemTheme();
+        SystemTheme currentTheme = SystemTheme::Unknown;
         Theme m_theme;
     };
 

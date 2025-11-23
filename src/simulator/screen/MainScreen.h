@@ -1,8 +1,11 @@
 #ifndef CIRCUITS_MAINSCREEN_H
 #define CIRCUITS_MAINSCREEN_H
 
+#include <memory>
+
 #include "MainVM.h"
 #include "core/IScreen.h"
+#include "ui/widget/Label.h"
 
 namespace circuits {
 
@@ -14,9 +17,12 @@ namespace circuits {
         void onUpdate(float) override;
         void onEvent(const Event &) override;
     private:
-        void onResize(const glm::ivec2& size);
+        void onResize(const glm::ivec2& size) const;
+        MainVM& viewmodel();
 
-        MainVM viewmodel;
+        std::shared_ptr<Label> m_label;
+
+        MainVM m_viewmodel;
     };
 
 }

@@ -16,6 +16,9 @@ namespace circuits {
             if (e.type == EventType::WindowClose) {
                 m_window.close();
             }
+            if (e.type == EventType::WindowResize) {
+                m_renderer.resize({e.window.width, e.window.height});
+            }
         }
     }
 
@@ -29,6 +32,7 @@ namespace circuits {
     int Application::run() {
         m_window.swap();
         m_renderer.load();
+        pollEvents();
         ThemeManager::setTheme(ThemeManager::getDarkTheme());
         m_screen->onInit();
         while (!m_window.isClosed()) {

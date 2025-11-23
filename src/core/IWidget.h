@@ -7,6 +7,7 @@
 
 #include "graphics/Renderer.h"
 #include "Modifier.h"
+#include "ui/theme/ThemeManager.h"
 #include "window/Event.h"
 
 namespace circuits {
@@ -43,6 +44,10 @@ namespace circuits {
     };
 
     using WidgetPtr = std::shared_ptr<IWidget>;
+
+    static Theme currentTheme() {
+        return ThemeManager::current();
+    }
 
 }
 
