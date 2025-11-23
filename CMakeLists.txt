@@ -18,7 +18,6 @@ add_executable(circuits
         src/enums/Baseline.h
         src/enums/Cap.h
         src/enums/Joint.h
-        src/enums/SizeType.h
 
         src/graphics/Renderer.cpp
         src/graphics/Renderer.h
@@ -41,6 +40,14 @@ add_executable(circuits
         src/window/Window.h
 
         src/main.cpp
+        src/simulator/Application.cpp
+        src/simulator/Application.h
+        src/core/IScreen.h
+        src/simulator/screen/MainScreen.cpp
+        src/simulator/screen/MainScreen.h
+        src/simulator/screen/MainVM.cpp
+        src/simulator/screen/MainVM.h
+        src/core/IViewmodel.h
 )
 
 target_include_directories(circuits PUBLIC src)
