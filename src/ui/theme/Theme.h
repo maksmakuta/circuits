@@ -9,6 +9,7 @@ namespace circuits {
 
     struct Palette {
         Color background;
+        Color primary;
         Color surface;
         Color border;
         Color text;

@@ -1,8 +1,5 @@
 #include "UI.h"
 
-#include "theme/ThemeManager.h"
-#include "widget/Label.h"
-
 namespace circuits {
 
     std::shared_ptr<Label> label(const std::string& text, const Modifier& mod) {
@@ -11,8 +8,18 @@ namespace circuits {
         return l;
     }
 
-    WidgetPtr button(WidgetPtr inner, Modifier mod);
-    WidgetPtr button(std::string text, Modifier mod);
+    std::shared_ptr<Button> button(const WidgetPtr& inner, const Modifier &mod){
+        const auto b = std::make_shared<Button>(inner);
+        b->setModifier(mod);
+        return b;
+    }
+
+    std::shared_ptr<Button> button(const std::string &text, const Modifier &mod){
+        const auto b = std::make_shared<Button>(label(text));
+        b->setModifier(mod);
+        return b;
+    }
+
     WidgetPtr input(std::string text, Modifier mod);
     WidgetPtr toggle(bool state, Modifier mod);
     WidgetPtr image(Texture& tex, Modifier mod);

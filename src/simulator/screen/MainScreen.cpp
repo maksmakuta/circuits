@@ -5,11 +5,7 @@
 namespace circuits {
 
     void MainScreen::onInit(){
-        m_ui = row({
-            label("1"),
-            label("2"),
-            label("3")
-        });
+        m_ui = button("Click me");
     }
 
     void MainScreen::onDeinit(){

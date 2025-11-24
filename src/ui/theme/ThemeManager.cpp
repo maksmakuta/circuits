@@ -46,11 +46,11 @@ namespace circuits {
         }
     }
 
-
     Theme ThemeManager::getLightTheme() {
         Theme theme;
         theme.palette.background = Color::fromBytes(255, 255, 255, 255);
-        theme.palette.surface = Color::fromBytes(245, 245, 245, 255);
+        theme.palette.surface = Color::fromBytes(33, 150, 243, 255);
+        theme.palette.primary = Color::fromBytes(255, 255, 0, 255);
         theme.palette.border = Color::fromBytes(200, 200, 200, 255);
         theme.palette.text = Color::fromBytes(32, 32, 32, 255);
 
@@ -65,6 +65,7 @@ namespace circuits {
     Theme ThemeManager::getDarkTheme() {
         Theme theme;
         theme.palette.background = Color::fromBytes(32, 32, 32, 255);
+        theme.palette.primary = Color::fromBytes(121, 134, 203, 255);
         theme.palette.surface = Color::fromBytes(48, 48, 48, 255);
         theme.palette.border = Color::fromBytes(80, 80, 80, 255);
         theme.palette.text = Color::fromBytes(220, 220, 220, 255);

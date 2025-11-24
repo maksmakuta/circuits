@@ -52,7 +52,6 @@ add_executable(circuits
         src/simulator/Application.cpp
         src/simulator/Application.h
 
-        src/ui/theme/Theme.cpp
         src/ui/theme/Theme.h
         src/ui/theme/ThemeManager.cpp
         src/ui/theme/ThemeManager.h
@@ -72,6 +71,8 @@ add_executable(circuits
         src/ui/layout/Column.h
         src/ui/layout/Row.cpp
         src/ui/layout/Row.h
+        src/ui/widget/Button.cpp
+        src/ui/widget/Button.h
 )
 
 target_include_directories(circuits PUBLIC src)

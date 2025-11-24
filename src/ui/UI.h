@@ -3,13 +3,14 @@
 
 #include "layout/Column.h"
 #include "layout/Row.h"
+#include "widget/Button.h"
 #include "widget/Label.h"
 
 namespace circuits {
 
     std::shared_ptr<Label> label(const std::string& text, const Modifier &mod = {});
-    WidgetPtr button(WidgetPtr inner, Modifier mod = {});
-    WidgetPtr button(std::string text, Modifier mod = {});
+    std::shared_ptr<Button> button(const WidgetPtr& inner, const Modifier &mod = {});
+    std::shared_ptr<Button> button(const std::string &text, const Modifier &mod = {});
     WidgetPtr input(std::string text, Modifier mod = {});
     WidgetPtr toggle(bool state, Modifier mod = {});
     WidgetPtr image(Texture& tex, Modifier mod = {});
