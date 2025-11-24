@@ -27,8 +27,8 @@
      - [X] Check system themes (where is possible)
    - [ ] Widgets:
      - [X] Label
-     - [ ] Button
-     - [ ] Image
+     - [X] Button
+     - [X] Image
      - [ ] Input
      - [ ] Switch
    - [ ] Layouts:

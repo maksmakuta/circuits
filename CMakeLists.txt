@@ -73,6 +73,8 @@ add_executable(circuits
         src/ui/layout/Row.h
         src/ui/widget/Button.cpp
         src/ui/widget/Button.h
+        src/ui/widget/Image.cpp
+        src/ui/widget/Image.h
 )
 
 target_include_directories(circuits PUBLIC src)
