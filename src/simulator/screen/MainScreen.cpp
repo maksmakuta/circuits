@@ -5,20 +5,8 @@
 namespace circuits {
 
     void MainScreen::onInit(){
-        auto fillpad = Modifier().padding(8,0).fillWidth();
         m_ui = card(
-            column({
-                label("Wellcome", Modifier().center().padding(16)),
-
-                label("EMail:"),
-                input("maksmakuta@mail.ua",fillpad),
-
-                label("Password:"),
-                input("**********",fillpad),
-
-                button("Login",fillpad),
-                button("Register",fillpad.padding(8,0,16,0))
-            },Modifier().padding(0,16))
+            label("Hello, World", Modifier().padding(8))
         );
     }
 

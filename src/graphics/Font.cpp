@@ -132,18 +132,15 @@ namespace circuits {
     }
 
     glm::ivec2 Font::textSize(const std::string& text) const {
-        int w = 0.0f, h = m_size;
-
+        auto size = glm::ivec2(0);
         for (const char c : text) {
-            if (c == '\n') {
-                break;
+            if (c == '\n') break;
+            if (const auto g = getGlyph(static_cast<uint32_t>(c))) {
+                size.y = std::max(static_cast<int>(g->size.y),size.y);
+                size.x += static_cast<int>(g->advance);
             }
-            const auto g = getGlyph(static_cast<uint32_t>(c));
-            if (!g) continue;
-            w += static_cast<int>(g->advance);
         }
-
-        return { w, h };
+        return size;
     }
 
 }
