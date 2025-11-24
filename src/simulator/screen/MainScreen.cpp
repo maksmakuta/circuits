@@ -1,11 +1,15 @@
 #include "MainScreen.h"
 
-#include "ui/theme/ThemeManager.h"
+#include "ui/UI.h"
 
 namespace circuits {
 
     void MainScreen::onInit(){
-        m_label = std::make_shared<Label>("Hello, world!");
+        m_ui = column({
+            label("Hello, world!"),
+            label("Hello, world!"),
+            label("Hello, world!")
+        });
     }
 
     void MainScreen::onDeinit(){
@@ -13,26 +17,26 @@ namespace circuits {
     }
 
     void MainScreen::onDraw(Renderer& r){
-        clear(ThemeManager::current().palette.background);
+        clear(currentTheme().palette.background);
 
-        m_label->onDraw(r);
+        m_ui->onDraw(r);
     }
 
     void MainScreen::onUpdate(const float dt){
-        m_label->onUpdate(dt);
+        m_ui->onUpdate(dt);
     }
 
     void MainScreen::onEvent(const Event& e){
         if (e.type == EventType::WindowResize) {
             onResize({e.window.width, e.window.height});
         }
-        m_label->onEvent(e);
+        m_ui->onEvent(e);
     }
 
     void MainScreen::onResize(const glm::ivec2& size) const {
-        const auto content = m_label->onMeasure(size);
+        const auto content = m_ui->onMeasure(size);
         const auto view = Rect(size / 2 - content / 2,content);
-        m_label->onLayout(view);
+        m_ui->onLayout(view);
     }
 
     MainVM& MainScreen::viewmodel() {

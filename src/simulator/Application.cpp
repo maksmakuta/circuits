@@ -33,7 +33,7 @@ namespace circuits {
         m_window.swap();
         m_renderer.load();
         pollEvents();
-        ThemeManager::setTheme(ThemeManager::getDarkTheme());
+        ThemeManager::change();
         m_screen->onInit();
         while (!m_window.isClosed()) {
             updateDelta();

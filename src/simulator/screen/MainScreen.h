@@ -5,7 +5,7 @@
 
 #include "MainVM.h"
 #include "core/IScreen.h"
-#include "ui/widget/Label.h"
+#include "core/IWidget.h"
 
 namespace circuits {
 
@@ -20,8 +20,7 @@ namespace circuits {
         void onResize(const glm::ivec2& size) const;
         MainVM& viewmodel();
 
-        std::shared_ptr<Label> m_label;
-
+        WidgetPtr m_ui;
         MainVM m_viewmodel;
     };
 

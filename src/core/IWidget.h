@@ -44,6 +44,7 @@ namespace circuits {
     };
 
     using WidgetPtr = std::shared_ptr<IWidget>;
+    using WidgetList = std::initializer_list<WidgetPtr>;
 
     static Theme currentTheme() {
         return ThemeManager::current();

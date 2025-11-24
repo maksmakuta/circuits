@@ -1,24 +1,23 @@
 #ifndef CIRCUITS_UI_H
 #define CIRCUITS_UI_H
 
-#include "core/IWidget.h"
+#include "layout/Column.h"
+#include "widget/Label.h"
 
 namespace circuits {
 
-    using WidgetList = std::initializer_list<WidgetPtr>;
+    std::shared_ptr<Label> label(const std::string& text, const Modifier &mod = {});
+    WidgetPtr button(WidgetPtr inner, Modifier mod = {});
+    WidgetPtr button(std::string text, Modifier mod = {});
+    WidgetPtr input(std::string text, Modifier mod = {});
+    WidgetPtr toggle(bool state, Modifier mod = {});
+    WidgetPtr image(Texture& tex, Modifier mod = {});
 
-    WidgetPtr Label(std::string text, Modifier mod = {});
-    WidgetPtr Button(WidgetPtr inner, Modifier mod = {});
-    WidgetPtr Button(std::string text, Modifier mod = {});
-    WidgetPtr Input(std::string text, Modifier mod = {});
-    WidgetPtr Switch(bool state, Modifier mod = {});
-    WidgetPtr Image(Texture& tex, Modifier mod = {});
+    WidgetPtr card(WidgetPtr inner, Modifier mod = {});
+    WidgetPtr tooltip(WidgetPtr inner, Modifier mod = {});
+    WidgetPtr notification(std::string message, Modifier mod = {});
 
-    WidgetPtr Card(WidgetPtr inner, Modifier mod = {});
-    WidgetPtr Tooltip(WidgetPtr inner, Modifier mod = {});
-    WidgetPtr Notification(std::string message, Modifier mod = {});
-
-    WidgetPtr column(const WidgetList& list, Modifier mod = {});
+    std::shared_ptr<Column> column(const WidgetList& list, const Modifier &mod = {});
     WidgetPtr row(const WidgetList& list, Modifier mod = {});
     WidgetPtr grid(const WidgetList& list, Modifier mod = {});
     WidgetPtr box(const WidgetList& list, Modifier mod = {});
