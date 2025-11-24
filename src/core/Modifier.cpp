@@ -2,18 +2,18 @@
 
 namespace circuits {
 
-    Margin::Margin() = default;
+    Padding::Padding() = default;
 
-    Margin::Margin(const int v)
-        : Margin{v, v, v, v} {}
+    Padding::Padding(const int v)
+        : Padding{v, v, v, v} {}
 
-    Margin::Margin(const int x, const int y)
-        : Margin{x, y, x, y} {}
+    Padding::Padding(const int x, const int y)
+        : Padding{x, y, x, y} {}
 
-    Margin::Margin(const int top, const int side, const int bottom)
-        : Margin{top, side, bottom, side} {}
+    Padding::Padding(const int top, const int side, const int bottom)
+        : Padding{top, side, bottom, side} {}
 
-    Margin::Margin(const int top, const int left, const int bottom, const int right)
+    Padding::Padding(const int top, const int left, const int bottom, const int right)
         : top(top), left(left), bottom(bottom), right(right) {}
 
     Modifier& Modifier::fillParent(){
@@ -124,38 +124,6 @@ namespace circuits {
         return padding(p.x, p.y, p.z, p.w);
     }
 
-    Modifier& Modifier::margin(const int m) {
-        m_margin = Margin(m);
-        return *this;
-    }
-
-    Modifier& Modifier::margin(const int vert, const int horiz) {
-        m_margin = Margin(vert, horiz);
-        return *this;
-    }
-
-    Modifier& Modifier::margin(const int top, const int side, const int bottom) {
-        m_margin = Margin(top, side, bottom);
-        return *this;
-    }
-
-    Modifier& Modifier::margin(const int top, const int right, const int bottom, const int left) {
-        m_margin = Margin(top, right, bottom, left);
-        return *this;
-    }
-
-    Modifier& Modifier::margin(const glm::ivec2& m) {
-        return margin(m.x, m.y);
-    }
-
-    Modifier& Modifier::margin(const glm::ivec3& m) {
-        return margin(m.x, m.y, m.z);
-    }
-
-    Modifier& Modifier::margin(const glm::ivec4& m) {
-        return margin(m.x, m.y, m.z, m.w);
-    }
-
     SizeParams Modifier::getParams() const {
         return m_params;
     }
@@ -166,10 +134,6 @@ namespace circuits {
 
     Padding Modifier::getPadding() const {
         return m_padding;
-    }
-
-    Margin Modifier::getMargin() const {
-        return m_margin;
     }
 
 }
