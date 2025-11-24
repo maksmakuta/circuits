@@ -77,6 +77,10 @@ add_executable(circuits
         src/ui/widget/Image.h
         src/ui/widget/Toggle.cpp
         src/ui/widget/Toggle.h
+        src/ui/widget/Input.cpp
+        src/ui/widget/Input.h
+        src/ui/widget/Card.cpp
+        src/ui/widget/Card.h
 )
 
 target_include_directories(circuits PUBLIC src)

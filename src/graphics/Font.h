@@ -26,7 +26,7 @@ namespace circuits {
         void loadDefault(int size);
         void unload();
 
-        glm::vec2 textSize(const std::string&) const;
+        glm::ivec2 textSize(const std::string&) const;
 
         int getSize() const;
         Texture getTexture() const;

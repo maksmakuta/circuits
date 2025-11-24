@@ -15,12 +15,16 @@ namespace circuits {
     }
 
     std::shared_ptr<Button> button(const std::string &text, const Modifier &mod){
-        const auto b = std::make_shared<Button>(label(text));
+        const auto b = std::make_shared<Button>(label(text, Modifier().center().padding(8)));
         b->setModifier(mod);
         return b;
     }
 
-    WidgetPtr input(std::string text, Modifier mod);
+    std::shared_ptr<Input> input(const std::string& text, const Modifier &mod) {
+        const auto i = std::make_shared<Input>(text);
+        i->setModifier(mod);
+        return i;
+    }
 
     std::shared_ptr<Toggle> toggle(bool state, const Modifier &mod) {
         const auto t = std::make_shared<Toggle>(state);
@@ -34,7 +38,12 @@ namespace circuits {
         return t;
     }
 
-    WidgetPtr card(WidgetPtr inner, Modifier mod);
+    std::shared_ptr<Card> card(const WidgetPtr& inner, const Modifier &mod) {
+        const auto t = std::make_shared<Card>(inner);
+        t->setModifier(mod);
+        return t;
+    }
+
     WidgetPtr tooltip(WidgetPtr inner, Modifier mod);
     WidgetPtr notification(std::string message, Modifier mod);
 

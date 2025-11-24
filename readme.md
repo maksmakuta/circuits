@@ -29,7 +29,7 @@
      - [X] Label
      - [X] Button
      - [X] Image
-     - [ ] Input (some troubles with that, skipped)
+     - [X] Input (no text input, skipped)
      - [X] Toggle
      - [ ] CheckBox
      - [ ] Radio:
@@ -41,7 +41,7 @@
      - [ ] Grid
      - [ ] Box
    - [ ] Other:
-     - [ ] Card
+     - [X] Card
      - [ ] Tooltip
      - [ ] Notification
  - [ ] Component subsystem (0.3.x)

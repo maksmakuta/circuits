@@ -9,10 +9,6 @@ namespace circuits {
         return theme.font.textSize(m_text);
     }
 
-    void Label::onLayout(const Rect& r){
-        setRect(r);
-    }
-
     void Label::onDraw(Renderer& r){
         const auto theme = currentTheme();
         r.setBaseline(Baseline::Bottom);

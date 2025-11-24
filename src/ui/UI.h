@@ -5,20 +5,22 @@
 #include "layout/Row.h"
 
 #include "widget/Button.h"
+#include "widget/Card.h"
 #include "widget/Image.h"
+#include "widget/Input.h"
 #include "widget/Label.h"
 #include "widget/Toggle.h"
 
 namespace circuits {
 
-    std::shared_ptr<Label> label(const std::string& text, const Modifier &mod = {});
+    std::shared_ptr<Label>  label(const std::string& text, const Modifier &mod = {});
     std::shared_ptr<Button> button(const WidgetPtr& inner, const Modifier &mod = {});
     std::shared_ptr<Button> button(const std::string &text, const Modifier &mod = {});
-    WidgetPtr input(std::string text, Modifier mod = {});
+    std::shared_ptr<Input>  input(const std::string& text, const Modifier& mod = {});
     std::shared_ptr<Toggle> toggle(bool state, const Modifier &mod = {});
-    std::shared_ptr<Image> image(Texture& tex, const Modifier &mod = {});
+    std::shared_ptr<Image>  image(Texture& tex, const Modifier &mod = {});
 
-    WidgetPtr card(WidgetPtr inner, Modifier mod = {});
+    std::shared_ptr<Card>   card(const WidgetPtr& inner, const Modifier &mod = {});
     WidgetPtr tooltip(WidgetPtr inner, Modifier mod = {});
     WidgetPtr notification(std::string message, Modifier mod = {});
 

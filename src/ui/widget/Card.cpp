@@ -1,14 +1,14 @@
-#include "Button.h"
+#include "Card.h"
 
 #include <utility>
 
 namespace circuits {
 
-    Button::Button(WidgetPtr p) : IWidget(), m_inner(std::move(p)){}
+    Card::Card(WidgetPtr w) : IWidget(), m_inner(std::move(w)) {}
 
-    glm::ivec2 Button::onMeasure(const glm::ivec2 &max) {
+    glm::ivec2 Card::onMeasure(const glm::ivec2 &max) {
         if (!m_inner)
-            return glm::ivec2{10, 10};
+            return glm::ivec2{60, 30};
 
         const auto padding = getModifier().getPadding();
         const glm::ivec2 innerMax = {
@@ -18,10 +18,12 @@ namespace circuits {
 
         const auto mod = m_inner->getModifier();
         const glm::ivec2 innerSize = m_inner->onMeasure(innerMax);
-        return getModifier().applySize(mod.applyPadding(innerSize), max);
+        const glm::ivec2 size = mod.applyPadding(innerSize);
+
+        return getModifier().applySize(size, max);
     }
 
-    void Button::onLayout(const Rect& r) {
+    void Card::onLayout(const Rect &r) {
         IWidget::onLayout(r);
 
         if (!m_inner) return;
@@ -51,34 +53,29 @@ namespace circuits {
         m_inner->onLayout({offset, innerSize});
     }
 
-    void Button::onDraw(Renderer& r) {
+    void Card::onDraw(Renderer& r) {
         const auto theme = currentTheme();
-        const auto& [pos, size] = getRect();
-        r.rect(pos,size,theme.style.cornerRadius);
-        if (state() == State::Hover) {
-            r.stroke(theme.palette.border,theme.style.borderThickness);
-        }else if (state() == State::Active) {
-            r.fill(theme.palette.primary);
-        }else {
-            r.fill(theme.palette.surface);
-        }
+        r.rect(getRect().pos,getRect().size, theme.style.borderRadius);
+        r.fill(theme.palette.background);
+        r.stroke(theme.palette.border,theme.style.borderThickness);
 
         if (m_inner) {
             m_inner->onDraw(r);
         }
     }
 
-    void Button::onUpdate(const float dt) {
+    void Card::onUpdate(const float dt) {
         if (m_inner) {
             m_inner->onUpdate(dt);
         }
     }
 
-    void Button::onEvent(const Event& e) {
-        IWidget::onEvent(e);
+    void Card::onEvent(const Event &e) {
         if (m_inner) {
             m_inner->onEvent(e);
         }
     }
+
+
 
 }

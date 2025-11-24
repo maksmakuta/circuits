@@ -5,19 +5,21 @@
 namespace circuits {
 
     void MainScreen::onInit(){
-        const auto end = Modifier().gravity(Gravity::Right);
-        const auto fill = Modifier().fillWidth().padding(4,8);
-        m_ui = column({
-            row({
-                label("Option 1"),
-                toggle(true, end)
-            }, fill),
-            row({
-                label("Option 2"),
-                toggle(true, end)
-            }, fill),
-        }, Modifier().width(300));
+        auto fillpad = Modifier().padding(8,0).fillWidth();
+        m_ui = card(
+            column({
+                label("Wellcome", Modifier().center().padding(16)),
 
+                label("EMail:"),
+                input("maksmakuta@mail.ua",fillpad),
+
+                label("Password:"),
+                input("**********",fillpad),
+
+                button("Login",fillpad),
+                button("Register",fillpad.padding(8,0,16,0))
+            },Modifier().padding(0,16))
+        );
     }
 
     void MainScreen::onDeinit(){
@@ -44,7 +46,7 @@ namespace circuits {
     void MainScreen::onResize(const glm::ivec2& size) const {
         const auto mod = m_ui->getModifier();
         const auto content = m_ui->onMeasure(size);
-        const auto view = Rect({},content);
+        const auto view = Rect(size / 2 - content / 2,content);
         m_ui->onLayout(mod.applyPadding(view));
     }
 

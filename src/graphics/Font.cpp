@@ -131,16 +131,16 @@ namespace circuits {
         return m_size;
     }
 
-    glm::vec2 Font::textSize(const std::string& text) const {
-        float w = 0.0f, h = static_cast<float>(m_size);
+    glm::ivec2 Font::textSize(const std::string& text) const {
+        int w = 0.0f, h = m_size;
 
         for (const char c : text) {
             if (c == '\n') {
                 break;
             }
-            auto g = getGlyph(static_cast<uint32_t>(c));
+            const auto g = getGlyph(static_cast<uint32_t>(c));
             if (!g) continue;
-            w += g->advance;
+            w += static_cast<int>(g->advance);
         }
 
         return { w, h };
