@@ -29,12 +29,21 @@
      - [X] Label
      - [X] Button
      - [X] Image
-     - [ ] Input
-     - [ ] Switch
+     - [ ] Input (some troubles with that, skipped)
+     - [X] Toggle
+     - [ ] CheckBox
+     - [ ] Radio:
+       - [ ] Group
+       - [ ] Button
    - [ ] Layouts:
      - [X] Column
      - [X] Row
      - [ ] Grid
+     - [ ] Box
+   - [ ] Other:
+     - [ ] Card
+     - [ ] Tooltip
+     - [ ] Notification
  - [ ] Component subsystem (0.3.x)
  - [ ] Format for storing circuits (0.3.x - 0.4.x)
 

@@ -7,11 +7,11 @@ namespace circuits {
     void MainScreen::onInit(){
         m_ui = column({
             row({
-                label("Enable Dev mode"),
+                toggle(true),
                 toggle(false)
             }),
             row({
-                label("Good mood"),
+                toggle(false),
                 toggle(true)
             }),
         });
