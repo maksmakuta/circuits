@@ -5,7 +5,16 @@
 namespace circuits {
 
     void MainScreen::onInit(){
-        m_ui = button("Click me");
+        m_ui = column({
+            row({
+                label("Enable Dev mode"),
+                toggle(false)
+            }),
+            row({
+                label("Good mood"),
+                toggle(true)
+            }),
+        });
     }
 
     void MainScreen::onDeinit(){
@@ -31,7 +40,7 @@ namespace circuits {
 
     void MainScreen::onResize(const glm::ivec2& size) const {
         const auto content = m_ui->onMeasure(size);
-        const auto view = Rect(size / 2 - content / 2,content);
+        const auto view = Rect({},content);
         m_ui->onLayout(view);
     }
 

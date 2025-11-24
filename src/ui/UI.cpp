@@ -21,8 +21,19 @@ namespace circuits {
     }
 
     WidgetPtr input(std::string text, Modifier mod);
-    WidgetPtr toggle(bool state, Modifier mod);
-    WidgetPtr image(Texture& tex, Modifier mod);
+
+    std::shared_ptr<Toggle> toggle(bool state, const Modifier &mod) {
+        const auto t = std::make_shared<Toggle>(state);
+        t->setModifier(mod);
+        return t;
+    }
+
+    std::shared_ptr<Image> image(Texture& tex, const Modifier &mod) {
+        const auto t = std::make_shared<Image>(tex);
+        t->setModifier(mod);
+        return t;
+    }
+
     WidgetPtr card(WidgetPtr inner, Modifier mod);
     WidgetPtr tooltip(WidgetPtr inner, Modifier mod);
     WidgetPtr notification(std::string message, Modifier mod);

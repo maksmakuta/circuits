@@ -12,7 +12,7 @@ namespace circuits {
         instance().m_theme = t;
         instance().currentTheme = t.theme;
         if (!instance().m_theme.font.getGlyph('A')) {
-            instance().m_theme.font.loadDefault(32);
+            instance().m_theme.font.loadDefault(24);
         }
     }
 
@@ -54,9 +54,9 @@ namespace circuits {
         theme.palette.border = Color::fromBytes(200, 200, 200, 255);
         theme.palette.text = Color::fromBytes(32, 32, 32, 255);
 
-        theme.style.cornerRadius = 4.0f;
-        theme.style.borderRadius = 4.0f;
-        theme.style.borderThickness = 1.0f;
+        theme.style.cornerRadius = 8.0f;
+        theme.style.borderRadius = 12.0f;
+        theme.style.borderThickness = 2.0f;
 
         theme.theme = SystemTheme::Light;
         return theme;
@@ -70,9 +70,9 @@ namespace circuits {
         theme.palette.border = Color::fromBytes(80, 80, 80, 255);
         theme.palette.text = Color::fromBytes(220, 220, 220, 255);
 
-        theme.style.cornerRadius = 4.0f;
-        theme.style.borderRadius = 4.0f;
-        theme.style.borderThickness = 1.0f;
+        theme.style.cornerRadius = 8.0f;
+        theme.style.borderRadius = 12.0f;
+        theme.style.borderThickness = 2.0f;
 
         theme.theme = SystemTheme::Dark;
         return theme;

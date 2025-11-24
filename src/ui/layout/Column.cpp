@@ -31,10 +31,9 @@ namespace circuits {
         for (const auto& child : m_children) {
             child->onDraw(r);
         }
-
-        const auto theme = currentTheme();
-        r.rect(getRect().pos, getRect().size);
-        r.stroke(theme.palette.border,theme.style.borderThickness);
+        // const auto theme = currentTheme();
+        // r.rect(getRect().pos, getRect().size);
+        // r.stroke(theme.palette.border,theme.style.borderThickness);
     }
 
     void Column::onUpdate(const float dt) {

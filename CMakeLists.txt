@@ -75,6 +75,8 @@ add_executable(circuits
         src/ui/widget/Button.h
         src/ui/widget/Image.cpp
         src/ui/widget/Image.h
+        src/ui/widget/Toggle.cpp
+        src/ui/widget/Toggle.h
 )
 
 target_include_directories(circuits PUBLIC src)

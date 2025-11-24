@@ -8,11 +8,11 @@ namespace circuits {
 
     struct Rect final {
         Rect();
-        Rect(const glm::vec2& p, const glm::vec2& s);
+        Rect(const glm::ivec2& p, const glm::ivec2& s);
 
-        static Rect fromPoints(const glm::vec2& p0, const glm::vec2& p1);
+        static Rect fromPoints(const glm::ivec2& p0, const glm::ivec2& p1);
 
-        [[nodiscard]] bool contains(const glm::vec2& p) const;
+        [[nodiscard]] bool contains(const glm::ivec2& p) const;
 
         glm::ivec2 pos{0};
         glm::ivec2 size{0};

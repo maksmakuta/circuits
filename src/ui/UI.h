@@ -3,8 +3,11 @@
 
 #include "layout/Column.h"
 #include "layout/Row.h"
+
 #include "widget/Button.h"
+#include "widget/Image.h"
 #include "widget/Label.h"
+#include "widget/Toggle.h"
 
 namespace circuits {
 
@@ -12,8 +15,8 @@ namespace circuits {
     std::shared_ptr<Button> button(const WidgetPtr& inner, const Modifier &mod = {});
     std::shared_ptr<Button> button(const std::string &text, const Modifier &mod = {});
     WidgetPtr input(std::string text, Modifier mod = {});
-    WidgetPtr toggle(bool state, Modifier mod = {});
-    WidgetPtr image(Texture& tex, Modifier mod = {});
+    std::shared_ptr<Toggle> toggle(bool state, const Modifier &mod = {});
+    std::shared_ptr<Image> image(Texture& tex, const Modifier &mod = {});
 
     WidgetPtr card(WidgetPtr inner, Modifier mod = {});
     WidgetPtr tooltip(WidgetPtr inner, Modifier mod = {});
