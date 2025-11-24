@@ -2,6 +2,7 @@
 #define CIRCUITS_UI_H
 
 #include "layout/Column.h"
+#include "layout/Row.h"
 #include "widget/Label.h"
 
 namespace circuits {
@@ -18,7 +19,7 @@ namespace circuits {
     WidgetPtr notification(std::string message, Modifier mod = {});
 
     std::shared_ptr<Column> column(const WidgetList& list, const Modifier &mod = {});
-    WidgetPtr row(const WidgetList& list, Modifier mod = {});
+    std::shared_ptr<Row> row(const WidgetList& list, const Modifier &mod = {});
     WidgetPtr grid(const WidgetList& list, Modifier mod = {});
     WidgetPtr box(const WidgetList& list, Modifier mod = {});
 

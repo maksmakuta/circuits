@@ -26,7 +26,12 @@ namespace circuits {
         return c;
     }
 
-    WidgetPtr row(const WidgetList& list, Modifier mod);
+    std::shared_ptr<Row> row(const WidgetList& list, const Modifier &mod) {
+        const auto r = std::make_shared<Row>(list);
+        r->setModifier(mod);
+        return r;
+    }
+
     WidgetPtr grid(const WidgetList& list, Modifier mod);
     WidgetPtr box(const WidgetList& list, Modifier mod);
 

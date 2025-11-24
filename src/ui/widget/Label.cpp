@@ -17,11 +17,6 @@ namespace circuits {
         const auto theme = currentTheme();
         r.setBaseline(Baseline::Bottom);
         r.text(theme.font,m_text,getRect().pos, theme.palette.text);
-
-        // r.rect(getRect().pos, getRect().size);
-        // r.stroke(theme.palette.border,theme.style.borderThickness);
-
     }
-
 
 }

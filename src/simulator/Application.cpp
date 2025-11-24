@@ -32,7 +32,6 @@ namespace circuits {
     int Application::run() {
         m_window.swap();
         m_renderer.load();
-        pollEvents();
         ThemeManager::change();
         m_screen->onInit();
         while (!m_window.isClosed()) {

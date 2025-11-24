@@ -1,33 +1,33 @@
-#include "Column.h"
+#include "Row.h"
 
 namespace circuits {
 
-    Column::Column(const WidgetList& list) : IWidget(), m_children(list), m_children_sizes(list.size(),{0,0}) {}
+    Row::Row(const WidgetList& list) : IWidget(), m_children(list), m_children_sizes(list.size(),{0,0}) {}
 
-    glm::ivec2 Column::onMeasure(const glm::ivec2 &max) {
+    glm::ivec2 Row::onMeasure(const glm::ivec2 &max) {
         auto size = glm::ivec2(0);
         for (auto i = 0; i < m_children.size(); i++) {
             const auto& child = m_children[i];
             //const auto mod = child->getModifier();
             const auto child_content = child->onMeasure(max);
-            size.x = std::max(size.x, child_content.x);
-            size.y += child_content.y;
+            size.y = std::max(size.y, child_content.y);
+            size.x += child_content.x;
             m_children_sizes[i] = child_content;
         }
         return size;
     }
 
-    void Column::onLayout(const Rect& r) {
+    void Row::onLayout(const Rect& r) {
         setRect(r);
         auto offset = r.pos;
         for (auto i = 0; i < m_children.size(); i++) {
             const auto size = m_children_sizes[i];
             m_children[i]->onLayout({offset, size});
-            offset.y += size.y;
+            offset.x += size.x;
         }
     }
 
-    void Column::onDraw(Renderer& r) {
+    void Row::onDraw(Renderer& r) {
         for (const auto& child : m_children) {
             child->onDraw(r);
         }
@@ -37,13 +37,13 @@ namespace circuits {
         r.stroke(theme.palette.border,theme.style.borderThickness);
     }
 
-    void Column::onUpdate(const float dt) {
+    void Row::onUpdate(const float dt) {
         for (const auto& child : m_children) {
             child->onUpdate(dt);
         }
     }
 
-    void Column::onEvent(const Event& e) {
+    void Row::onEvent(const Event& e) {
         for (const auto& child : m_children) {
             child->onEvent(e);
         }

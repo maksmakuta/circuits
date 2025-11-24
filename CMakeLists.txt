@@ -70,6 +70,8 @@ add_executable(circuits
         src/enums/State.h
         src/ui/layout/Column.cpp
         src/ui/layout/Column.h
+        src/ui/layout/Row.cpp
+        src/ui/layout/Row.h
 )
 
 target_include_directories(circuits PUBLIC src)

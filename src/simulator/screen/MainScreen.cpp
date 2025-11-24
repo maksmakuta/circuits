@@ -5,10 +5,10 @@
 namespace circuits {
 
     void MainScreen::onInit(){
-        m_ui = column({
-            label("Hello, world!"),
-            label("Hello, world!"),
-            label("Hello, world!")
+        m_ui = row({
+            label("1"),
+            label("2"),
+            label("3")
         });
     }
 
@@ -42,4 +42,5 @@ namespace circuits {
     MainVM& MainScreen::viewmodel() {
         return m_viewmodel;
     }
+
 }

@@ -32,8 +32,8 @@
      - [ ] Input
      - [ ] Switch
    - [ ] Layouts:
-     - [ ] Column
-     - [ ] Row
+     - [X] Column
+     - [X] Row
      - [ ] Grid
  - [ ] Component subsystem (0.3.x)
  - [ ] Format for storing circuits (0.3.x - 0.4.x)
