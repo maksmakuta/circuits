@@ -136,4 +136,53 @@ namespace circuits {
         return m_padding;
     }
 
+    glm::ivec2 Modifier::applyPadding(const glm::ivec2 &size) const {
+        const auto p = getPadding();
+        return {
+            size.x + p.left + p.right,
+            size.y + p.top + p.bottom
+        };
+    }
+
+    Rect Modifier::applyPadding(const Rect &rect) const {
+        const auto p = getPadding();
+        return {
+            glm::ivec2{
+                rect.pos.x + p.left,
+                rect.pos.y + p.top
+            },
+            glm::ivec2{
+                rect.size.x + p.left + p.right,
+                rect.size.y + p.top + p.bottom
+            }
+        };
+    }
+
+    glm::ivec2 Modifier::applySize(const glm::ivec2 &content, const glm::ivec2 &max) const {
+        glm::ivec2 result = content;
+
+        switch (m_params.width.unit) {
+            case SizeUnit::Fixed:
+                result.x = m_params.width.value;
+                break;
+            case SizeUnit::Percent:
+                result.x = (max.x * m_params.width.value) / 100;
+                break;
+            default:
+                break;
+        }
+
+        switch (m_params.height.unit) {
+            case SizeUnit::Fixed:
+                result.y = m_params.height.value;
+                break;
+            case SizeUnit::Percent:
+                result.y = (max.y * m_params.height.value) / 100;
+                break;
+            default:
+                break;
+        }
+
+        return result;
+    }
 }

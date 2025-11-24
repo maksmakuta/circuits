@@ -5,6 +5,7 @@
 #include <glm/vec3.hpp>
 #include <glm/vec4.hpp>
 
+#include "Rect.h"
 #include "enums/Gravity.h"
 #include "enums/SizeUnit.h"
 
@@ -57,6 +58,11 @@ namespace circuits {
         Modifier& padding(const glm::ivec2& p);
         Modifier& padding(const glm::ivec3& p);
         Modifier& padding(const glm::ivec4& p);
+
+        [[nodiscard]] glm::ivec2 applyPadding(const glm::ivec2& size) const;
+        [[nodiscard]] Rect applyPadding(const Rect& rect) const;
+
+        [[nodiscard]] glm::ivec2 applySize(const glm::ivec2& content, const glm::ivec2& max) const;
 
         [[nodiscard]] SizeParams getParams() const;
         [[nodiscard]] Gravity getGravity() const;
