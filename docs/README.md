@@ -7,5 +7,4 @@ This documentation explains how to *use* the Circuits C++20 UI/rendering library
 - [Windowing and event handling](windowing.md)
 - [Rendering with `Renderer`](rendering.md)
 - [Building UIs with widgets](ui-toolkit.md)
-- [Running or embedding the simulator](simulator.md)
 - [Project layout](project-layout.md)

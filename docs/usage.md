@@ -18,7 +18,6 @@ This produces the `build/circuits` executable.
 ```sh
 ./build/circuits
 ```
-`Application::run()` sets up the window, renderer, theme, and the active screen before entering the frame loop.
 
 ## Create your own screen
 1. Derive from `circuits::IScreen` and implement the lifecycle methods.

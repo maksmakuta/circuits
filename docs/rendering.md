@@ -19,10 +19,11 @@ void MyScreen::onDraw(Renderer& r) {
 - `line(a, b)` renders a stroked line; call `stroke(color, thickness)` after defining a path.
 - `fill(Color)` sets the fill paint for subsequent path operations.
 
-Example: a filled card with an outline:
+The renderer queues geometry first and only paints when you call `fill()` or `stroke()`, so shape calls should precede those pa
+int invocations. Example: a filled card with an outline:
 ```cpp
-r.fill(Color(0xFF202020));
 r.rect({32, 32}, {320, 200}, 12.f);
+r.fill(Color(0xFF202020));
 r.stroke(Color(0xFF808080), 2.f);
 ```
 

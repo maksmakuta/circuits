@@ -1,6 +1,6 @@
 # Building UIs with widgets
 
-Circuits ships a small declarative widget set so you can build screens without writing low-level drawing code. Each widget implements `IWidget` with `onDraw`, `onUpdate`, and `onEvent` hooks.
+Circuits ships a small declarative widget set so you can build screens without writing low-level drawing code. Each widget implements `IWidget` with hooks for measurement (`onMeasure`), layout (`onLayout`), drawing (`onDraw`), per-frame updates (`onUpdate`), and event handling (`onEvent`).
 
 ## Constructing widgets
 Include `ui/UI.h` and use the factory helpers to build a hierarchy:
@@ -25,6 +25,7 @@ Common factories:
 ## Layout and modifiers
 The `Modifier` argument customizes sizing and positioning:
 - `size`, `width`, `height` for fixed dimensions.
+- `fillParent`, `fillWidth`, `fillHeight` to occupy the available parent space.
 - `asParent`/`asWidth`/`asHeight` to size relative to the parent.
 - `padding` to inset content.
 - `gravity` to align a child within its available space.
