@@ -1,7 +1,7 @@
 #include "MainScreen.h"
 
+#include "manager/ThemeManager.h"
 #include "ui/UI.h"
-#include "ui/theme/ThemeManager.h"
 
 namespace circuits {
 

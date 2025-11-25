@@ -1,7 +1,7 @@
 #ifndef CIRCUITS_THEME_H
 #define CIRCUITS_THEME_H
 
-#include "enums/SystemTheme.h"
+#include "enums/ThemeName.h"
 #include "graphics/Color.h"
 #include "graphics/Font.h"
 
@@ -48,9 +48,9 @@ namespace circuits {
         Shape shape;
         Palette palette;
         Typography typography;
-        SystemTheme theme = SystemTheme::Unknown;
+        ThemeName theme = ThemeName::Unknown;
 
-        static Theme getTheme(SystemTheme systemTheme = SystemTheme::Unknown);
+        static Theme getTheme(ThemeName systemTheme = ThemeName::Unknown);
         static Theme getDarkTheme();
         static Theme getLightTheme();
     };

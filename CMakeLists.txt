@@ -14,6 +14,7 @@ add_subdirectory(libs/LodePNG)
 add_subdirectory(libs/OpenSans_ettf)
 
 add_executable(circuits
+
         src/core/IScreen.h
         src/core/IViewmodel.h
         src/core/IWidget.h
@@ -23,12 +24,16 @@ add_executable(circuits
         src/core/Rect.h
 
         src/enums/Align.h
+        src/enums/Appearance.h
         src/enums/Baseline.h
         src/enums/Cap.h
+        src/enums/Cursor.h
+        src/enums/FontRole.h
         src/enums/Gravity.h
         src/enums/Joint.h
         src/enums/SizeUnit.h
-        src/enums/SystemTheme.h
+        src/enums/State.h
+        src/enums/ThemeName.h
 
         src/graphics/Renderer.cpp
         src/graphics/Renderer.h
@@ -45,6 +50,11 @@ add_executable(circuits
         src/graphics/Path.cpp
         src/graphics/Path.h
 
+        src/manager/CursorManager.cpp
+        src/manager/CursorManager.h
+        src/manager/ThemeManager.cpp
+        src/manager/ThemeManager.h
+
         src/simulator/screen/MainScreen.cpp
         src/simulator/screen/MainScreen.h
         src/simulator/screen/MainVM.cpp
@@ -52,9 +62,26 @@ add_executable(circuits
         src/simulator/Application.cpp
         src/simulator/Application.h
 
-        src/ui/theme/Theme.h
+        src/ui/layout/Column.cpp
+        src/ui/layout/Column.h
+        src/ui/layout/Row.cpp
+        src/ui/layout/Row.h
+
+        src/ui/widget/Button.cpp
+        src/ui/widget/Button.h
+        src/ui/widget/Card.cpp
+        src/ui/widget/Card.h
+        src/ui/widget/Image.cpp
+        src/ui/widget/Image.h
+        src/ui/widget/Input.cpp
+        src/ui/widget/Input.h
         src/ui/widget/Label.cpp
         src/ui/widget/Label.h
+        src/ui/widget/Toggle.cpp
+        src/ui/widget/Toggle.h
+
+        src/ui/Theme.cpp
+        src/ui/Theme.h
         src/ui/UI.cpp
         src/ui/UI.h
 
@@ -64,25 +91,6 @@ add_executable(circuits
         src/window/Window.h
 
         src/main.cpp
-        src/enums/State.h
-        src/ui/layout/Column.cpp
-        src/ui/layout/Column.h
-        src/ui/layout/Row.cpp
-        src/ui/layout/Row.h
-        src/ui/widget/Button.cpp
-        src/ui/widget/Button.h
-        src/ui/widget/Image.cpp
-        src/ui/widget/Image.h
-        src/ui/widget/Toggle.cpp
-        src/ui/widget/Toggle.h
-        src/ui/widget/Input.cpp
-        src/ui/widget/Input.h
-        src/ui/widget/Card.cpp
-        src/ui/widget/Card.h
-        src/ui/theme/Theme.cpp
-        src/enums/Appearance.h
-        src/ui/theme/ThemeManager.h
-        src/enums/FontRole.h
 )
 
 target_include_directories(circuits PUBLIC src)

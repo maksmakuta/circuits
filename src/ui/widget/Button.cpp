@@ -2,7 +2,7 @@
 
 #include <utility>
 
-#include "ui/theme/ThemeManager.h"
+#include "manager/ThemeManager.h"
 
 namespace circuits {
 
@@ -61,14 +61,15 @@ namespace circuits {
         const auto theme = currentTheme();
         const auto& [pos, size] = getRect();
         r.rect(pos,size,theme.shape.cornerMedium);
+
         if (state() == State::Hover) {
-            r.stroke(theme.palette.outline,theme.shape.borderThickness);
+            const auto col = theme.palette.primary.asVec3() - 0.1f;
+            r.fill(Color(col));
         }else if (state() == State::Active) {
             r.fill(theme.palette.secondary);
-        }else {
+        } else {
             r.fill(theme.palette.primary);
         }
-
         if (m_inner) {
             m_inner->onDraw(r);
         }
@@ -84,12 +85,6 @@ namespace circuits {
         IWidget::onEvent(e);
         if (m_inner) {
             m_inner->onEvent(e);
-        }
-
-        if (state() == State::Hover || state() == State::Active) {
-            setAppearance(Appearance::Secondary);
-        }else {
-            setAppearance(Appearance::Primary);
         }
     }
 

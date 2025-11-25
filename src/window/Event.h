@@ -18,7 +18,7 @@ namespace circuits {
         MouseWheel
     };
 
-    struct Modifiers {
+    struct Mods {
         bool shift = false;
         bool ctrl  = false;
         bool alt   = false;
@@ -28,7 +28,7 @@ namespace circuits {
         Event() = default;
 
         EventType type = EventType::None;
-        Modifiers mods;
+        Mods mods;
         union {
             struct { unsigned key; bool repeat; } key;
             struct { float x, y; float dx, dy; } mouseMove;
@@ -40,13 +40,13 @@ namespace circuits {
         static Event WindowClose();
         static Event WindowResize(int w, int h);
 
-        static Event KeyDown(unsigned key, bool repeat, Modifiers mods = {});
-        static Event KeyUp(unsigned key, Modifiers mods = {});
+        static Event KeyDown(unsigned key, bool repeat, Mods mods = {});
+        static Event KeyUp(unsigned key, Mods mods = {});
 
-        static Event MouseMove(float x, float y, float dx, float dy, Modifiers mods = {});
-        static Event MouseDown(unsigned button, float x, float y, Modifiers mods = {});
-        static Event MouseUp(unsigned button, float x, float y, Modifiers mods = {});
-        static Event MouseWheel(float dx, float dy, Modifiers mods = {});
+        static Event MouseMove(float x, float y, float dx, float dy, Mods mods = {});
+        static Event MouseDown(unsigned button, float x, float y, Mods mods = {});
+        static Event MouseUp(unsigned button, float x, float y, Mods mods = {});
+        static Event MouseWheel(float dx, float dy, Mods mods = {});
     };
 
 }

@@ -7,6 +7,8 @@ namespace circuits {
     glm::ivec2 Column::onMeasure(const glm::ivec2 &max) {
         glm::ivec2 size = {0, 0};
 
+        setAppearance(getParent() ? getParent()->getAppearance() : getAppearance());
+
         for (size_t i = 0; i < m_children.size(); i++) {
             const auto& child = m_children[i];
 

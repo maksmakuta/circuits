@@ -2,7 +2,7 @@
 
 #include <utility>
 
-#include "ui/theme/ThemeManager.h"
+#include "manager/ThemeManager.h"
 
 namespace circuits {
 

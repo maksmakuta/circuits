@@ -5,7 +5,7 @@
 
 namespace circuits {
 
-    enum class SystemTheme : uint8_t{
+    enum class ThemeName : uint8_t{
         Unknown = 0,
         Light,
         Dark

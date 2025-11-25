@@ -15,7 +15,7 @@ namespace circuits {
         return e;
     }
 
-    Event Event::KeyDown(const unsigned key, const bool repeat, const Modifiers mods) {
+    Event Event::KeyDown(const unsigned key, const bool repeat, const Mods mods) {
         Event e;
         e.type = EventType::KeyDown;
         e.key = { key, repeat };
@@ -23,7 +23,7 @@ namespace circuits {
         return e;
     }
 
-    Event Event::KeyUp(const unsigned key, const Modifiers mods) {
+    Event Event::KeyUp(const unsigned key, const Mods mods) {
         Event e;
         e.type = EventType::KeyUp;
         e.key = { key, false };
@@ -31,7 +31,7 @@ namespace circuits {
         return e;
     }
 
-    Event Event::MouseMove(const float x, const float y, const float dx, const float dy, const Modifiers mods) {
+    Event Event::MouseMove(const float x, const float y, const float dx, const float dy, const Mods mods) {
         Event e;
         e.type = EventType::MouseMove;
         e.mouseMove = { x, y, dx, dy };
@@ -39,7 +39,7 @@ namespace circuits {
         return e;
     }
 
-    Event Event::MouseDown(const unsigned button, const float x, const float y, const Modifiers mods) {
+    Event Event::MouseDown(const unsigned button, const float x, const float y, const Mods mods) {
         Event e;
         e.type = EventType::MouseDown;
         e.mouseButton = { x, y, button };
@@ -47,7 +47,7 @@ namespace circuits {
         return e;
     }
 
-    Event Event::MouseUp(const unsigned button, const float x, const float y, const Modifiers mods) {
+    Event Event::MouseUp(const unsigned button, const float x, const float y, const Mods mods) {
         Event e;
         e.type = EventType::MouseUp;
         e.mouseButton = { x, y, button };
@@ -55,11 +55,12 @@ namespace circuits {
         return e;
     }
 
-    Event Event::MouseWheel(const float dx, const float dy, const Modifiers mods) {
+    Event Event::MouseWheel(const float dx, const float dy, const Mods mods) {
         Event e;
         e.type = EventType::MouseWheel;
         e.mouseWheel = { dx, dy };
         e.mods = mods;
         return e;
     }
+
 }

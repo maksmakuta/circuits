@@ -2,10 +2,12 @@
 
 namespace circuits {
 
-    Row::Row(const WidgetList& list) : IWidget(), m_children(list), m_children_sizes(list.size(),{0,0}) {}
+    Row::Row(const WidgetList& list) : m_children(list), m_children_sizes(list.size(),{0,0}) {}
 
     glm::ivec2 Row::onMeasure(const glm::ivec2 &max) {
         glm::ivec2 size = {0, 0};
+
+        setAppearance(getParent() ? getParent()->getAppearance() : getAppearance());
 
         for (size_t i = 0; i < m_children.size(); i++) {
             const auto& child = m_children[i];
@@ -37,6 +39,7 @@ namespace circuits {
 
         for (size_t i = 0; i < m_children.size(); i++) {
             const auto& child = m_children[i];
+            child->setParent(shared_from_this());
             const auto mod = child->getModifier();
             const auto padding = mod.getPadding();
             const auto gravity = mod.getGravity();

@@ -117,7 +117,7 @@ namespace circuits {
         if (!SDL_PollEvent(&e))
             return false;
 
-        const auto mods = Modifiers{
+        const auto mods = Mods{
             .shift = (SDL_GetModState() & SDL_KMOD_SHIFT) != 0,
             .ctrl  = (SDL_GetModState() & SDL_KMOD_CTRL)  != 0,
             .alt   = (SDL_GetModState() & SDL_KMOD_ALT)   != 0,

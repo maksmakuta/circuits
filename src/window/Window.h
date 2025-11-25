@@ -25,9 +25,9 @@ namespace circuits {
         void setTitle(const char*) const;
 
         void close();
-        static bool poll(Event&);
         void swap() const;
 
+        static bool poll(Event&);
         static uint64_t getTime();
 
     private:
