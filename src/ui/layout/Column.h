@@ -5,7 +5,7 @@
 
 namespace circuits {
 
-    class Column final : public IWidget {
+    class Column final : public IWidget, public std::enable_shared_from_this<Column>{
     public:
         Column(const WidgetList& list);
 

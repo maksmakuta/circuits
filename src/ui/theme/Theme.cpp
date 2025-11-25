@@ -49,7 +49,7 @@ namespace circuits {
         t.palette.secondary         = Color::fromBytes(216, 185, 255 );
         t.palette.onSecondary       = Color::fromBytes(33 , 25 , 40  );
 
-        t.palette.surface           = Color::fromBytes(255, 251, 254 );
+        t.palette.surface           = Color::fromBytes(235, 231, 234 );
         t.palette.onSurface         = Color::fromBytes(33 , 25 , 40  );
 
         t.palette.surfaceVariant    = Color::fromBytes(232, 222, 248 );

@@ -2,13 +2,15 @@
 
 namespace circuits {
 
-    Column::Column(const WidgetList& list) : IWidget(), m_children(list), m_children_sizes(list.size(),{0,0}) {}
+    Column::Column(const WidgetList& list) : m_children(list), m_children_sizes(list.size(),{0,0}) {}
 
     glm::ivec2 Column::onMeasure(const glm::ivec2 &max) {
         glm::ivec2 size = {0, 0};
 
         for (size_t i = 0; i < m_children.size(); i++) {
             const auto& child = m_children[i];
+
+            child->setParent(shared_from_this());
 
             const auto mod = child->getModifier();
             const auto padding = mod.getPadding();

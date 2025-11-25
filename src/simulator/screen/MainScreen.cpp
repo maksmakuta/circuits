@@ -7,18 +7,14 @@ namespace circuits {
 
     void MainScreen::onInit(){
         const auto pad8 = Modifier().padding(8);
-        m_ui = column({
-            button("This is button",pad8),
-            card(
-                label("This is a Card",Modifier().padding(16)),
-                pad8
-            ),
-            card(
-                button("Button in Card",pad8),
-                pad8
-            ),
-            label("Just text", FontRole::Label,pad8)
-        });
+        m_ui = card(
+            column({
+                label("Just text", FontRole::Label,pad8),
+                button("This is button",pad8),
+                input("This is a Input", pad8),
+                toggle(true,pad8)
+            })
+        );
     }
 
     void MainScreen::onDeinit(){}

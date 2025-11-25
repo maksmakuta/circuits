@@ -18,6 +18,7 @@ namespace circuits {
 
     std::shared_ptr<Button> button(const WidgetPtr& inner, const Modifier &mod = {});
     std::shared_ptr<Button> button(const std::string &text, const Modifier &mod = {});
+
     std::shared_ptr<Input>  input(const std::string& text, const Modifier& mod = {});
     std::shared_ptr<Toggle> toggle(bool state, const Modifier &mod = {});
     std::shared_ptr<Image>  image(const Texture& tex, const Modifier &mod = {});

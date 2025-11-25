@@ -7,7 +7,7 @@
 namespace circuits {
 
     Card::Card(WidgetPtr w) : m_inner(std::move(w)) {
-        setAppearance(Appearance::SurfaceVariant);
+        setAppearance(Appearance::Surface);
     }
 
     glm::ivec2 Card::onMeasure(const glm::ivec2 &max) {
@@ -62,7 +62,7 @@ namespace circuits {
     void Card::onDraw(Renderer& r) {
         const auto theme = currentTheme();
         r.rect(getRect().pos,getRect().size, theme.shape.cornerMedium);
-        r.fill(theme.palette.surfaceVariant);
+        r.fill(theme.palette.surface);
 
         if (m_inner) {
             m_inner->onDraw(r);
