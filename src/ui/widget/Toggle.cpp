@@ -8,7 +8,7 @@ namespace circuits {
         return glm::ivec2{52,30};
     }
 
-    void Toggle::onDraw(Renderer& r) {
+    void Toggle::onDraw(Renderer& r) { /*
         const auto theme = currentTheme();
         const auto rect = getRect();
         const auto radius = static_cast<float>(rect.size.y >> 1);
@@ -29,7 +29,7 @@ namespace circuits {
         }else {
             r.fill(theme.palette.background);
             r.stroke(theme.palette.border, theme.style.borderThickness);
-        }
+        }*/
     }
 
     void Toggle::onEvent(const Event &e) {

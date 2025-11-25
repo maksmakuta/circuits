@@ -2,6 +2,8 @@
 
 #include <utility>
 
+#include "ui/theme/ThemeManager.h"
+
 namespace circuits {
 
     Button::Button(WidgetPtr p) : IWidget(), m_inner(std::move(p)){}
@@ -54,13 +56,12 @@ namespace circuits {
     void Button::onDraw(Renderer& r) {
         const auto theme = currentTheme();
         const auto& [pos, size] = getRect();
-        r.rect(pos,size,theme.style.cornerRadius);
+        r.rect(pos,size,theme.shape.cornerMedium);
+        r.fill(theme.palette.primary);
         if (state() == State::Hover) {
-            r.stroke(theme.palette.border,theme.style.borderThickness);
+            r.stroke(theme.palette.outline,theme.shape.borderThickness);
         }else if (state() == State::Active) {
-            r.fill(theme.palette.primary);
-        }else {
-            r.fill(theme.palette.surface);
+            r.fill(theme.palette.secondary);
         }
 
         if (m_inner) {

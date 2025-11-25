@@ -2,20 +2,26 @@
 #define CIRCUITS_IWIDGET_H
 
 #include <memory>
-#include <glm/gtc/constants.hpp>
+#include <utility>
 
 #include "Rect.h"
+#include "Modifier.h"
 
 #include "graphics/Renderer.h"
-#include "Modifier.h"
+#include "enums/Appearance.h"
 #include "enums/State.h"
-#include "ui/theme/ThemeManager.h"
 #include "window/Event.h"
 
 namespace circuits {
 
+    class IWidget;
+
+    using WidgetPtr = std::shared_ptr<IWidget>;
+    using WidgetList = std::initializer_list<WidgetPtr>;
+
     class IWidget {
     public:
+        explicit IWidget(WidgetPtr parent = nullptr) : m_parent(std::move(parent)) {}
         virtual ~IWidget() = default;
 
         virtual glm::ivec2 onMeasure(const glm::ivec2& max) = 0;
@@ -80,6 +86,14 @@ namespace circuits {
             m_state = s;
         }
 
+        void setAppearance(const Appearance a) {
+            m_appearance = a;
+        }
+
+        void setParent(const WidgetPtr& p) {
+            m_parent = p;
+        }
+
         [[nodiscard]] Modifier getModifier() const {
             return m_modifier;
         }
@@ -92,18 +106,21 @@ namespace circuits {
             return m_state;
         }
 
+        [[nodiscard]] Appearance getAppearance() const {
+            return m_appearance;
+        }
+
+        [[nodiscard]] WidgetPtr getParent() const {
+            return m_parent;
+        }
+
     private:
         Rect m_rect;
+        WidgetPtr m_parent;
         Modifier m_modifier;
         State m_state = State::Normal;
+        Appearance m_appearance = Appearance::Normal;
     };
-
-    using WidgetPtr = std::shared_ptr<IWidget>;
-    using WidgetList = std::initializer_list<WidgetPtr>;
-
-    static Theme currentTheme() {
-        return ThemeManager::current();
-    }
 
 }
 

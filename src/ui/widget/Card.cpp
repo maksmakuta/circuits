@@ -2,6 +2,8 @@
 
 #include <utility>
 
+#include "ui/theme/ThemeManager.h"
+
 namespace circuits {
 
     Card::Card(WidgetPtr w) : IWidget(), m_inner(std::move(w)) {}
@@ -55,9 +57,8 @@ namespace circuits {
 
     void Card::onDraw(Renderer& r) {
         const auto theme = currentTheme();
-        r.rect(getRect().pos,getRect().size, theme.style.borderRadius);
-        r.fill(theme.palette.background);
-        r.stroke(theme.palette.border,theme.style.borderThickness);
+        r.rect(getRect().pos,getRect().size, theme.shape.cornerMedium);
+        r.fill(theme.palette.surface);
 
         if (m_inner) {
             m_inner->onDraw(r);

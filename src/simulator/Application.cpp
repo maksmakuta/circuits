@@ -32,7 +32,7 @@ namespace circuits {
     int Application::run() {
         m_window.swap();
         m_renderer.load();
-        ThemeManager::change();
+        ThemeManager::instance();
         m_screen->onInit();
         while (!m_window.isClosed()) {
             updateDelta();

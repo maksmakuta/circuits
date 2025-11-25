@@ -53,8 +53,6 @@ add_executable(circuits
         src/simulator/Application.h
 
         src/ui/theme/Theme.h
-        src/ui/theme/ThemeManager.cpp
-        src/ui/theme/ThemeManager.h
         src/ui/widget/Label.cpp
         src/ui/widget/Label.h
         src/ui/UI.cpp
@@ -81,6 +79,10 @@ add_executable(circuits
         src/ui/widget/Input.h
         src/ui/widget/Card.cpp
         src/ui/widget/Card.h
+        src/ui/theme/Theme.cpp
+        src/enums/Appearance.h
+        src/ui/theme/ThemeManager.h
+        src/enums/FontRole.h
 )
 
 target_include_directories(circuits PUBLIC src)

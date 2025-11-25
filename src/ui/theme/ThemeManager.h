@@ -7,23 +7,43 @@ namespace circuits {
 
     class ThemeManager {
     public:
-        static Theme& current();
-        static void setTheme(const Theme& t);
-        static void change();
+        static ThemeManager& instance() {
+            static ThemeManager _instance;
+            return _instance;
+        }
 
-        static Theme getDarkTheme();
-        static Theme getLightTheme();
-        static SystemTheme getSystemTheme();
+        void setTheme(const Theme& theme) {
+            currentTheme = theme;
+            systemTheme = theme.theme;
+        }
+
+        const Theme& getTheme() const {
+            return currentTheme;
+        }
+
+        const SystemTheme& getSystemTheme() const {
+            return systemTheme;
+        }
 
     private:
-        ThemeManager();
-        ~ThemeManager();
+        Theme currentTheme;
+        SystemTheme systemTheme = SystemTheme::Unknown;
 
-        static ThemeManager& instance();
+        ThemeManager() {
+            setTheme(Theme::getTheme());
+        }
 
-        SystemTheme currentTheme = SystemTheme::Unknown;
-        Theme m_theme;
+        ~ThemeManager() {
+            currentTheme.typography.label.unload();
+            currentTheme.typography.body.unload();
+            currentTheme.typography.title.unload();
+        }
+
     };
+
+    inline Theme currentTheme() {
+        return ThemeManager::instance().getTheme();
+    }
 
 }
 

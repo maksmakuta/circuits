@@ -8,24 +8,51 @@
 namespace circuits {
 
     struct Palette {
-        Color background;
         Color primary;
+        Color onPrimary;
+
+        Color secondary;
+        Color onSecondary;
+
         Color surface;
-        Color border;
-        Color text;
+        Color onSurface;
+
+        Color surfaceVariant;
+        Color onSurfaceVariant;
+
+        Color outline;
+
+        Color background;
+        Color onBackground;
+
+        Color error;
+        Color onError;
     };
 
-    struct Style {
-        float cornerRadius{0};
-        float borderRadius{0};
-        float borderThickness{0};
+    struct Shape {
+        float cornerSmall   = 4.0f;
+        float cornerMedium  = 8.0f;
+        float cornerLarge   = 16.0f;
+
+        float borderThickness = 2.0f;
+        float borderRadius    = 12.0f;
+    };
+
+    struct Typography {
+        Font title;
+        Font body;
+        Font label;
     };
 
     struct Theme {
+        Shape shape;
         Palette palette;
-        Style style;
-        Font font;
+        Typography typography;
         SystemTheme theme = SystemTheme::Unknown;
+
+        static Theme getTheme(SystemTheme systemTheme = SystemTheme::Unknown);
+        static Theme getDarkTheme();
+        static Theme getLightTheme();
     };
 
 }

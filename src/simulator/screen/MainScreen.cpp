@@ -1,22 +1,22 @@
 #include "MainScreen.h"
 
 #include "ui/UI.h"
+#include "ui/theme/ThemeManager.h"
 
 namespace circuits {
 
     void MainScreen::onInit(){
-        m_ui = card(
-            label("Hello, World", Modifier().padding(8))
-        );
+        m_ui = column({
+            label("Hello, World", FontRole::Title,Modifier().padding(8)),
+            label("Hello, World", FontRole::Body,Modifier().padding(8)),
+            label("Hello, World", FontRole::Label,Modifier().padding(8))
+        });
     }
 
-    void MainScreen::onDeinit(){
-
-    }
+    void MainScreen::onDeinit(){}
 
     void MainScreen::onDraw(Renderer& r){
         clear(currentTheme().palette.background);
-
         m_ui->onDraw(r);
     }
 
