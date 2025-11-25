@@ -6,11 +6,15 @@
 
 namespace circuits {
 
-    Button::Button(WidgetPtr p) : IWidget(), m_inner(std::move(p)){}
+    Button::Button(WidgetPtr p) : m_inner(std::move(p)) {
+        setAppearance(Appearance::Primary);
+    }
 
     glm::ivec2 Button::onMeasure(const glm::ivec2 &max) {
         if (!m_inner)
             return glm::ivec2{10, 10};
+
+        m_inner->setParent(shared_from_this());
 
         const auto padding = getModifier().getPadding();
         const glm::ivec2 innerMax = {
@@ -57,11 +61,12 @@ namespace circuits {
         const auto theme = currentTheme();
         const auto& [pos, size] = getRect();
         r.rect(pos,size,theme.shape.cornerMedium);
-        r.fill(theme.palette.primary);
         if (state() == State::Hover) {
             r.stroke(theme.palette.outline,theme.shape.borderThickness);
         }else if (state() == State::Active) {
             r.fill(theme.palette.secondary);
+        }else {
+            r.fill(theme.palette.primary);
         }
 
         if (m_inner) {
@@ -79,6 +84,12 @@ namespace circuits {
         IWidget::onEvent(e);
         if (m_inner) {
             m_inner->onEvent(e);
+        }
+
+        if (state() == State::Hover || state() == State::Active) {
+            setAppearance(Appearance::Secondary);
+        }else {
+            setAppearance(Appearance::Primary);
         }
     }
 

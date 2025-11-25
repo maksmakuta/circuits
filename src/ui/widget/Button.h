@@ -5,7 +5,7 @@
 
 namespace circuits {
 
-    class Button final : public IWidget{
+    class Button final : public IWidget, public std::enable_shared_from_this<Button>{
     public:
         explicit Button(WidgetPtr = nullptr);
 

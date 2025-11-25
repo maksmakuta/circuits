@@ -5,7 +5,7 @@
 
 namespace circuits {
 
-    class Card final : public IWidget {
+    class Card final : public IWidget, public std::enable_shared_from_this<Card> {
     public:
         explicit Card(WidgetPtr);
 

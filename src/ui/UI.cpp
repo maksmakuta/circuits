@@ -13,6 +13,10 @@ namespace circuits {
        return new_widget<Label>(mod, text, r);
     }
 
+    std::shared_ptr<Label> label(const std::string& text,const Modifier& mod) {
+        return new_widget<Label>(mod, text, FontRole::Body);
+    }
+
     std::shared_ptr<Button> button(const WidgetPtr& inner, const Modifier &mod){
         return new_widget<Button>(mod, inner);
     }

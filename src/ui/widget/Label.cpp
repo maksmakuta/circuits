@@ -32,7 +32,7 @@ namespace circuits {
         }
     }
 
-    Label::Label(std::string text, const FontRole r) : IWidget(), m_text(std::move(text)), m_role(r) {}
+    Label::Label(std::string text, const FontRole r) : m_text(std::move(text)), m_role(r) {}
 
     glm::ivec2 Label::onMeasure(const glm::ivec2 &max){
         const auto font = getFont(m_role);
@@ -42,7 +42,12 @@ namespace circuits {
     void Label::onDraw(Renderer& r){
         const auto theme = currentTheme();
         r.setBaseline(Baseline::Bottom);
-        r.text(getFont(m_role),m_text,getRect().pos, onText(getParent() ? getParent()->getAppearance() : getAppearance()));
+        r.text(
+            getFont(m_role),
+            m_text,
+            getRect().pos,
+            onText(getParent() ? getParent()->getAppearance() : getAppearance())
+        );
     }
 
 }

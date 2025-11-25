@@ -6,11 +6,15 @@
 
 namespace circuits {
 
-    Card::Card(WidgetPtr w) : IWidget(), m_inner(std::move(w)) {}
+    Card::Card(WidgetPtr w) : m_inner(std::move(w)) {
+        setAppearance(Appearance::SurfaceVariant);
+    }
 
     glm::ivec2 Card::onMeasure(const glm::ivec2 &max) {
         if (!m_inner)
             return glm::ivec2{60, 30};
+
+        m_inner->setParent(shared_from_this());
 
         const auto padding = getModifier().getPadding();
         const glm::ivec2 innerMax = {
@@ -58,7 +62,7 @@ namespace circuits {
     void Card::onDraw(Renderer& r) {
         const auto theme = currentTheme();
         r.rect(getRect().pos,getRect().size, theme.shape.cornerMedium);
-        r.fill(theme.palette.surface);
+        r.fill(theme.palette.surfaceVariant);
 
         if (m_inner) {
             m_inner->onDraw(r);

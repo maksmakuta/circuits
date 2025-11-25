@@ -30,12 +30,12 @@ namespace circuits {
     };
 
     struct Shape {
-        float cornerSmall   = 4.0f;
-        float cornerMedium  = 8.0f;
-        float cornerLarge   = 16.0f;
+        float cornerSmall;
+        float cornerMedium;
+        float cornerLarge;
 
-        float borderThickness = 2.0f;
-        float borderRadius    = 12.0f;
+        float borderThickness;
+        float borderRadius;
     };
 
     struct Typography {
@@ -56,6 +56,5 @@ namespace circuits {
     };
 
 }
-
 
 #endif //CIRCUITS_THEME_H

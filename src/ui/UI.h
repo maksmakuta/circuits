@@ -14,6 +14,8 @@
 namespace circuits {
 
     std::shared_ptr<Label>  label(const std::string& text, const FontRole& r = FontRole::Body, const Modifier &mod = {});
+    std::shared_ptr<Label>  label(const std::string& text, const Modifier &mod = {});
+
     std::shared_ptr<Button> button(const WidgetPtr& inner, const Modifier &mod = {});
     std::shared_ptr<Button> button(const std::string &text, const Modifier &mod = {});
     std::shared_ptr<Input>  input(const std::string& text, const Modifier& mod = {});
