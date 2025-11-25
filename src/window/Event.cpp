@@ -1,5 +1,7 @@
 #include "Event.h"
 
+#include <SDL3/SDL_events.h>
+
 namespace circuits {
 
     Event Event::WindowClose() {
@@ -63,4 +65,38 @@ namespace circuits {
         return e;
     }
 
+    Event Event::SwitchTheme(){
+        Event e;
+        e.type = EventType::SwitchTheme;
+        return e;
+    }
+
+    Event Event::StartInput(){
+        Event e;
+        e.type = EventType::StartInput;
+        return e;
+    }
+
+    Event Event::EndInput(){
+        Event e;
+        e.type = EventType::EndInput;
+        return e;
+    }
+
+    Event Event::ChangeCursor(const Cursor& c){
+        Event e;
+        e.type = EventType::ChangeCursor;
+        e.cursor.cursor = c;
+        return e;
+    }
+
+    void pushEvent(Event ev) {
+        auto* copy = new Event(ev);
+        SDL_Event e{};
+        e.type = SDL_EVENT_USER;
+        e.user.code = static_cast<int>(ev.type);
+        e.user.data1 = copy;
+        e.user.data2 = nullptr;
+        SDL_PushEvent(&e);
+    }
 }

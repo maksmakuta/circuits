@@ -44,8 +44,10 @@
      - [X] Card
      - [ ] Tooltip
      - [ ] Notification
- - [ ] Component subsystem (0.3.x)
- - [ ] Format for storing circuits (0.3.x - 0.4.x)
+ - [ ] Reactive support (0.2.x - 0.3.x, in progress)
+ - [ ] Component subsystem (0.3.x, planned)
+ - [ ] App UI (0.3.x - 0.4.x, planned)
+ - [ ] Format for storing circuits (0.3.x - 0.4.x, planned)
 
 ### Thanks to
 

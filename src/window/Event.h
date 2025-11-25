@@ -1,9 +1,11 @@
 #ifndef CIRCUITS_EVENT_H
 #define CIRCUITS_EVENT_H
 
+#include "enums/Cursor.h"
+
 namespace circuits {
 
-    enum class EventType {
+    enum class EventType : int{
         None = 0,
 
         WindowClose,
@@ -15,7 +17,15 @@ namespace circuits {
         MouseMove,
         MouseDown,
         MouseUp,
-        MouseWheel
+        MouseWheel,
+
+        // non SDL events
+        SwitchTheme,
+
+        StartInput,
+        EndInput,
+
+        ChangeCursor
     };
 
     struct Mods {
@@ -35,6 +45,7 @@ namespace circuits {
             struct { float x, y; unsigned button; } mouseButton;
             struct { float dx, dy; } mouseWheel{0,0};
             struct { int width, height; } window;
+            struct { Cursor cursor; } cursor;
         };
 
         static Event WindowClose();
@@ -47,7 +58,14 @@ namespace circuits {
         static Event MouseDown(unsigned button, float x, float y, Mods mods = {});
         static Event MouseUp(unsigned button, float x, float y, Mods mods = {});
         static Event MouseWheel(float dx, float dy, Mods mods = {});
+
+        static Event SwitchTheme();
+        static Event StartInput();
+        static Event EndInput();
+        static Event ChangeCursor(const Cursor&);
     };
+
+    void pushEvent(Event ev);
 
 }
 

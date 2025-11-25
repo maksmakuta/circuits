@@ -156,6 +156,13 @@ namespace circuits {
                 out = Event::MouseWheel(e.wheel.x, e.wheel.y, mods);
                 break;
 
+            case SDL_EVENT_USER: {
+                const auto* data = static_cast<Event*>(e.user.data1);
+                out = *data;
+                delete data;
+            }
+                break;
+
             default:
                 return false;
         }

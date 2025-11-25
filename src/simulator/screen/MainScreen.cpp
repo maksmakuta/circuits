@@ -1,5 +1,9 @@
 #include "MainScreen.h"
 
+#include <iostream>
+#include <ostream>
+#include <SDL3/SDL_keycode.h>
+
 #include "manager/ThemeManager.h"
 #include "ui/UI.h"
 
@@ -29,10 +33,24 @@ namespace circuits {
     }
 
     void MainScreen::onEvent(const Event& e){
+        m_ui->onEvent(e);
         if (e.type == EventType::WindowResize) {
             onResize({e.window.width, e.window.height});
         }
-        m_ui->onEvent(e);
+        if (e.type == EventType::SwitchTheme) {
+            const auto current = ThemeManager::instance().getSystemTheme();
+            if (current == ThemeName::Dark) {
+                ThemeManager::instance().setTheme(Theme::getLightTheme());
+            }else{
+                ThemeManager::instance().setTheme(Theme::getDarkTheme());
+            }
+        }
+        if (e.type == EventType::KeyDown) {
+            if (e.key.key == SDLK_SPACE) {
+                pushEvent(Event::SwitchTheme());
+                std::cout << "Switch Theme" << std::endl;
+            }
+        }
     }
 
     void MainScreen::onResize(const glm::ivec2& size) const {
