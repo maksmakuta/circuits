@@ -3,10 +3,10 @@
 namespace circuits {
 
     template<typename T, typename... Args>
-    std::shared_ptr<T> new_widget(const Modifier& m, const Args&... args) {
-        const auto l = std::make_shared<T>(args...);
-        l->setModifier(m);
-        return l;
+    std::shared_ptr<T> new_widget(const Modifier& m, Args&&... args) {
+        auto w = std::make_shared<T>(std::forward<Args>(args)...);
+        w->setModifier(m);
+        return w;
     }
 
     std::shared_ptr<Label> label(const std::string& text, const FontRole& r,const Modifier& mod) {
@@ -17,12 +17,12 @@ namespace circuits {
         return new_widget<Label>(mod, text, FontRole::Body);
     }
 
-    std::shared_ptr<Button> button(const WidgetPtr& inner, const Modifier &mod){
-        return new_widget<Button>(mod, inner);
+    std::shared_ptr<Button> button(const WidgetPtr& inner, const ButtonCallback& c, const Modifier &mod){
+        return new_widget<Button>(mod, inner, c);
     }
 
-    std::shared_ptr<Button> button(const std::string &text, const Modifier &mod){
-        return new_widget<Button>(mod, label(text, FontRole::Label, Modifier().center().padding(8)));
+    std::shared_ptr<Button> button(const std::string &text, const ButtonCallback& c, const Modifier &mod){
+        return new_widget<Button>(mod, label(text, FontRole::Label, Modifier().center().padding(8)),c);
     }
 
     std::shared_ptr<Input> input(const std::string& text, const Modifier &mod) {
@@ -54,5 +54,9 @@ namespace circuits {
 
     WidgetPtr grid(const WidgetList& list, Modifier mod);
     WidgetPtr box(const WidgetList& list, Modifier mod);
+
+    std::shared_ptr<RxLabel>  rxlabel(Observable<std::string>& text, const FontRole& r, const Modifier &mod) {
+        return new_widget<RxLabel>(mod, text, r);
+    }
 
 }

@@ -1,6 +1,8 @@
 #include "MainScreen.h"
 
+#include "core/IContext.h"
 #include "ui/UI.h"
+#include "ui/widget/RxLabel.h"
 
 namespace circuits {
 
@@ -8,17 +10,21 @@ namespace circuits {
 
     void MainScreen::onInit(){
         const auto pad8 = Modifier().padding(8);
-        const auto pad8c = Modifier().padding(8).height(48).width(48).center();
+        const auto pad8c = Modifier().padding(4).height(48).width(48).center();
         m_ui = card(
             column({
-                label(
-                    viewmodel().counter_str.getValue(),
-                    FontRole::Title,
-                    Modifier().padding(8).center()
-                ),
+                rxlabel(viewmodel().counter_str,FontRole::Title,Modifier().padding(8).center()),
                 row({
-                    button(label("-",FontRole::Title,Modifier().center()),pad8c),
-                    button(label("+",FontRole::Title,Modifier().center()),pad8c),
+                    button(
+                        label("-",FontRole::Title,Modifier().center()),
+                        [this]{ viewmodel().decrement(); },
+                        pad8c
+                    ),
+                    button(
+                        label("+",FontRole::Title,Modifier().center()),
+                        [this]{ viewmodel().increment(); },
+                        pad8c
+                    ),
                 },pad8)
             },pad8)
         );
@@ -39,6 +45,9 @@ namespace circuits {
         m_ui->onEvent(e);
         if (e.type == EventType::WindowResize) {
             onResize({e.window.width, e.window.height});
+        }
+        if (e.type == EventType::Recompose) {
+            onResize(getContext()->screenSize());
         }
     }
 

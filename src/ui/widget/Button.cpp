@@ -1,6 +1,7 @@
 #include "Button.h"
 
 #include <utility>
+#include <SDL3/SDL_mouse.h>
 
 namespace circuits {
 
@@ -17,7 +18,7 @@ namespace circuits {
         const auto mod = m_inner->getModifier();
         const auto padding = mod.getPadding();
 
-        glm::ivec2 innerMax = {
+        const glm::ivec2 innerMax = {
             max.x - padding.left - padding.right,
             max.y - padding.top  - padding.bottom
         };
@@ -98,7 +99,13 @@ namespace circuits {
     }
 
     void Button::onEvent(const Event& e) {
-        IWidget::onEvent(e);
+        if (e.type == EventType::MouseDown) {
+            const auto pos = glm::ivec2(e.mouseButton.x, e.mouseButton.y);
+            if (e.mouseButton.button == SDL_BUTTON_LEFT && getRect().contains(pos) && m_callback) {
+                m_callback();
+            }
+        }
+
         if (m_inner) {
             m_inner->onEvent(e);
         }

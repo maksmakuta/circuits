@@ -31,7 +31,8 @@
         - [ ] Notification
 - [ ] Reactive support (0.2.x - 0.3.x, in progress)
   - [X] Observable
-  - [ ] Reactive widgets
+  - [ ] Reactive widgets:
+    - [X] RxLabel
 - [ ] Component subsystem (0.3.x, planned)
 - [ ] App UI (0.3.x - 0.4.x, planned)
 - [ ] Format for storing circuits (0.3.x - 0.4.x, planned)

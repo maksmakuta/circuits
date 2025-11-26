@@ -9,6 +9,7 @@
 #include "widget/Image.h"
 #include "widget/Input.h"
 #include "widget/Label.h"
+#include "widget/RxLabel.h"
 #include "widget/Toggle.h"
 
 namespace circuits {
@@ -16,8 +17,8 @@ namespace circuits {
     std::shared_ptr<Label>  label(const std::string& text, const FontRole& r = FontRole::Body, const Modifier &mod = {});
     std::shared_ptr<Label>  label(const std::string& text, const Modifier &mod = {});
 
-    std::shared_ptr<Button> button(const WidgetPtr& inner, const Modifier &mod = {});
-    std::shared_ptr<Button> button(const std::string &text, const Modifier &mod = {});
+    std::shared_ptr<Button> button(const WidgetPtr& inner, const ButtonCallback& = {}, const Modifier &mod = {});
+    std::shared_ptr<Button> button(const std::string &text, const ButtonCallback& = {}, const Modifier &mod = {});
 
     std::shared_ptr<Input>  input(const std::string& text, const Modifier& mod = {});
     std::shared_ptr<Toggle> toggle(bool state, const Modifier &mod = {});
@@ -31,6 +32,10 @@ namespace circuits {
     std::shared_ptr<Row> row(const WidgetList& list, const Modifier &mod = {});
     WidgetPtr grid(const WidgetList& list, Modifier mod = {});
     WidgetPtr box(const WidgetList& list, Modifier mod = {});
+
+
+    std::shared_ptr<RxLabel>  rxlabel(Observable<std::string>& text, const FontRole& r = FontRole::Body, const Modifier &mod = {});
+
 
 }
 

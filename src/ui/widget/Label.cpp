@@ -47,4 +47,20 @@ namespace circuits {
         );
     }
 
+    void Label::setText(std::string text) {
+        m_text = std::move(text);
+    }
+
+    void Label::setFontRole(const FontRole value) {
+        m_role = value;
+    }
+
+    std::string Label::getText() const {
+        return m_text;
+    }
+
+    FontRole Label::getFontRole() const {
+        return m_role;
+    }
+
 }

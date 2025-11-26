@@ -89,6 +89,8 @@ add_executable(circuits
         src/window/Window.h
 
         src/main.cpp
+        src/ui/widget/RxLabel.cpp
+        src/ui/widget/RxLabel.h
 )
 
 target_include_directories(circuits PUBLIC src)
