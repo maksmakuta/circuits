@@ -1,7 +1,5 @@
 #include "Toggle.h"
 
-#include "manager/ThemeManager.h"
-
 namespace circuits {
 
     Toggle::Toggle(const bool state) : m_switch(state) {}

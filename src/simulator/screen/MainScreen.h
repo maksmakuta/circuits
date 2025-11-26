@@ -11,6 +11,8 @@ namespace circuits {
 
     class MainScreen final : public IScreen {
     public:
+        explicit MainScreen(const std::weak_ptr<IContext> &ctx);
+
         void onInit() override;
         void onDeinit() override;
         void onDraw(Renderer &) override;

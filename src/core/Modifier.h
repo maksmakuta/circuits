@@ -8,6 +8,7 @@
 #include "Rect.h"
 #include "enums/Gravity.h"
 #include "enums/SizeUnit.h"
+#include "ui/Theme.h"
 
 namespace circuits {
 
@@ -73,6 +74,11 @@ namespace circuits {
         SizeParams m_params;
         Padding m_padding;
     };
+
+    Theme currentTheme();
+    ThemeName currentThemeName();
+    void switchTheme();
+    void setTheme(Theme);
 
 }
 

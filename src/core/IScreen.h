@@ -6,8 +6,11 @@
 
 namespace circuits {
 
+    class IContext;
+
     class IScreen {
     public:
+        explicit IScreen(const std::weak_ptr<IContext>& ctx) : m_context(ctx) {}
         virtual ~IScreen() = default;
 
         virtual void onInit() = 0;
@@ -15,6 +18,13 @@ namespace circuits {
         virtual void onDraw(Renderer&) = 0;
         virtual void onUpdate(float) = 0;
         virtual void onEvent(const Event&) = 0;
+
+        [[nodiscard]] std::shared_ptr<IContext> getContext() const {
+            return m_context.lock();
+        }
+
+    private:
+        std::weak_ptr<IContext> m_context;
     };
 
 }

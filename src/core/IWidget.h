@@ -21,7 +21,7 @@ namespace circuits {
 
     class IWidget {
     public:
-        explicit IWidget(WidgetPtr parent = nullptr) : m_parent(std::move(parent)) {}
+        explicit IWidget(const WidgetPtr& parent = nullptr) : m_parent(parent) {}
         virtual ~IWidget() = default;
 
         virtual glm::ivec2 onMeasure(const glm::ivec2& max) = 0;
@@ -71,12 +71,12 @@ namespace circuits {
         }
 
         [[nodiscard]] WidgetPtr getParent() const {
-            return m_parent;
+            return m_parent.lock();
         }
 
     private:
         Rect m_rect;
-        WidgetPtr m_parent;
+        std::weak_ptr<IWidget> m_parent;
         Modifier m_modifier;
         State m_state = State::Normal;
         Appearance m_appearance = Appearance::Normal;

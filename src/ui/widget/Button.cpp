@@ -2,8 +2,6 @@
 
 #include <utility>
 
-#include "manager/ThemeManager.h"
-
 namespace circuits {
 
     Button::Button(WidgetPtr p) : m_inner(std::move(p)) {

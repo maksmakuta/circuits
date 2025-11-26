@@ -2,8 +2,6 @@
 
 #include <utility>
 
-#include "manager/ThemeManager.h"
-
 namespace circuits {
 
     Card::Card(WidgetPtr w) : m_inner(std::move(w)) {

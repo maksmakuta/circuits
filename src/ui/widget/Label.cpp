@@ -1,7 +1,5 @@
 #include "Label.h"
 
-#include "manager/ThemeManager.h"
-
 namespace circuits {
 
     Color onText(const Appearance text_appearance) {

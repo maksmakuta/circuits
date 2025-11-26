@@ -1,5 +1,8 @@
 #include "Modifier.h"
 
+#include <memory>
+#include <utility>
+
 namespace circuits {
 
     Padding::Padding() = default;
@@ -184,5 +187,27 @@ namespace circuits {
         }
 
         return result;
+    }
+
+    static Theme global_theme{};
+
+    Theme currentTheme() {
+        return global_theme;
+    }
+
+    ThemeName currentThemeName() {
+        return currentTheme().theme;
+    }
+
+    void switchTheme() {
+        if (currentThemeName() == ThemeName::Dark) {
+            setTheme(Theme::getLightTheme());
+        }else {
+            setTheme(Theme::getDarkTheme());
+        }
+    }
+
+    void setTheme(Theme t) {
+        global_theme = std::move(t);
     }
 }

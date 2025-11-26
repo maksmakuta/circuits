@@ -1,11 +1,10 @@
 #include "MainScreen.h"
 
-#include <SDL3/SDL_keycode.h>
-
-#include "manager/ThemeManager.h"
 #include "ui/UI.h"
 
 namespace circuits {
+
+    MainScreen::MainScreen(const std::weak_ptr<IContext> &ctx) : IScreen(ctx) {}
 
     void MainScreen::onInit(){
         const auto pad8 = Modifier().padding(8);

@@ -14,10 +14,6 @@ namespace circuits {
     public:
         virtual ~IContext() = default;
 
-        virtual Theme getTheme() = 0;
-        virtual ThemeName getThemeName() = 0;
-        virtual void switchTheme() = 0;
-
         virtual void setCursor(Cursor) = 0;
 
         virtual void go(const std::shared_ptr<IScreen>&) = 0;

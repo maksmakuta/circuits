@@ -2,8 +2,6 @@
 
 #include <utility>
 
-#include "manager/ThemeManager.h"
-
 namespace circuits {
 
     Input::Input(std::string t) : m_text(std::move(t)) {

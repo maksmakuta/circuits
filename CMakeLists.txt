@@ -51,9 +51,6 @@ add_executable(circuits
         src/graphics/Path.cpp
         src/graphics/Path.h
 
-        src/manager/ThemeManager.cpp
-        src/manager/ThemeManager.h
-
         src/rx/Observable.h
 
         src/simulator/screen/MainScreen.cpp
