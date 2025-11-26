@@ -7,8 +7,11 @@ namespace circuits {
 
     enum class Cursor : uint8_t{
         Default,
+        No,
         Hand,
-        IBeam,
+        Text,
+        Move,
+        Wait,
         ResizeH,
         ResizeV
     };

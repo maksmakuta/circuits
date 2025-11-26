@@ -1,7 +1,5 @@
 #include "MainScreen.h"
 
-#include <iostream>
-#include <ostream>
 #include <SDL3/SDL_keycode.h>
 
 #include "manager/ThemeManager.h"
@@ -46,9 +44,8 @@ namespace circuits {
             }
         }
         if (e.type == EventType::KeyDown) {
-            if (e.key.key == SDLK_SPACE) {
+            if (e.key.key == SDLK_P && e.mods.ctrl) {
                 pushEvent(Event::SwitchTheme());
-                std::cout << "Switch Theme" << std::endl;
             }
         }
     }

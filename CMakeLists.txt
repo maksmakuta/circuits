@@ -50,8 +50,6 @@ add_executable(circuits
         src/graphics/Path.cpp
         src/graphics/Path.h
 
-        src/manager/CursorManager.cpp
-        src/manager/CursorManager.h
         src/manager/ThemeManager.cpp
         src/manager/ThemeManager.h
 

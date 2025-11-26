@@ -1,10 +1,8 @@
 #ifndef CIRCUITS_APPLICATION_H
 #define CIRCUITS_APPLICATION_H
 
-#include <memory>
+#include <string>
 
-#include "core/IScreen.h"
-#include "graphics/Renderer.h"
 #include "window/Window.h"
 
 namespace circuits {
@@ -18,10 +16,9 @@ namespace circuits {
         void pollEvents();
         void updateDelta();
 
-        uint64_t lastTime = 0;
+        bool m_text_input{false};
+        std::string m_text;
         Window m_window;
-        Renderer m_renderer;
-        std::unique_ptr<IScreen> m_screen;
     };
 
 }

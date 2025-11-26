@@ -13,13 +13,22 @@ namespace circuits {
         std::cerr << message << std::endl;
     }
 
-    void Window::initSDL() {
+    Window::Window() : Window("Circuits", {640,480}){}
+
+    Window::Window(const char* title, const glm::ivec2& size) {
         if (SDL_Init(SDL_INIT_VIDEO) != 1) {
             std::cerr << "SDL_Init Error: " << SDL_GetError() << "\n";
         }
-    }
 
-    void Window::initGL() {
+        SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
+        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 6);
+        SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+        SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 1);
+        SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, 4);
+
+        m_window = SDL_CreateWindow(title, size.x, size.y, SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL);
+
         if (m_window == nullptr) {
             onError("Cannot initialize OpenGL: Window pointer is null");
             return;
@@ -42,38 +51,16 @@ namespace circuits {
         SDL_GL_MakeCurrent(m_window, m_context);
 
         m_running = true;
-    }
-
-    void Window::deinitSDL() {
-        SDL_Quit();
-    }
-
-    void Window::deinitGL() const {
-        SDL_GL_DestroyContext(m_context);
-    }
-
-    Window::Window() : Window("Circuits", {640,480}){}
-
-    Window::Window(const char* title, const glm::ivec2& size) {
-        initSDL();
-
-        SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
-        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 6);
-        SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-        SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 1);
-        SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, 4);
-
-        m_window = SDL_CreateWindow(title, size.x, size.y, SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL);
-        initGL();
 
         glEnable(GL_MULTISAMPLE);
+        setCursor(Cursor::Default);
     }
 
     Window::~Window() {
-        deinitGL();
+        SDL_DestroyCursor(m_cursor_ptr);
+        SDL_GL_DestroyContext(m_context);
         SDL_DestroyWindow(m_window);
-        deinitSDL();
+        SDL_Quit();
     }
 
     bool Window::isClosed() const {
@@ -176,5 +163,43 @@ namespace circuits {
 
     uint64_t Window::getTime() {
         return SDL_GetTicks();
+    }
+
+    Cursor Window::getCursor() const {
+        return m_cursor;
+    }
+
+    SDL_SystemCursor getSystemCursor(const Cursor c) {
+        switch (c){
+            case Cursor::Text:          return SDL_SYSTEM_CURSOR_TEXT;
+            case Cursor::Hand:          return SDL_SYSTEM_CURSOR_POINTER;
+            case Cursor::ResizeV:       return SDL_SYSTEM_CURSOR_NS_RESIZE;
+            case Cursor::ResizeH:       return SDL_SYSTEM_CURSOR_EW_RESIZE;
+            case Cursor::No:            return SDL_SYSTEM_CURSOR_NOT_ALLOWED;
+            case Cursor::Wait:          return SDL_SYSTEM_CURSOR_WAIT;
+            case Cursor::Move:          return SDL_SYSTEM_CURSOR_MOVE;
+            default:                    return SDL_SYSTEM_CURSOR_DEFAULT;
+        }
+    }
+
+    void Window::setCursor(const Cursor& cursor) {
+        if (!m_window){ return; }
+        m_cursor = cursor;
+        m_cursor_ptr = SDL_CreateSystemCursor(getSystemCursor(cursor));
+        SDL_SetCursor(m_cursor_ptr);
+    }
+
+    void Window::showCursor(const bool val) const {
+        if (!m_window){ return; }
+        if (!(val ? SDL_ShowCursor() : SDL_HideCursor())) {
+            onError(SDL_GetError());
+        }
+    }
+
+    void Window::enableInput(const bool val) const {
+        if (!m_window){ return; }
+        if (!(val ? SDL_StartTextInput(m_window) : SDL_StopTextInput(m_window))) {
+            onError(SDL_GetError());
+        }
     }
 }
