@@ -39,7 +39,6 @@ namespace circuits {
 
     void Label::onDraw(Renderer& r){
         const auto theme = currentTheme();
-        r.setBaseline(Baseline::Bottom);
         r.text(
             getFont(m_role),
             m_text,

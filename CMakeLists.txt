@@ -24,17 +24,17 @@ add_executable(circuits
         src/core/Rect.cpp
         src/core/Rect.h
 
-        src/enums/Align.h
         src/enums/Appearance.h
-        src/enums/Baseline.h
         src/enums/Cap.h
         src/enums/Cursor.h
         src/enums/FontRole.h
         src/enums/Gravity.h
+        src/enums/HAlign.h
         src/enums/Joint.h
         src/enums/SizeUnit.h
         src/enums/State.h
         src/enums/ThemeName.h
+        src/enums/VAlign.h
 
         src/graphics/Renderer.cpp
         src/graphics/Renderer.h

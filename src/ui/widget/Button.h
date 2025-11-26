@@ -5,9 +5,11 @@
 
 namespace circuits {
 
+    using ButtonCallback = std::function<void()>;
+
     class Button final : public IWidget, public std::enable_shared_from_this<Button>{
     public:
-        explicit Button(WidgetPtr = nullptr);
+        explicit Button(WidgetPtr = nullptr, ButtonCallback = ButtonCallback{});
 
         glm::ivec2 onMeasure(const glm::ivec2 &max) override;
         void onLayout(const Rect &) override;
@@ -15,7 +17,9 @@ namespace circuits {
         void onUpdate(float) override;
         void onEvent(const Event &) override;
     private:
+        glm::ivec2 m_child_size{0};
         WidgetPtr m_inner;
+        ButtonCallback m_callback;
     };
 
 }

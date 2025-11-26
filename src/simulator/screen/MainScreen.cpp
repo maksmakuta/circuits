@@ -8,13 +8,19 @@ namespace circuits {
 
     void MainScreen::onInit(){
         const auto pad8 = Modifier().padding(8);
+        const auto pad8c = Modifier().padding(8).height(48).width(48).center();
         m_ui = card(
             column({
-                label("Just text", FontRole::Label,pad8),
-                button("This is button",pad8),
-                input("This is a Input", pad8),
-                toggle(true,pad8)
-            })
+                label(
+                    viewmodel().counter_str.getValue(),
+                    FontRole::Title,
+                    Modifier().padding(8).center()
+                ),
+                row({
+                    button(label("-",FontRole::Title,Modifier().center()),pad8c),
+                    button(label("+",FontRole::Title,Modifier().center()),pad8c),
+                },pad8)
+            },pad8)
         );
     }
 

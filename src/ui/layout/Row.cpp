@@ -63,11 +63,11 @@ namespace circuits {
                 size.y - padding.top  - padding.bottom
             };
 
-            const int freeX = r.size.x - size.x;
+            const int freeY = r.size.y - size.y;
             if (gravity == Gravity::Center)
-                finalPos.x = r.pos.x + freeX / 2 + padding.left;
-            else if (gravity == Gravity::Right)
-                finalPos.x = r.pos.x + freeX + padding.left;
+                finalPos.y = r.pos.y + freeY / 2 + padding.top;
+            else if (gravity == Gravity::Bottom)
+                finalPos.y = r.pos.y + freeY + padding.top;
 
             child->onLayout({finalPos, finalSize});
             cursor.x += size.x;

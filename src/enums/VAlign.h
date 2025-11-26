@@ -5,10 +5,11 @@
 
 namespace circuits {
 
-    enum class Baseline : uint8_t {
+    enum class VAlign : uint8_t {
         Top,
         Middle,
-        Bottom
+        Bottom,
+        Baseline
     };
 
 }

@@ -29,12 +29,17 @@ namespace circuits {
         glm::ivec2 textSize(const std::string&) const;
 
         int getSize() const;
+        int getAscent() const;
+        int getDescent() const;
+        int getLineHeight() const;
+
         Texture getTexture() const;
         std::optional<Glyph> getGlyph(uint32_t) const;
 
     private:
         void build(const FT_Face& face);
-        int m_size{0};
+
+        glm::ivec4 m_font_data{0}; // size, ascent, descent, lineHeight
         Texture m_texture;
         std::unordered_map<uint32_t, Glyph> m_glyphs;
     };

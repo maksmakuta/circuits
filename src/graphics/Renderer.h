@@ -11,8 +11,8 @@
 #include "Texture.h"
 #include "Vertex.h"
 
-#include "enums/Align.h"
-#include "enums/Baseline.h"
+#include "enums/HAlign.h"
+#include "enums/VAlign.h"
 #include "enums/Cap.h"
 #include "enums/Joint.h"
 
@@ -49,8 +49,8 @@ namespace circuits {
 
         void setCap(const Cap&);
         void setJoint(const Joint&);
-        void setAlign(const Align&);
-        void setBaseline(const Baseline&);
+        void setAlign(const HAlign&);
+        void setBaseline(const VAlign&);
 
         void text(const Font&, const std::string&, const glm::vec2&, const Color& c = Color(0xFFFFFFFF));
 
@@ -83,8 +83,8 @@ namespace circuits {
         glm::uint m_vbo{0};
         Cap m_cap = Cap::Butt;
         Joint m_joint = Joint::Bevel;
-        Align m_align = Align::Right;
-        Baseline m_baseline = Baseline::Top;
+        HAlign m_align = HAlign::Left;
+        VAlign m_baseline = VAlign::Top;
         glm::mat4 m_projection{1.f};
         std::vector<Vertex> m_vertices;
     };

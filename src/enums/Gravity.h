@@ -34,7 +34,7 @@ namespace circuits {
         );
     }
 
-    inline Gravity& operator|=(Gravity& a, Gravity b) {
+    inline Gravity& operator|=(Gravity& a, const Gravity b) {
         a = a | b;
         return a;
     }

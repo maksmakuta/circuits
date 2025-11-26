@@ -5,7 +5,7 @@
 
 namespace circuits {
 
-    enum class Align : uint8_t {
+    enum class HAlign : uint8_t {
         Left,
         Center,
         Right

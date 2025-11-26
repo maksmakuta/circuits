@@ -4,7 +4,7 @@
 
 namespace circuits {
 
-    Button::Button(WidgetPtr p) : m_inner(std::move(p)) {
+    Button::Button(WidgetPtr p, ButtonCallback c) : m_inner(std::move(p)), m_callback(std::move(c)) {
         setAppearance(Appearance::Primary);
     }
 
@@ -14,15 +14,21 @@ namespace circuits {
 
         m_inner->setParent(shared_from_this());
 
-        const auto padding = getModifier().getPadding();
-        const glm::ivec2 innerMax = {
+        const auto mod = m_inner->getModifier();
+        const auto padding = mod.getPadding();
+
+        glm::ivec2 innerMax = {
             max.x - padding.left - padding.right,
             max.y - padding.top  - padding.bottom
         };
 
-        const auto mod = m_inner->getModifier();
-        const glm::ivec2 innerSize = m_inner->onMeasure(innerMax);
-        return getModifier().applySize(mod.applyPadding(innerSize), max);
+        glm::ivec2 measured = m_inner->onMeasure(innerMax);
+        measured = mod.applySize(measured, innerMax);
+        measured = mod.applyPadding(measured);
+
+        m_child_size = measured;
+
+        return getModifier().applySize(measured, max);
     }
 
     void Button::onLayout(const Rect& r) {
@@ -30,29 +36,41 @@ namespace circuits {
 
         if (!m_inner) return;
 
-        const auto padding = m_inner->getModifier().getPadding();
-        const auto gravity = m_inner->getModifier().getGravity();
+        const auto& child = m_inner;
+        const auto mod = child->getModifier();
+        const auto padding = mod.getPadding();
+        const auto gravity = mod.getGravity();
 
-        const glm::ivec2 innerMax = {
-            r.size.x - padding.left - padding.right,
-            r.size.y - padding.top  - padding.bottom
-        };
+        auto size = m_child_size;
 
-        glm::ivec2 innerSize = m_inner->onMeasure(innerMax);
+        if (mod.getParams().width.unit == SizeUnit::Fill) {
+            size.x = getRect().size.x;
+        }
+        if (mod.getParams().height.unit == SizeUnit::Fill) {
+            size.y = getRect().size.y;
+        }
 
-        glm::ivec2 offset = {
+        glm::ivec2 finalPos = {
             r.pos.x + padding.left,
             r.pos.y + padding.top
         };
 
-        if (gravity == Gravity::Center) {
-            offset.x += (innerMax.x - innerSize.x) / 2;
-            offset.y += (innerMax.y - innerSize.y) / 2;
-        } else if (gravity == Gravity::Right) {
-            offset.x += innerMax.x - innerSize.x;
-        }
+        glm::ivec2 finalSize = size;
 
-        m_inner->onLayout({offset, innerSize});
+        const int freeX = r.size.x - size.x;
+        const int freeY = r.size.y - size.y;
+
+        if (any(gravity, Gravity::HCenter))
+            finalPos.x = r.pos.x + freeX / 2 + padding.left;
+        else if (any(gravity, Gravity::Right))
+            finalPos.x = r.pos.x + freeX + padding.left;
+
+        if (any(gravity, Gravity::VCenter))
+            finalPos.y = r.pos.y + freeY / 2 + padding.top;
+        else if (any(gravity, Gravity::Bottom))
+            finalPos.y = r.pos.y + freeY + padding.top;
+
+        child->onLayout({finalPos, finalSize});
     }
 
     void Button::onDraw(Renderer& r) {

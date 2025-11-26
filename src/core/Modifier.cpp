@@ -151,8 +151,8 @@ namespace circuits {
         const auto p = getPadding();
         return {
             glm::ivec2{
-                rect.pos.x + p.left,
-                rect.pos.y + p.top
+                rect.pos.x - p.left,
+                rect.pos.y - p.top
             },
             glm::ivec2{
                 rect.size.x + p.left + p.right,

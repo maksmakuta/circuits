@@ -317,48 +317,61 @@ namespace circuits {
     void Renderer::text(const Font& font, const std::string& text, const glm::vec2& pos, const Color& c){
         setPaint(2);
         setTexture(font.getTexture());
+        glm::ivec2 cursor = pos;
 
-        glm::vec2 cursor = pos;
+        int textWidth = font.textSize(text).x;
+        int textHeight = font.getAscent() - font.getDescent();
 
-        if (m_align == Align::Center) {
-            cursor.x -= font.textSize(text).x / 2;
-        }else if (m_align == Align::Left) {
-            cursor.x -= font.textSize(text).x;
-        }
-
-        if (m_baseline == Baseline::Middle) {
-            cursor.y += font.textSize(text).y / 2;
-        } else if (m_baseline == Baseline::Bottom) {
-            cursor.y += font.textSize(text).y;
-        }
-
-        for (const char ch : text){
-            if (ch == '\n') {
+        switch (m_align) {
+            case HAlign::Left:
                 break;
-            }
+            case HAlign::Center:
+                cursor.x -= textWidth / 2;
+                break;
+            case HAlign::Right:
+                cursor.x -= textWidth;
+                break;
+        }
 
-            auto gopt = font.getGlyph(static_cast<uint32_t>(ch));
-            if (!gopt.has_value())
-                continue;
+        switch (m_baseline) {
+            case VAlign::Top:
+                cursor.y += font.getAscent();
+                break;
+            case VAlign::Middle:
+                cursor.y += font.getAscent() - textHeight/2;
+                break;
+            case VAlign::Bottom:
+                cursor.y -= font.getDescent();
+                break;
+            case VAlign::Baseline:
+                break;
+        }
 
-            const auto&[size, offset, advance, uv] = gopt.value();
+        for (char ch : text) {
+            if (ch == '\n') break;
 
-            glm::vec2 p0 = cursor + glm::vec2(offset.x, -offset.y);
+            auto gopt = font.getGlyph((uint32_t)ch);
+            if (!gopt.has_value()) continue;
+
+            const auto& [size, offset, advance, uv] = gopt.value();
+
+            // offset.y = bitmap_top
+            glm::vec2 p0 = cursor + glm::ivec2(offset.x, -offset.y);
             glm::vec2 p1 = p0 + glm::vec2(size.x, 0);
             glm::vec2 p2 = p0 + glm::vec2(0, size.y);
-            glm::vec2 p3 = p0 + size;
+            glm::vec2 p3 = p0 + glm::vec2(size.x, size.y);
 
-            m_vertices.emplace_back(p0, glm::vec2{ uv.x, uv.y }, c);
-            m_vertices.emplace_back(p1, glm::vec2{ uv.z, uv.y }, c);
-            m_vertices.emplace_back(p3, glm::vec2{ uv.z, uv.w }, c);
+            m_vertices.emplace_back(p0, glm::vec2{uv.x, uv.y}, c);
+            m_vertices.emplace_back(p1, glm::vec2{uv.z, uv.y}, c);
+            m_vertices.emplace_back(p3, glm::vec2{uv.z, uv.w}, c);
 
+            m_vertices.emplace_back(p0, glm::vec2{uv.x, uv.y}, c);
+            m_vertices.emplace_back(p3, glm::vec2{uv.z, uv.w}, c);
+            m_vertices.emplace_back(p2, glm::vec2{uv.x, uv.w}, c);
 
-            m_vertices.emplace_back(p0, glm::vec2{ uv.x, uv.y }, c);
-            m_vertices.emplace_back(p3, glm::vec2{ uv.z, uv.w }, c);
-            m_vertices.emplace_back(p2, glm::vec2{ uv.x, uv.w }, c);
-
-            cursor.x += advance;
+            cursor.x += (int)advance;
         }
+
     }
 
 
@@ -370,11 +383,11 @@ namespace circuits {
         m_joint = j;
     }
 
-    void Renderer::setAlign(const Align& a) {
+    void Renderer::setAlign(const HAlign& a) {
         m_align = a;
     }
 
-    void Renderer::setBaseline(const Baseline& b) {
+    void Renderer::setBaseline(const VAlign& b) {
         m_baseline = b;
     }
 

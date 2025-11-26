@@ -1,5 +1,6 @@
 #include "Font.h"
 
+#include <cmath>
 #include <iostream>
 
 #include "glad/gl.h"
@@ -11,7 +12,7 @@ namespace circuits {
 
     void Font::load(const std::string& file, const int size) {
         unload();
-        m_size = size;
+        m_font_data[0] = size;
 
         FT_Library ft;
         if (FT_Init_FreeType(&ft) != 0) {
@@ -36,7 +37,7 @@ namespace circuits {
 
     void Font::loadDefault(const int size) {
         unload();
-        m_size = size;
+        m_font_data[0] = size;
 
         FT_Library ft;
         if (FT_Init_FreeType(&ft) != 0) {
@@ -62,7 +63,7 @@ namespace circuits {
     void Font::unload() {
         m_texture.unload();
         m_glyphs.clear();
-        m_size = 0;
+        m_font_data = glm::ivec4{0};
     }
 
     Texture Font::getTexture() const {
@@ -77,6 +78,10 @@ namespace circuits {
     }
 
     void Font::build(const FT_Face& face) {
+        m_font_data[1] = static_cast<int>(face->size->metrics.ascender  >> 6);
+        m_font_data[2] = static_cast<int>(face->size->metrics.descender >> 6);
+        m_font_data[3] = static_cast<int>(face->size->metrics.height    >> 6);
+
         std::vector<uint8_t> atlas(atlas_size.x * atlas_size.y, 0);
 
         glm::ivec2 pos{0};
@@ -128,19 +133,31 @@ namespace circuits {
     }
 
     int Font::getSize() const {
-        return m_size;
+        return m_font_data[0];
+    }
+
+    int Font::getAscent() const{
+        return m_font_data[1];
+    }
+
+    int Font::getDescent() const{
+        return m_font_data[2];
+    }
+
+    int Font::getLineHeight() const{
+        return m_font_data[3];
     }
 
     glm::ivec2 Font::textSize(const std::string& text) const {
-        auto size = glm::ivec2(0);
-        for (const char c : text) {
-            if (c == '\n') break;
-            if (const auto g = getGlyph(static_cast<uint32_t>(c))) {
-                size.y = std::max(static_cast<int>(g->size.y),size.y);
-                size.x += static_cast<int>(g->advance);
-            }
+        int width = 0;
+
+        for (char c : text) {
+            auto it = m_glyphs.find(c);
+            if (it == m_glyphs.end()) continue;
+            width += static_cast<int>(it->second.advance);
         }
-        return size;
+
+        return {width, getAscent() - getDescent()};
     }
 
 }
