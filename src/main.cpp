@@ -1,5 +1,5 @@
 #include "simulator/Application.h"
 
 int main() {
-    return circuits::Application().run();
+    return std::make_shared<circuits::Application>()->run();
 }

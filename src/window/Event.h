@@ -19,13 +19,7 @@ namespace circuits {
         MouseUp,
         MouseWheel,
 
-        // non SDL events
-        SwitchTheme,
-
-        StartInput,
-        EndInput,
-
-        ChangeCursor
+        Recompose //event for UI
     };
 
     struct Mods {
@@ -59,10 +53,7 @@ namespace circuits {
         static Event MouseUp(unsigned button, float x, float y, Mods mods = {});
         static Event MouseWheel(float dx, float dy, Mods mods = {});
 
-        static Event SwitchTheme();
-        static Event StartInput();
-        static Event EndInput();
-        static Event ChangeCursor(const Cursor&);
+        static Event Recompose();
     };
 
     void pushEvent(Event ev);

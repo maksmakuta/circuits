@@ -3,21 +3,27 @@
 
 #include <string>
 
+#include "core/IContext.h"
 #include "window/Window.h"
 
 namespace circuits {
 
-    class Application {
+    class Application final : public IContext, public std::enable_shared_from_this<IContext>{
     public:
         Application();
 
         int run();
-    private:
-        void pollEvents();
-        void updateDelta();
 
-        bool m_text_input{false};
-        std::string m_text;
+        Theme getTheme() override;
+        ThemeName getThemeName() override;
+        void switchTheme() override;
+        void setCursor(Cursor) override;
+        void go(const std::shared_ptr<IScreen> &) override;
+        void goBack() override;
+        glm::ivec2 screenSize() override;
+
+    private:
+
         Window m_window;
     };
 

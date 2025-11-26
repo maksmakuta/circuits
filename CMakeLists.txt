@@ -15,6 +15,7 @@ add_subdirectory(libs/OpenSans_ettf)
 
 add_executable(circuits
 
+        src/core/IContext.h
         src/core/IScreen.h
         src/core/IViewmodel.h
         src/core/IWidget.h
@@ -52,6 +53,8 @@ add_executable(circuits
 
         src/manager/ThemeManager.cpp
         src/manager/ThemeManager.h
+
+        src/rx/Observable.h
 
         src/simulator/screen/MainScreen.cpp
         src/simulator/screen/MainScreen.h

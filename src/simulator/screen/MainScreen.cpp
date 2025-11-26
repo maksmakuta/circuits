@@ -35,19 +35,6 @@ namespace circuits {
         if (e.type == EventType::WindowResize) {
             onResize({e.window.width, e.window.height});
         }
-        if (e.type == EventType::SwitchTheme) {
-            const auto current = ThemeManager::instance().getSystemTheme();
-            if (current == ThemeName::Dark) {
-                ThemeManager::instance().setTheme(Theme::getLightTheme());
-            }else{
-                ThemeManager::instance().setTheme(Theme::getDarkTheme());
-            }
-        }
-        if (e.type == EventType::KeyDown) {
-            if (e.key.key == SDLK_P && e.mods.ctrl) {
-                pushEvent(Event::SwitchTheme());
-            }
-        }
     }
 
     void MainScreen::onResize(const glm::ivec2& size) const {

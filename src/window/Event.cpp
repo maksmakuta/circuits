@@ -65,28 +65,9 @@ namespace circuits {
         return e;
     }
 
-    Event Event::SwitchTheme(){
+    Event Event::Recompose(){
         Event e;
-        e.type = EventType::SwitchTheme;
-        return e;
-    }
-
-    Event Event::StartInput(){
-        Event e;
-        e.type = EventType::StartInput;
-        return e;
-    }
-
-    Event Event::EndInput(){
-        Event e;
-        e.type = EventType::EndInput;
-        return e;
-    }
-
-    Event Event::ChangeCursor(const Cursor& c){
-        Event e;
-        e.type = EventType::ChangeCursor;
-        e.cursor.cursor = c;
+        e.type = EventType::Recompose;
         return e;
     }
 
