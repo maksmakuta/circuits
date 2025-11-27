@@ -38,6 +38,9 @@ namespace circuits {
     }
 
     void MainScreen::onUpdate(const float dt){
+        if (m_need_recompose) {
+            onResize(getContext()->screenSize());
+        }
         m_ui->onUpdate(dt);
     }
 
@@ -47,7 +50,7 @@ namespace circuits {
             onResize({e.window.width, e.window.height});
         }
         if (e.type == EventType::Recompose) {
-            onResize(getContext()->screenSize());
+            m_need_recompose = true;
         }
     }
 
