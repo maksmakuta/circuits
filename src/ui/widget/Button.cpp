@@ -111,4 +111,20 @@ namespace circuits {
         }
     }
 
+    void Button::setInnerWidget(WidgetPtr widget) {
+        m_inner = std::move(widget);
+    }
+
+    void Button::setCallback(ButtonCallback callback) {
+        m_callback = std::move(callback);
+    }
+
+    WidgetPtr Button::getInnerWidget() const {
+        return m_inner;
+    }
+
+    ButtonCallback Button::getCallback() const {
+        return m_callback;
+    }
+
 }

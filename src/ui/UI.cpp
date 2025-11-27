@@ -25,11 +25,11 @@ namespace circuits {
         return new_widget<Button>(mod, label(text, FontRole::Label, Modifier().center().padding(8)),c);
     }
 
-    std::shared_ptr<Input> input(const std::string& text, const Modifier &mod) {
+    std::shared_ptr<Input> input(Observable<std::string>& text, const Modifier &mod) {
         return new_widget<Input>(mod, text);
     }
 
-    std::shared_ptr<Toggle> toggle(const bool state, const Modifier &mod) {
+    std::shared_ptr<Toggle> toggle(Observable<bool>& state, const Modifier &mod) {
         return new_widget<Toggle>(mod, state);
     }
 
@@ -55,8 +55,12 @@ namespace circuits {
     WidgetPtr grid(const WidgetList& list, Modifier mod);
     WidgetPtr box(const WidgetList& list, Modifier mod);
 
-    std::shared_ptr<RxLabel>  rxlabel(Observable<std::string>& text, const FontRole& r, const Modifier &mod) {
-        return new_widget<RxLabel>(mod, text, r);
+    std::shared_ptr<Label>  label(Observable<std::string>& text, const FontRole& r, const Modifier &mod) {
+        return new_widget<Label>(mod, text, r);
+    }
+
+    std::shared_ptr<Label>  label(Observable<std::string>& text, const Modifier &mod) {
+        return new_widget<Label>(mod, text, FontRole::Body);
     }
 
 }

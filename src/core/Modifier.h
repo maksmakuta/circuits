@@ -71,14 +71,16 @@ namespace circuits {
 
     private:
         Gravity m_gravity = Gravity::None;
-        SizeParams m_params;
-        Padding m_padding;
+        SizeParams m_params{};
+        Padding m_padding{};
     };
 
     Theme currentTheme();
     ThemeName currentThemeName();
     void switchTheme();
     void setTheme(Theme);
+
+    inline Modifier mod(){ return {}; }
 
 }
 

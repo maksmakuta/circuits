@@ -4,8 +4,11 @@
 
 namespace circuits {
 
-    Input::Input(std::string t) : m_text(std::move(t)) {
+    Input::Input(Observable<std::string> &text) : m_text(text.getValue()){
         setAppearance(Appearance::SurfaceVariant);
+        text.observe([this](const std::string& val) {
+            setText(val);
+        });
     }
 
     glm::ivec2 Input::onMeasure(const glm::ivec2 &max) {
@@ -27,6 +30,14 @@ namespace circuits {
 
     void Input::onEvent(const Event &e) {
         IWidget::onEvent(e);
+    }
+
+    void Input::setText(const std::string& text) {
+        m_text = text;
+    }
+
+    std::string Input::getText() const {
+        return m_text;
     }
 
 }

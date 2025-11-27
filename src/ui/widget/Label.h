@@ -3,11 +3,13 @@
 
 #include "core/IWidget.h"
 #include "enums/FontRole.h"
+#include "rx/Observable.h"
 
 namespace circuits {
 
     class Label : public IWidget{
     public:
+        explicit Label(Observable<std::string>&, FontRole role = FontRole::Body);
         explicit Label(std::string text = "", FontRole r = FontRole::Body);
 
         glm::ivec2 onMeasure(const glm::ivec2 &max) override;

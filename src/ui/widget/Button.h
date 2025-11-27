@@ -16,6 +16,13 @@ namespace circuits {
         void onDraw(Renderer &) override;
         void onUpdate(float) override;
         void onEvent(const Event &) override;
+
+        void setInnerWidget(WidgetPtr widget);
+        void setCallback(ButtonCallback callback);
+
+        WidgetPtr getInnerWidget() const;
+        ButtonCallback getCallback() const;
+
     private:
         glm::ivec2 m_child_size{0};
         WidgetPtr m_inner;

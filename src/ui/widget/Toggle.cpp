@@ -2,7 +2,11 @@
 
 namespace circuits {
 
-    Toggle::Toggle(const bool state) : m_switch(state) {}
+    Toggle::Toggle(Observable<bool>& state) : m_switch(state.getValue()) {
+        state.observe([this](const bool val) {
+            setValue(val);
+        });
+    }
 
     glm::ivec2 Toggle::onMeasure(const glm::ivec2 &max) {
         return glm::ivec2{52,30};
@@ -38,4 +42,17 @@ namespace circuits {
             m_switch = !m_switch;
         }
     }
+
+    void Toggle::setValue(const bool value) {
+        m_switch = value;
+    }
+
+    bool Toggle::getValue() const {
+        return m_switch;
+    }
+
+    void Toggle::toggle() {
+        setValue(!m_switch);
+    }
+
 }

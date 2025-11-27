@@ -86,12 +86,12 @@ namespace circuits {
     }
 
     Modifier& Modifier::gravity(const Gravity g) {
-        m_gravity = g;
+        m_gravity |= g;
         return *this;
     }
 
     Modifier& Modifier::center() {
-        m_gravity = Gravity::Center;
+        m_gravity |= Gravity::Center;
         return *this;
     }
 

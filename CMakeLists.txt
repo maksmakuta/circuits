@@ -23,6 +23,8 @@ add_executable(circuits
         src/core/Modifier.h
         src/core/Rect.cpp
         src/core/Rect.h
+        src/core/UIScreen.cpp
+        src/core/UIScreen.h
 
         src/enums/Appearance.h
         src/enums/Cap.h
@@ -89,10 +91,6 @@ add_executable(circuits
         src/window/Window.h
 
         src/main.cpp
-        src/ui/widget/RxLabel.cpp
-        src/ui/widget/RxLabel.h
-        src/core/UIScreen.cpp
-        src/core/UIScreen.h
 )
 
 target_include_directories(circuits PUBLIC src)

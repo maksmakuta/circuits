@@ -30,6 +30,12 @@ namespace circuits {
         }
     }
 
+    Label::Label(Observable<std::string>& val, const FontRole role) : Label(val.getValue(),role){
+        val.observe([this](const std::string& v) {
+            setText(v);
+        });
+    }
+
     Label::Label(std::string text, const FontRole r) : m_text(std::move(text)), m_role(r) {}
 
     glm::ivec2 Label::onMeasure(const glm::ivec2 &max){

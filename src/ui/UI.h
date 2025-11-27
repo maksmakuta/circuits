@@ -9,19 +9,20 @@
 #include "widget/Image.h"
 #include "widget/Input.h"
 #include "widget/Label.h"
-#include "widget/RxLabel.h"
 #include "widget/Toggle.h"
 
 namespace circuits {
 
     std::shared_ptr<Label>  label(const std::string& text, const FontRole& r = FontRole::Body, const Modifier &mod = {});
+    std::shared_ptr<Label>  label(Observable<std::string>& text, const FontRole& r = FontRole::Body, const Modifier &mod = {});
     std::shared_ptr<Label>  label(const std::string& text, const Modifier &mod = {});
+    std::shared_ptr<Label>  label(Observable<std::string>& text, const Modifier &mod = {});
 
     std::shared_ptr<Button> button(const WidgetPtr& inner, const ButtonCallback& = {}, const Modifier &mod = {});
     std::shared_ptr<Button> button(const std::string &text, const ButtonCallback& = {}, const Modifier &mod = {});
 
-    std::shared_ptr<Input>  input(const std::string& text, const Modifier& mod = {});
-    std::shared_ptr<Toggle> toggle(bool state, const Modifier &mod = {});
+    std::shared_ptr<Input>  input(Observable<std::string>& text, const Modifier& mod = {});
+    std::shared_ptr<Toggle> toggle(Observable<bool>& state, const Modifier &mod = {});
     std::shared_ptr<Image>  image(const Texture& tex, const Modifier &mod = {});
 
     std::shared_ptr<Card>   card(const WidgetPtr& inner, const Modifier &mod = {});
@@ -34,7 +35,6 @@ namespace circuits {
     WidgetPtr box(const WidgetList& list, Modifier mod = {});
 
 
-    std::shared_ptr<RxLabel>  rxlabel(Observable<std::string>& text, const FontRole& r = FontRole::Body, const Modifier &mod = {});
 
 
 }

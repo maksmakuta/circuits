@@ -4,6 +4,8 @@
 #include <functional>
 #include <vector>
 
+#include "window/Event.h"
+
 namespace circuits {
 
     template<typename T>
@@ -19,12 +21,18 @@ namespace circuits {
             m_observers.clear();
         }
 
+        Observable<T>& operator = (const T& value) {
+            setValue(value);
+            return *this;
+        }
+
         void setValue(const T& value) {
             if (m_value != value) {
                 m_value = value;
                 for (const auto& observer : m_observers) {
                     observer(m_value);
                 }
+                pushEvent(Event::Recompose());
             }
         }
 
