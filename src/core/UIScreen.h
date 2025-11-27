@@ -13,7 +13,7 @@ namespace circuits {
         explicit UIScreen(const std::weak_ptr<IContext> &ctx);
 
         virtual WidgetPtr onUI() = 0;
-        virtual void onResize(const WidgetPtr&, const glm::ivec2&) = 0;
+        virtual void onResize(const WidgetPtr&, const glm::ivec2&);
 
         void onInit() override;
         void onDeinit() override;

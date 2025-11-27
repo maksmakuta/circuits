@@ -4,25 +4,17 @@
 #include <memory>
 
 #include "MainVM.h"
-#include "core/IScreen.h"
-#include "core/IWidget.h"
+#include "core/UIScreen.h"
 
 namespace circuits {
 
-    class MainScreen final : public IScreen {
+    class MainScreen final : public UIScreen {
     public:
         explicit MainScreen(const std::weak_ptr<IContext> &ctx);
 
-        void onInit() override;
-        void onDeinit() override;
-        void onDraw(Renderer &) override;
-        void onUpdate(float) override;
-        void onEvent(const Event &) override;
-    private:
-        void onResize(const glm::ivec2& size) const;
-        MainVM& viewmodel();
+        WidgetPtr onUI() override;
 
-        WidgetPtr m_ui;
+    private:
         MainVM m_viewmodel;
     };
 
