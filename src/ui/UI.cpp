@@ -33,6 +33,10 @@ namespace circuits {
         return new_widget<Toggle>(mod, state);
     }
 
+    std::shared_ptr<Toggle> toggle(bool state, const Modifier &mod) {
+        return new_widget<Toggle>(mod, state);
+    }
+
     std::shared_ptr<Image> image(const Texture& tex, const Modifier &mod) {
         return new_widget<Image>(mod, tex);
     }

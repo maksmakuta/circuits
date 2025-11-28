@@ -42,7 +42,8 @@ namespace circuits {
                     false,
                     mod().padding(8).center()
                 )
-            })
+            }),
+            toggle(false, mod().padding(8).center())
         }),
         CardType::Outlined,
         mod().center()

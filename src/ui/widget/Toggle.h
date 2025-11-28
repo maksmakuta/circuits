@@ -8,6 +8,7 @@ namespace circuits {
 
     class Toggle final : public IWidget{
     public:
+        explicit Toggle(bool state);
         explicit Toggle(Observable<bool>& state);
 
         glm::ivec2 onMeasure(const glm::ivec2 &max) override;
