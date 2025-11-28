@@ -2,10 +2,12 @@
 
 #include <utility>
 
+#include "utils/ColorUtils.h"
+
 namespace circuits {
 
-    Card::Card(WidgetPtr w) : m_inner(std::move(w)) {
-        setAppearance(Appearance::Surface);
+    Card::Card(WidgetPtr w, const CardType t) : m_type(t), m_inner(std::move(w)) {
+        setAppearance(t == CardType::Filled ? Appearance::SurfaceVariant : Appearance::Surface);
     }
 
     glm::ivec2 Card::onMeasure(const glm::ivec2 &max) {
@@ -60,7 +62,10 @@ namespace circuits {
     void Card::onDraw(Renderer& r) {
         const auto theme = currentTheme();
         r.rect(getRect().pos,getRect().size, theme.shape.cornerMedium);
-        r.fill(theme.palette.surface);
+        r.fill(ColorUtils::resolveColor(getAppearance(),state()));
+        if (m_type == CardType::Outlined) {
+            r.stroke(theme.palette.outline,1);
+        }
 
         if (m_inner) {
             m_inner->onDraw(r);

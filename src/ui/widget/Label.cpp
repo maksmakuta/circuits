@@ -54,7 +54,10 @@ namespace circuits {
     }
 
     void Label::setText(std::string text) {
-        m_text = std::move(text);
+        if (m_text != text) {
+            m_text = std::move(text);
+            recompose();
+        }
     }
 
     void Label::setFontRole(const FontRole value) {

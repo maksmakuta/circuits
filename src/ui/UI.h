@@ -6,6 +6,7 @@
 
 #include "widget/Button.h"
 #include "widget/Card.h"
+#include "widget/Checkbox.h"
 #include "widget/Image.h"
 #include "widget/Input.h"
 #include "widget/Label.h"
@@ -26,8 +27,10 @@ namespace circuits {
     std::shared_ptr<Image>  image(const Texture& tex, const Modifier &mod = {});
 
     std::shared_ptr<Card>   card(const WidgetPtr& inner, const Modifier &mod = {});
-    WidgetPtr tooltip(WidgetPtr inner, Modifier mod = {});
-    WidgetPtr notification(std::string message, Modifier mod = {});
+    std::shared_ptr<Card>   card(const WidgetPtr& inner, CardType type = CardType::Filled, const Modifier &mod = {});
+
+    std::shared_ptr<Checkbox>  checkbox(bool val, const Modifier &mod = {});
+    std::shared_ptr<Checkbox>  checkbox(Observable<bool>& val, const Modifier &mod = {});
 
     std::shared_ptr<Column> column(const WidgetList& list, const Modifier &mod = {});
     std::shared_ptr<Row> row(const WidgetList& list, const Modifier &mod = {});

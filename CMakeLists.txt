@@ -18,6 +18,7 @@ add_executable(circuits
         src/core/IContext.h
         src/core/IScreen.h
         src/core/IViewmodel.h
+        src/core/IWidget.cpp
         src/core/IWidget.h
         src/core/Modifier.cpp
         src/core/Modifier.h
@@ -71,6 +72,8 @@ add_executable(circuits
         src/ui/widget/Button.h
         src/ui/widget/Card.cpp
         src/ui/widget/Card.h
+        src/ui/widget/Checkbox.cpp
+        src/ui/widget/Checkbox.h
         src/ui/widget/Image.cpp
         src/ui/widget/Image.h
         src/ui/widget/Input.cpp

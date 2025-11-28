@@ -4,8 +4,6 @@
 #include <functional>
 #include <vector>
 
-#include "window/Event.h"
-
 namespace circuits {
 
     template<typename T>
@@ -32,7 +30,6 @@ namespace circuits {
                 for (const auto& observer : m_observers) {
                     observer(m_value);
                 }
-                pushEvent(Event::Recompose());
             }
         }
 

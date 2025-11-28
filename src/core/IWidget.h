@@ -28,51 +28,24 @@ namespace circuits {
         virtual void onLayout(const Rect& r) {
             setRect(r);
         }
+
         virtual void onDraw(Renderer&) = 0;
         virtual void onUpdate(float){}
-
         virtual void onEvent(const Event& e) {}
 
-        void setModifier(const Modifier& m) {
-            m_modifier = m;
-        }
+        void setModifier(const Modifier&);
+        void setRect(const Rect&);
+        void setState(State);
+        void setAppearance(Appearance);
+        void setParent(const WidgetPtr&);
 
-        void setRect(const Rect& r) {
-            m_rect = r;
-        }
+        static void recompose();
 
-        void setState(const State s) {
-            if (m_state == s) return;
-            m_state = s;
-        }
-
-        void setAppearance(const Appearance a) {
-            m_appearance = a;
-        }
-
-        void setParent(const WidgetPtr& p) {
-            m_parent = p;
-        }
-
-        [[nodiscard]] Modifier getModifier() const {
-            return m_modifier;
-        }
-
-        [[nodiscard]] Rect getRect() const {
-            return m_rect;
-        }
-
-        [[nodiscard]] State state() const {
-            return m_state;
-        }
-
-        [[nodiscard]] Appearance getAppearance() const {
-            return m_appearance;
-        }
-
-        [[nodiscard]] WidgetPtr getParent() const {
-            return m_parent.lock();
-        }
+        [[nodiscard]] Modifier getModifier() const;
+        [[nodiscard]] Rect getRect() const;
+        [[nodiscard]] State state() const;
+        [[nodiscard]] Appearance getAppearance() const;
+        [[nodiscard]] WidgetPtr getParent() const;
 
     private:
         Rect m_rect;

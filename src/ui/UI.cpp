@@ -41,8 +41,17 @@ namespace circuits {
         return new_widget<Card>(mod, inner);
     }
 
-    WidgetPtr tooltip(WidgetPtr inner, Modifier mod);
-    WidgetPtr notification(std::string message, Modifier mod);
+    std::shared_ptr<Card> card(const WidgetPtr& inner, const CardType type, const Modifier &mod) {
+        return new_widget<Card>(mod, inner, type);
+    }
+
+    std::shared_ptr<Checkbox>  checkbox(bool val, const Modifier &mod) {
+        return new_widget<Checkbox>(mod, val);
+    }
+
+    std::shared_ptr<Checkbox>  checkbox(Observable<bool>& val, const Modifier &mod) {
+        return new_widget<Checkbox>(mod, val);
+    }
 
     std::shared_ptr<Column> column(const WidgetList& list, const Modifier &mod) {
         return new_widget<Column>(mod, list);

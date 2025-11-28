@@ -7,7 +7,7 @@ namespace circuits {
     MainScreen::MainScreen(const std::weak_ptr<IContext> &ctx) : UIScreen(ctx) {}
 
     WidgetPtr MainScreen::onUI() {
-        return column({
+        return card(column({
             label(
                 m_viewmodel.counter_str,
                 FontRole::Body,
@@ -32,8 +32,21 @@ namespace circuits {
                             .size(glm::ivec2{48})
                             .padding(4,8)
                 ),
-            }, mod().padding(8).center())
-        }, mod().center());
+            }, mod().padding(8).center()),
+            row({
+                checkbox(
+                    true,
+                    mod().padding(8).center()
+                ),
+                checkbox(
+                    false,
+                    mod().padding(8).center()
+                )
+            })
+        }),
+        CardType::Outlined,
+        mod().center()
+        );
     }
 
 }

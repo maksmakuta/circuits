@@ -17,18 +17,13 @@
         - [X] Image
         - [X] Input (no text input, skipped)
         - [X] Toggle
-        - [ ] CheckBox
-        - [ ] Radio:
-            - [ ] Group
-            - [ ] Button
+        - [X] CheckBox
+        - [ ] RadioGroup
     - [ ] Layouts:
         - [X] Column
         - [X] Row
         - [ ] Grid
         - [ ] Box
-    - [ ] Other:
-        - [ ] Tooltip
-        - [ ] Notification
 - [ ] Reactive support (0.2.x - 0.3.x, in progress)
   - [X] Observable
 - [ ] Component subsystem (0.3.x, planned)
