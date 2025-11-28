@@ -5,7 +5,7 @@
     - [X] Fill and stroke Renderer API
     - [X] Textures and images API
     - [X] Text rendering API
-- [ ] Widget subsystem (0.2.x, in progress)
+- [ ] Widget subsystem (0.2.x - 0.3.x, in progress)
     - [X] IWidget interface
     - [X] Theming
         - [X] Light/Dark themes
@@ -15,17 +15,51 @@
         - [X] Label
         - [X] Button
         - [X] Image
-        - [X] Input (no text input, skipped)
+        - [X] Input (need to rewrite)
         - [X] Toggle
         - [X] CheckBox
-        - [ ] RadioGroup
+        - [ ] RadioGroup (do I need it?)
     - [ ] Layouts:
         - [X] Column
         - [X] Row
         - [ ] Grid
         - [ ] Box
-- [ ] Reactive support (0.2.x - 0.3.x, in progress)
+- [X] Reactive support (0.2.x - 0.3.x, in progress)
   - [X] Observable
 - [ ] Component subsystem (0.3.x, planned)
+  - [ ] Gates
+    - [ ] NOT
+    - [ ] AND
+    - [ ] OR
+    - [ ] XOR
+  - [ ] Sequential / Memory Components
+    - [ ] D Flip-Flop
+    - [ ] JK Flip-Flop
+    - [ ] T Flip-Flop
+    - [ ] SR Latch
+    - [ ] Memory Cell / RAM (bit or byte)
+    - [ ] Registers / Counters
+  - [ ] Others
+    - [ ] Multiplexer
+    - [ ] Demultiplexer
+    - [ ] Encoder
+    - [ ] Decoder
+    - [ ] Comparator
+  - [ ] ALU stuff
+    - [ ] Adder
+    - [ ] Subtractor
+    - [ ] Counter
+  - [ ] Displays
+    - [ ] 7-Segment Display
+    - [ ] Binary Display (Black & White LEDs)
+    - [ ] LEDs
+  - [ ] Inputs
+    - [ ] Toggle Switch (On/Off)
+    - [ ] Button
+    - [ ] Clock 
+  - [ ] Connections
+    - [ ] Wire creation (click-drag from output to input)
+    - [ ] Wire deletion / editing
+    - [ ] Snap-to-grid support
 - [ ] App UI (0.3.x - 0.4.x, planned)
 - [ ] Format for storing circuits (0.3.x - 0.4.x, planned)

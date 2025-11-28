@@ -52,6 +52,11 @@ namespace circuits {
     void UIScreen::onDeinit(){}
 
     void UIScreen::onDraw(Renderer& r){
+        if (m_recompose) {
+            onResize(m_ui,getContext()->screenSize());
+            m_recompose = false;
+        }
+
         clear(currentTheme().palette.background);
         m_ui->onDraw(r);
     }
@@ -61,11 +66,6 @@ namespace circuits {
     }
 
     void UIScreen::onEvent(const Event& e){
-        if (m_recompose) {
-            onResize(m_ui,getContext()->screenSize());
-            m_recompose = false;
-        }
-
         if (e.type == EventType::WindowResize) {
             onResize(m_ui,{e.window.width,e.window.height});
         }else if (e.type == EventType::Recompose) {

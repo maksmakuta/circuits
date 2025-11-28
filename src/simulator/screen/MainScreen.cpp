@@ -32,22 +32,8 @@ namespace circuits {
                             .size(glm::ivec2{48})
                             .padding(4,8)
                 ),
-            }, mod().padding(8).center()),
-            row({
-                checkbox(
-                    true,
-                    mod().padding(8).center()
-                ),
-                checkbox(
-                    false,
-                    mod().padding(8).center()
-                )
-            }),
-            toggle(false, mod().padding(8).center())
-        }),
-        CardType::Outlined,
-        mod().center()
-        );
+            }, mod().padding(8).center())
+        }),mod().center() );
     }
 
 }

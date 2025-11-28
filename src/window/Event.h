@@ -19,7 +19,7 @@ namespace circuits {
         MouseUp,
         MouseWheel,
 
-        Recompose //event for UI
+        Recompose,
     };
 
     struct Mods {
