@@ -24,6 +24,8 @@ namespace circuits {
         ButtonCallback getCallback() const;
 
     private:
+        void onButtonEvent(const Event & event);
+
         glm::ivec2 m_child_size{0};
         WidgetPtr m_inner;
         ButtonCallback m_callback;

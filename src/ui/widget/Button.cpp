@@ -3,6 +3,8 @@
 #include <utility>
 #include <SDL3/SDL_mouse.h>
 
+#include "utils/ColorUtils.h"
+
 namespace circuits {
 
     Button::Button(WidgetPtr p, ButtonCallback c) : m_inner(std::move(p)), m_callback(std::move(c)) {
@@ -78,15 +80,8 @@ namespace circuits {
         const auto theme = currentTheme();
         const auto& [pos, size] = getRect();
         r.rect(pos,size,theme.shape.cornerMedium);
+        r.fill(ColorUtils::resolveColor(getAppearance(),state()));
 
-        if (state() == State::Hover) {
-            const auto col = theme.palette.primary.asVec3() - 0.1f;
-            r.fill(Color(col));
-        }else if (state() == State::Active) {
-            r.fill(theme.palette.secondary);
-        } else {
-            r.fill(theme.palette.primary);
-        }
         if (m_inner) {
             m_inner->onDraw(r);
         }
@@ -98,13 +93,55 @@ namespace circuits {
         }
     }
 
-    void Button::onEvent(const Event& e) {
-        if (e.type == EventType::MouseDown) {
-            const auto pos = glm::ivec2(e.mouseButton.x, e.mouseButton.y);
-            if (e.mouseButton.button == SDL_BUTTON_LEFT && getRect().contains(pos) && m_callback) {
-                m_callback();
-            }
+    void Button::onButtonEvent(const Event& e) {
+        if (state() == State::Disabled)
+            return;
+
+        const Rect rect = getRect();
+        const glm::ivec2 mousePos = e.type == EventType::MouseMove
+            ? glm::ivec2{e.mouseMove.x, e.mouseMove.y}
+        : glm::ivec2{e.mouseButton.x, e.mouseButton.y};
+
+        const bool inside = rect.contains(mousePos);
+
+        switch (e.type) {
+
+            case EventType::MouseMove: {
+                if (inside) {
+                    if (state() != State::Pressed && state() != State::Hovered)
+                        setState(State::Hovered);
+                } else {
+                    if (state() != State::Enabled)
+                        setState(State::Enabled);
+                }
+            } break;
+
+            case EventType::MouseDown: {
+                if (inside && e.mouseButton.button == SDL_BUTTON_LEFT) {
+                    if (state() != State::Pressed)
+                        setState(State::Pressed);
+                }
+            } break;
+
+            case EventType::MouseUp: {
+                if (state() == State::Pressed) {
+                    if (inside) {
+                        setState(State::Hovered);
+                        if (m_callback)
+                            m_callback();
+                    } else {
+                        setState(State::Enabled);
+                    }
+                }
+            } break;
+
+            default:
+                break;
         }
+    }
+
+    void Button::onEvent(const Event& e) {
+        onButtonEvent(e);
 
         if (m_inner) {
             m_inner->onEvent(e);

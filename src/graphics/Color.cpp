@@ -1,5 +1,7 @@
 #include "Color.h"
 
+#include <glm/common.hpp>
+
 namespace circuits {
 
     Color::Color(const glm::vec3& color) : m_color(color, 1.f) {}
@@ -35,4 +37,17 @@ namespace circuits {
         return c.a << 24 | c.r << 16 | c.g << 8 | c.b;
     }
 
+    Color Color::withAlpha(const float a) const {
+        return Color(glm::vec4{asVec3(), a});
+    }
+
+    Color Color::blend(const Color &base, const Color &overlay) {
+        const float oa = overlay.asVec4().a;
+        return Color(
+            glm::vec4{
+                glm::mix(base.asVec3(), overlay.asVec3(), oa),
+                1.0f
+            }
+        );
+    }
 }

@@ -6,10 +6,10 @@
 namespace circuits {
 
     enum class State : uint8_t {
-        Normal,
-        Hover,
-        Active,
-        Disable
+        Enabled,
+        Disabled,
+        Hovered,
+        Pressed
     };
 
 }

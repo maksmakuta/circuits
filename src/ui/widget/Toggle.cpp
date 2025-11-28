@@ -38,7 +38,7 @@ namespace circuits {
 
     void Toggle::onEvent(const Event &e) {
         IWidget::onEvent(e);
-        if (state() == State::Active) {
+        if (state() == State::Pressed) {
             m_switch = !m_switch;
         }
     }

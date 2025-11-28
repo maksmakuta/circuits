@@ -78,7 +78,7 @@ namespace circuits {
         Rect m_rect;
         std::weak_ptr<IWidget> m_parent;
         Modifier m_modifier;
-        State m_state = State::Normal;
+        State m_state = State::Enabled;
         Appearance m_appearance = Appearance::Normal;
     };
 

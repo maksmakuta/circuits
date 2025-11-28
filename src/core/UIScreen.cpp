@@ -1,5 +1,4 @@
 #include "UIScreen.h"
-
 #include "IContext.h"
 
 namespace circuits {
@@ -58,14 +57,15 @@ namespace circuits {
     }
 
     void UIScreen::onUpdate(const float dt){
-        if (m_recompose) {
-            onResize(m_ui,getContext()->screenSize());
-            m_recompose = false;
-        }
         m_ui->onUpdate(dt);
     }
 
     void UIScreen::onEvent(const Event& e){
+        if (m_recompose) {
+            onResize(m_ui,getContext()->screenSize());
+            m_recompose = false;
+        }
+
         if (e.type == EventType::WindowResize) {
             onResize(m_ui,{e.window.width,e.window.height});
         }else if (e.type == EventType::Recompose) {

@@ -85,6 +85,9 @@ add_executable(circuits
         src/ui/UI.cpp
         src/ui/UI.h
 
+        src/utils/ColorUtils.cpp
+        src/utils/ColorUtils.h
+
         src/window/Event.cpp
         src/window/Event.h
         src/window/Window.cpp

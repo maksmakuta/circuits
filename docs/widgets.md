@@ -172,10 +172,10 @@ Every widget stores two concepts:
 
 A runtime interaction flag:
 
-* `State::Normal`
-* `State::Hover`
-* `State::Active`
-* `State::Disable`
+* `State::Enabled`
+* `State::Disabled`
+* `State::Hovered`
+* `State::Pressed`
 
 Used by rendering logic to pick colors, shadows, animations.
 

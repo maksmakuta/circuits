@@ -9,23 +9,18 @@ namespace circuits {
 
     struct Palette {
         Color primary;
-        Color onPrimary;
-
         Color secondary;
-        Color onSecondary;
-
         Color surface;
-        Color onSurface;
-
         Color surfaceVariant;
-        Color onSurfaceVariant;
-
+        Color background;
+        Color error;
         Color outline;
 
-        Color background;
+        Color onPrimary;
+        Color onSecondary;
+        Color onSurface;
+        Color onSurfaceVariant;
         Color onBackground;
-
-        Color error;
         Color onError;
     };
 
@@ -38,6 +33,12 @@ namespace circuits {
         float borderRadius;
     };
 
+    struct StateLayer {
+        float hoverOpacity  = 0.12f;
+        float pressOpacity  = 0.20f;
+        float disabledAlpha = 0.38f;
+    };
+
     struct Typography {
         Font title;
         Font body;
@@ -45,9 +46,10 @@ namespace circuits {
     };
 
     struct Theme {
-        Shape shape;
-        Palette palette;
-        Typography typography;
+        Shape shape{};
+        Palette palette{};
+        StateLayer layer{};
+        Typography typography{};
         ThemeName theme = ThemeName::Unknown;
 
         static Theme getTheme(ThemeName systemTheme = ThemeName::Unknown);

@@ -6,7 +6,6 @@ namespace circuits {
         counter.observe([this](const int val) {
            counter_str = std::to_string(val);
         });
-        counter = 0;
     }
 
     void MainVM::increment() {

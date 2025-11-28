@@ -21,7 +21,7 @@ namespace circuits {
 
         r.rect(rect.pos,rect.size, theme.shape.cornerSmall);
         r.fill(theme.palette.surfaceVariant);
-        if (state() == State::Active) {
+        if (state() == State::Pressed) {
             r.stroke(theme.palette.outline,theme.shape.borderThickness);
         }
 
