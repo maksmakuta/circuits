@@ -26,15 +26,18 @@ namespace circuits {
 
     void Column::onLayout(const Rect& r) {
         IWidget::onLayout(r);
-
         auto offset = getRect().pos;
-
         for (auto i = 0; i < m_children.size(); ++i) {
             const auto& child = m_children[i];
             const auto mod = child->getModifier();
             auto child_size = m_children_sizes[i];
-            const auto g_offset = WidgetUtils::applyVGravity(mod.getGravity(),child_size,getRect().size);
-            child->onLayout({offset + g_offset, child_size});
+            const auto g_offset = WidgetUtils::applyVGravity(
+                mod.getGravity(),
+                child_size,
+                getRect().size
+            );
+            const auto rect = Rect(offset + g_offset, child_size);
+            child->onLayout(WidgetUtils::removePadding(rect,mod.getPadding()));
             offset.y += child_size.y;
         }
     }

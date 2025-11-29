@@ -53,6 +53,13 @@ namespace circuits {
         return static_cast<float>(val) / 100.f;
     }
 
+    Rect WidgetUtils::removePadding(const Rect &rect, const Padding &padding) {
+        return {
+            rect.pos + glm::ivec2{padding.left,padding.top},
+            rect.size - glm::ivec2{padding.left + padding.right,padding.top + padding.bottom}
+        };
+    }
+
     glm::ivec2 WidgetUtils::applyVGravity(const Gravity& g, const glm::ivec2& content,const glm::ivec2& max_size) {
         if (any(g, Gravity::HCenter))
             return {max_size.x / 2 - content.x / 2,0};
