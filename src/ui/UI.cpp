@@ -76,18 +76,32 @@ namespace circuits {
         return new_widget<Box>(mod, list);
     }
 
-    std::shared_ptr<RadioButton>  radiobutton(const Modifier &mod) {
+    std::shared_ptr<Row> radiobutton(const std::string& text, const Modifier& mod){
+        return radiobutton(label(text, FontRole::Label,Modifier().center()),mod);
+    }
+
+    std::shared_ptr<Row> radiobutton(const WidgetPtr& inner, const Modifier& mod){
+        return row({radiobutton(mod), inner}, Modifier().padding(4,8));
+    }
+
+    std::shared_ptr<RadioButton> radiobutton(const Modifier& mod){
         return new_widget<RadioButton>(mod);
     }
 
-    std::shared_ptr<Row>  radiobutton(const WidgetPtr& value, const Modifier &mod) {
-        return row({ radiobutton(mod), value}, Modifier().padding(8));
+    std::shared_ptr<RadioGroup> radiogroup(
+        Observable<int>& selected,
+        const WidgetList& list,
+        const Modifier& mod
+    ) {
+        return new_widget<RadioGroup>(mod,selected,list);
     }
 
-    std::shared_ptr<Row>  radiobutton(const std::string& text, const Modifier &mod) {
-        return row({ radiobutton(mod), label(text, Modifier().padding(8))}, Modifier().padding(8));
+    std::shared_ptr<RadioGroup> radiogroup(
+        int selected,
+        const WidgetList& list,
+        const Modifier& mod
+    ) {
+        return new_widget<RadioGroup>(mod,selected,list);
     }
-
-    WidgetPtr grid(const WidgetList& list, Modifier mod);
 
 }

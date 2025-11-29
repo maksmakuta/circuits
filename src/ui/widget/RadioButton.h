@@ -5,17 +5,8 @@
 
 namespace circuits {
 
-    class RadioGroup;
-    class RadioButton;
-
-    using OnCheckedListener = std::function<void(RadioButton*)>;
-
     class RadioButton final : public IWidget {
     public:
-        friend class RadioGroup;
-
-        explicit RadioButton(RadioGroup* parent = nullptr);
-
         glm::ivec2 onMeasure(const glm::ivec2 &max) override;
         void onDraw(Renderer &) override;
         void onEvent(const Event &e) override;

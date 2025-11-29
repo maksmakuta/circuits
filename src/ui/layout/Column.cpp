@@ -61,4 +61,8 @@ namespace circuits {
         }
     }
 
+    void Column::add(const WidgetPtr &w) {
+        m_children.push_back(w);
+    }
+
 }

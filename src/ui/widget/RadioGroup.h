@@ -2,22 +2,22 @@
 #define CIRCUITS_RADIOGROUP_H
 
 #include "RadioButton.h"
-#include "core/IWidget.h"
+#include "rx/Observable.h"
+#include "ui/layout/Column.h"
 
 namespace circuits {
 
-    class RadioGroup final : public IWidget {
+    class RadioGroup final : public Column {
     public:
-        RadioGroup(const WidgetList& widgets);
-        RadioGroup(const std::initializer_list<std::string>& strings);
+        RadioGroup(Observable<int>& s,const WidgetList& widgets);
+        RadioGroup(int s,const WidgetList& widgets);
 
-        glm::ivec2 onMeasure(const glm::ivec2 &max) override;
-        void onLayout(const Rect &r) override;
-        void onDraw(Renderer &) override;
-        void onUpdate(float) override;
-        void onEvent(const Event &e) override;
+        void select(int n);
+        int selected() const;
+
     private:
-
+        int m_selected;
+        std::unordered_map<int, RadioButton*> m_table;
     };
 
 }

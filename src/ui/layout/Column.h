@@ -5,7 +5,7 @@
 
 namespace circuits {
 
-    class Column final : public IWidget, public std::enable_shared_from_this<Column>{
+    class Column : public IWidget, public std::enable_shared_from_this<Column>{
     public:
         Column(const WidgetList& list);
 
@@ -14,6 +14,8 @@ namespace circuits {
         void onDraw(Renderer &) override;
         void onUpdate(float) override;
         void onEvent(const Event &) override;
+
+        void add(const WidgetPtr &);
 
     private:
         std::vector<WidgetPtr> m_children;

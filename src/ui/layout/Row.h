@@ -5,7 +5,7 @@
 
 namespace circuits {
 
-    class Row final : public IWidget, public std::enable_shared_from_this<Row>{
+    class Row : public IWidget, public std::enable_shared_from_this<Row>{
     public:
         Row(const WidgetList& list);
 

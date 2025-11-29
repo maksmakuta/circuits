@@ -4,10 +4,6 @@
 
 namespace circuits {
 
-    RadioButton::RadioButton(RadioGroup *parent) {
-
-    }
-
     glm::ivec2 RadioButton::onMeasure(const glm::ivec2 &max) {
         return {20,20};
     }
