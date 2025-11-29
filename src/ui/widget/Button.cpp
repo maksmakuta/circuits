@@ -4,6 +4,7 @@
 #include <SDL3/SDL_mouse.h>
 
 #include "utils/ColorUtils.h"
+#include "utils/WidgetUtils.h"
 
 namespace circuits {
 
@@ -12,11 +13,41 @@ namespace circuits {
     }
 
     glm::ivec2 Button::onMeasure(const glm::ivec2 &max) {
-        return {0,0};
+        auto size = glm::ivec2(0);
+
+        if(m_inner != nullptr) {
+            const auto& child = m_inner;
+            const auto child_size = WidgetUtils::preferredSize(
+                child->getModifier().getParams(),
+                WidgetUtils::sizeWithPadding(child, max),
+                max
+            );
+            m_child_size = child_size;
+            size = glm::max(size, child_size);
+        }else {
+            size += glm::ivec2{50,30};
+        }
+
+        return size;
     }
 
     void Button::onLayout(const Rect& r) {
         IWidget::onLayout(r);
+
+        if(m_inner == nullptr) return;
+
+        const auto offset = getRect().pos;
+        const auto& child = m_inner;
+        const auto mod = child->getModifier();
+        const auto& child_size = m_child_size;
+        const auto g_offset = WidgetUtils::applyGravity(
+            mod.getGravity(),
+            child_size,
+            getRect().size
+        );
+        const auto rect = Rect(offset + g_offset, child_size);
+        child->onLayout(WidgetUtils::removePadding(rect,mod.getPadding()));
+
     }
 
     void Button::onDraw(Renderer& r) {

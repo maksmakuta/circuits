@@ -26,6 +26,7 @@ namespace circuits {
 
     void Column::onLayout(const Rect& r) {
         IWidget::onLayout(r);
+
         auto offset = getRect().pos;
         for (auto i = 0; i < m_children.size(); ++i) {
             const auto& child = m_children[i];
@@ -43,9 +44,6 @@ namespace circuits {
     }
 
     void Column::onDraw(Renderer& r) {
-        r.rect(getRect().pos, getRect().size);
-        r.fill(Color(0xFFFF0000));
-
         for (const auto& child : m_children) {
             child->onDraw(r);
         }

@@ -66,15 +66,18 @@ namespace circuits {
         if (any(g, Gravity::Right))
             return {max_size.x - content.x ,0};
         return {0,0};
-
     }
 
     glm::ivec2 WidgetUtils::applyHGravity(const Gravity& g, const glm::ivec2& content,const glm::ivec2& max_size) {
-
+        if (any(g, Gravity::VCenter))
+            return {0, max_size.y / 2 - content.y / 2};
+        if (any(g, Gravity::Bottom))
+            return {0, max_size.y - content.y};
+        return {0,0};
     }
 
     glm::ivec2 WidgetUtils::applyGravity(const Gravity& g, const glm::ivec2& content,const glm::ivec2& max_size) {
-
+        return applyHGravity(g,content,max_size) + applyVGravity(g,content,max_size);
     }
 
 
