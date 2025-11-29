@@ -37,6 +37,7 @@ namespace circuits {
 
     void Column::onLayout(const Rect& r) {
         setRect(r);
+
         glm::ivec2 cursor = r.pos;
 
         for (size_t i = 0; i < m_children.size(); i++) {
@@ -59,15 +60,13 @@ namespace circuits {
                 cursor.y + padding.top
             };
 
-            glm::ivec2 finalSize = {
-                size.x - padding.left - padding.right,
-                size.y - padding.top  - padding.bottom
-            };
+            glm::ivec2 finalSize = size;
 
             const int freeX = r.size.x - size.x;
-            if (gravity == Gravity::Center)
+
+            if (any(gravity, Gravity::HCenter))
                 finalPos.x = r.pos.x + freeX / 2 + padding.left;
-            else if (gravity == Gravity::Right)
+            else if (any(gravity, Gravity::Right))
                 finalPos.x = r.pos.x + freeX + padding.left;
 
             child->onLayout({finalPos, finalSize});
@@ -79,9 +78,6 @@ namespace circuits {
         for (const auto& child : m_children) {
             child->onDraw(r);
         }
-        // const auto theme = currentTheme();
-        // r.rect(getRect().pos, getRect().size);
-        // r.stroke(theme.palette.border,theme.style.borderThickness);
     }
 
     void Column::onUpdate(const float dt) {

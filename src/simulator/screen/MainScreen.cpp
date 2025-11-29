@@ -32,7 +32,12 @@ namespace circuits {
                             .size(glm::ivec2{48})
                             .padding(4,8)
                 ),
-            }, mod().padding(8).center())
+            }, mod().padding(8).center()),
+            box({
+                card(label("0",mod().padding(32).center()), CardType::Outlined ),
+                label("1",mod().padding(8).gravity(Gravity::BottomRight)),
+                label("2",mod().padding(8).gravity(Gravity::TopLeft)),
+            },mod().padding(8).center())
         }),mod().center() );
     }
 

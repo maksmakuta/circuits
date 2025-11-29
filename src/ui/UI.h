@@ -1,6 +1,7 @@
 #ifndef CIRCUITS_UI_H
 #define CIRCUITS_UI_H
 
+#include "layout/Box.h"
 #include "layout/Column.h"
 #include "layout/Row.h"
 
@@ -36,10 +37,7 @@ namespace circuits {
     std::shared_ptr<Column> column(const WidgetList& list, const Modifier &mod = {});
     std::shared_ptr<Row> row(const WidgetList& list, const Modifier &mod = {});
     WidgetPtr grid(const WidgetList& list, Modifier mod = {});
-    WidgetPtr box(const WidgetList& list, Modifier mod = {});
-
-
-
+    std::shared_ptr<Box> box(const WidgetList& list, const Modifier &mod = {});
 
 }
 

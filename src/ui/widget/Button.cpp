@@ -93,18 +93,18 @@ namespace circuits {
         }
     }
 
-    void Button::onButtonEvent(const Event& e) {
+    void Button::onButtonEvent(const Event& event) {
         if (state() == State::Disabled)
             return;
 
         const Rect rect = getRect();
-        const glm::ivec2 mousePos = e.type == EventType::MouseMove
-            ? glm::ivec2{e.mouseMove.x, e.mouseMove.y}
-        : glm::ivec2{e.mouseButton.x, e.mouseButton.y};
+        const glm::ivec2 mousePos = event.type == EventType::MouseMove
+            ? glm::ivec2{event.mouseMove.x, event.mouseMove.y}
+        : glm::ivec2{event.mouseButton.x, event.mouseButton.y};
 
         const bool inside = rect.contains(mousePos);
 
-        switch (e.type) {
+        switch (event.type) {
 
             case EventType::MouseMove: {
                 if (inside) {
@@ -117,7 +117,7 @@ namespace circuits {
             } break;
 
             case EventType::MouseDown: {
-                if (inside && e.mouseButton.button == SDL_BUTTON_LEFT) {
+                if (inside && event.mouseButton.button == SDL_BUTTON_LEFT) {
                     if (state() != State::Pressed)
                         setState(State::Pressed);
                 }

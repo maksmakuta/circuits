@@ -17,6 +17,14 @@ namespace circuits {
         return new_widget<Label>(mod, text, FontRole::Body);
     }
 
+    std::shared_ptr<Label>  label(Observable<std::string>& text, const FontRole& r, const Modifier &mod) {
+        return new_widget<Label>(mod, text, r);
+    }
+
+    std::shared_ptr<Label>  label(Observable<std::string>& text, const Modifier &mod) {
+        return new_widget<Label>(mod, text, FontRole::Body);
+    }
+
     std::shared_ptr<Button> button(const WidgetPtr& inner, const ButtonCallback& c, const Modifier &mod){
         return new_widget<Button>(mod, inner, c);
     }
@@ -66,14 +74,8 @@ namespace circuits {
     }
 
     WidgetPtr grid(const WidgetList& list, Modifier mod);
-    WidgetPtr box(const WidgetList& list, Modifier mod);
 
-    std::shared_ptr<Label>  label(Observable<std::string>& text, const FontRole& r, const Modifier &mod) {
-        return new_widget<Label>(mod, text, r);
+    std::shared_ptr<Box> box(const WidgetList& list, const Modifier &mod) {
+        return new_widget<Box>(mod, list);
     }
-
-    std::shared_ptr<Label>  label(Observable<std::string>& text, const Modifier &mod) {
-        return new_widget<Label>(mod, text, FontRole::Body);
-    }
-
 }

@@ -97,6 +97,12 @@ add_executable(circuits
         src/window/Window.h
 
         src/main.cpp
+        src/ui/widget/RadioButton.cpp
+        src/ui/widget/RadioButton.h
+        src/ui/widget/RadioGroup.cpp
+        src/ui/widget/RadioGroup.h
+        src/ui/layout/Box.cpp
+        src/ui/layout/Box.h
 )
 
 target_include_directories(circuits PUBLIC src)
