@@ -41,12 +41,6 @@ namespace circuits {
         return *this;
     }
 
-    Modifier& Modifier::asParent(const float percent_h, const float percent_v){
-        m_params.width  = SizeValue(SizeUnit::Percent,static_cast<int16_t>(percent_v * 100.f));
-        m_params.height = SizeValue(SizeUnit::Percent,static_cast<int16_t>(percent_h * 100.f));
-        return *this;
-    }
-
     Modifier& Modifier::asParent(const glm::vec2& percent){
         m_params.width  = SizeValue(SizeUnit::Percent,static_cast<int16_t>(percent.x * 100.f));
         m_params.height = SizeValue(SizeUnit::Percent,static_cast<int16_t>(percent.y * 100.f));
@@ -60,12 +54,6 @@ namespace circuits {
 
     Modifier& Modifier::asHeight(const float percent){
         m_params.height  = SizeValue(SizeUnit::Percent,static_cast<int16_t>(percent * 100.f));
-        return *this;
-    }
-
-    Modifier& Modifier::size(const int w, const int h){
-        m_params.width  = SizeValue(SizeUnit::Fixed,static_cast<int16_t>(w));
-        m_params.height = SizeValue(SizeUnit::Fixed,static_cast<int16_t>(h));
         return *this;
     }
 
@@ -91,8 +79,31 @@ namespace circuits {
     }
 
     Modifier& Modifier::center() {
-        m_gravity |= Gravity::Center;
-        return *this;
+        return gravity(Gravity::Center);
+    }
+
+    Modifier& Modifier::centerV(){
+        return gravity(Gravity::VCenter);
+    }
+
+    Modifier& Modifier::centerH(){
+        return gravity(Gravity::HCenter);
+    }
+
+    Modifier& Modifier::top(){
+        return gravity(Gravity::Top);
+    }
+
+    Modifier& Modifier::bottom(){
+        return gravity(Gravity::Bottom);
+    }
+
+    Modifier& Modifier::left(){
+        return gravity(Gravity::Left);
+    }
+
+    Modifier& Modifier::right(){
+        return gravity(Gravity::Right);
     }
 
     Modifier& Modifier::padding(const int p) {
@@ -139,56 +150,6 @@ namespace circuits {
         return m_padding;
     }
 
-    glm::ivec2 Modifier::applyPadding(const glm::ivec2 &size) const {
-        const auto p = getPadding();
-        return {
-            size.x + p.left + p.right,
-            size.y + p.top + p.bottom
-        };
-    }
-
-    Rect Modifier::applyPadding(const Rect &rect) const {
-        const auto p = getPadding();
-        return {
-            glm::ivec2{
-                rect.pos.x - p.left,
-                rect.pos.y - p.top
-            },
-            glm::ivec2{
-                rect.size.x + p.left + p.right,
-                rect.size.y + p.top + p.bottom
-            }
-        };
-    }
-
-    glm::ivec2 Modifier::applySize(const glm::ivec2 &content, const glm::ivec2 &max) const {
-        glm::ivec2 result = content;
-
-        switch (m_params.width.unit) {
-            case SizeUnit::Fixed:
-                result.x = m_params.width.value;
-                break;
-            case SizeUnit::Percent:
-                result.x = (max.x * m_params.width.value) / 100;
-                break;
-            default:
-                break;
-        }
-
-        switch (m_params.height.unit) {
-            case SizeUnit::Fixed:
-                result.y = m_params.height.value;
-                break;
-            case SizeUnit::Percent:
-                result.y = (max.y * m_params.height.value) / 100;
-                break;
-            default:
-                break;
-        }
-
-        return result;
-    }
-
     static Theme global_theme{};
 
     Theme currentTheme() {
@@ -210,4 +171,5 @@ namespace circuits {
     void setTheme(Theme t) {
         global_theme = std::move(t);
     }
+
 }

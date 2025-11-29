@@ -12,68 +12,11 @@ namespace circuits {
     }
 
     glm::ivec2 Button::onMeasure(const glm::ivec2 &max) {
-        if (!m_inner)
-            return glm::ivec2{10, 10};
-
-        m_inner->setParent(shared_from_this());
-
-        const auto mod = m_inner->getModifier();
-        const auto padding = mod.getPadding();
-
-        const glm::ivec2 innerMax = {
-            max.x - padding.left - padding.right,
-            max.y - padding.top  - padding.bottom
-        };
-
-        glm::ivec2 measured = m_inner->onMeasure(innerMax);
-        measured = mod.applySize(measured, innerMax);
-        measured = mod.applyPadding(measured);
-
-        m_child_size = measured;
-
-        return getModifier().applySize(measured, max);
+        return {0,0};
     }
 
     void Button::onLayout(const Rect& r) {
         IWidget::onLayout(r);
-
-        if (!m_inner) return;
-
-        const auto& child = m_inner;
-        const auto mod = child->getModifier();
-        const auto padding = mod.getPadding();
-        const auto gravity = mod.getGravity();
-
-        auto size = m_child_size;
-
-        if (mod.getParams().width.unit == SizeUnit::Fill) {
-            size.x = getRect().size.x;
-        }
-        if (mod.getParams().height.unit == SizeUnit::Fill) {
-            size.y = getRect().size.y;
-        }
-
-        glm::ivec2 finalPos = {
-            r.pos.x + padding.left,
-            r.pos.y + padding.top
-        };
-
-        glm::ivec2 finalSize = size;
-
-        const int freeX = r.size.x - size.x;
-        const int freeY = r.size.y - size.y;
-
-        if (any(gravity, Gravity::HCenter))
-            finalPos.x = r.pos.x + freeX / 2 + padding.left;
-        else if (any(gravity, Gravity::Right))
-            finalPos.x = r.pos.x + freeX + padding.left;
-
-        if (any(gravity, Gravity::VCenter))
-            finalPos.y = r.pos.y + freeY / 2 + padding.top;
-        else if (any(gravity, Gravity::Bottom))
-            finalPos.y = r.pos.y + freeY + padding.top;
-
-        child->onLayout({finalPos, finalSize});
     }
 
     void Button::onDraw(Renderer& r) {

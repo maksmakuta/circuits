@@ -1,7 +1,6 @@
 #include "UI.h"
 
 namespace circuits {
-
     template<typename T, typename... Args>
     std::shared_ptr<T> new_widget(const Modifier& m, Args&&... args) {
         auto w = std::make_shared<T>(std::forward<Args>(args)...);
@@ -10,7 +9,7 @@ namespace circuits {
     }
 
     std::shared_ptr<Label> label(const std::string& text, const FontRole& r,const Modifier& mod) {
-       return new_widget<Label>(mod, text, r);
+        return new_widget<Label>(mod, text, r);
     }
 
     std::shared_ptr<Label> label(const std::string& text,const Modifier& mod) {
@@ -73,9 +72,22 @@ namespace circuits {
         return new_widget<Row>(mod, list);
     }
 
-    WidgetPtr grid(const WidgetList& list, Modifier mod);
-
     std::shared_ptr<Box> box(const WidgetList& list, const Modifier &mod) {
         return new_widget<Box>(mod, list);
     }
+
+    std::shared_ptr<RadioButton>  radiobutton(const Modifier &mod) {
+        return new_widget<RadioButton>(mod);
+    }
+
+    std::shared_ptr<Row>  radiobutton(const WidgetPtr& value, const Modifier &mod) {
+        return row({ radiobutton(mod), value}, Modifier().padding(8));
+    }
+
+    std::shared_ptr<Row>  radiobutton(const std::string& text, const Modifier &mod) {
+        return row({ radiobutton(mod), label(text, Modifier().padding(8))}, Modifier().padding(8));
+    }
+
+    WidgetPtr grid(const WidgetList& list, Modifier mod);
+
 }

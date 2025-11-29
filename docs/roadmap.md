@@ -5,26 +5,25 @@
     - [X] Fill and stroke Renderer API
     - [X] Textures and images API
     - [X] Text rendering API
-- [ ] Widget subsystem (0.2.x - 0.3.x, in progress)
+- [X] Widget subsystem (0.2.x, in progress)
     - [X] IWidget interface
     - [X] Theming
         - [X] Light/Dark themes
         - [X] Check system themes (where is possible)
-    - [ ] Widgets:
+    - [X] Widgets:
         - [X] Card
         - [X] Label
         - [X] Button
         - [X] Image
-        - [X] Input (need to rewrite)
+        - [X] Input
         - [X] Toggle
         - [X] CheckBox
-        - [ ] RadioGroup:
-          - [ ] RadioButton
-    - [ ] Layouts:
+        - [X] RadioGroup:
+          - [X] RadioButton
+    - [X] Layouts:
         - [X] Column
         - [X] Row
-        - [ ] Grid
-        - [ ] Box
+        - [X] Box
 - [X] Reactive support (0.2.x - 0.3.x, in progress)
   - [X] Observable
 - [ ] Component subsystem (0.3.x, planned)

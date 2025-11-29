@@ -11,6 +11,7 @@
 #include "widget/Image.h"
 #include "widget/Input.h"
 #include "widget/Label.h"
+#include "widget/RadioGroup.h"
 #include "widget/Toggle.h"
 
 namespace circuits {
@@ -34,10 +35,18 @@ namespace circuits {
     std::shared_ptr<Checkbox>  checkbox(bool val, const Modifier &mod = {});
     std::shared_ptr<Checkbox>  checkbox(Observable<bool>& val, const Modifier &mod = {});
 
+    std::shared_ptr<RadioButton>  radiobutton(const Modifier &mod = {});
+    std::shared_ptr<Row>  radiobutton(const WidgetPtr& value, const Modifier &mod = {});
+    std::shared_ptr<Row>  radiobutton(const std::string& text, const Modifier &mod = {});
+
+    std::shared_ptr<RadioGroup>  radiogroup(const WidgetList& items, const Modifier &mod = {});
+    std::shared_ptr<RadioGroup>  radiogroup(const std::initializer_list<std::string>& items, const Modifier &mod = {});
+
     std::shared_ptr<Column> column(const WidgetList& list, const Modifier &mod = {});
     std::shared_ptr<Row> row(const WidgetList& list, const Modifier &mod = {});
-    WidgetPtr grid(const WidgetList& list, Modifier mod = {});
     std::shared_ptr<Box> box(const WidgetList& list, const Modifier &mod = {});
+
+    WidgetPtr grid(const WidgetList& list, Modifier mod = {});
 
 }
 

@@ -39,18 +39,22 @@ namespace circuits {
         Modifier& fillHeight();
 
         Modifier& asParent(float percent);
-        Modifier& asParent(float percent_h,float percent_v);
         Modifier& asParent(const glm::vec2& percent);
         Modifier& asWidth(float percent);
         Modifier& asHeight(float percent);
 
-        Modifier& size(int w, int h);
         Modifier& size(const glm::vec2& size);
         Modifier& width(int);
         Modifier& height(int);
 
         Modifier& gravity(Gravity);
         Modifier& center();
+        Modifier& centerV();
+        Modifier& centerH();
+        Modifier& top();
+        Modifier& bottom();
+        Modifier& left();
+        Modifier& right();
 
         Modifier& padding(int p);
         Modifier& padding(int vert, int horiz);
@@ -59,11 +63,6 @@ namespace circuits {
         Modifier& padding(const glm::ivec2& p);
         Modifier& padding(const glm::ivec3& p);
         Modifier& padding(const glm::ivec4& p);
-
-        [[nodiscard]] glm::ivec2 applyPadding(const glm::ivec2& size) const;
-        [[nodiscard]] Rect applyPadding(const Rect& rect) const;
-
-        [[nodiscard]] glm::ivec2 applySize(const glm::ivec2& content, const glm::ivec2& max) const;
 
         [[nodiscard]] SizeParams getParams() const;
         [[nodiscard]] Gravity getGravity() const;
