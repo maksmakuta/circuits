@@ -80,5 +80,15 @@ namespace circuits {
         return applyHGravity(g,content,max_size) + applyVGravity(g,content,max_size);
     }
 
+    Font WidgetUtils::getFont(const FontRole r) {
+        switch (r) {
+            case FontRole::Title:
+                return currentTheme().typography.title;
+            case FontRole::Body:
+                return currentTheme().typography.body;
+            default:
+                return currentTheme().typography.label;
+        }
+    }
 
 }

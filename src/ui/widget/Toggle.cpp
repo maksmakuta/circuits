@@ -32,7 +32,7 @@ namespace circuits {
             ? glm::ivec2{getRect().size.x - 16, getRect().size.y / 2}
             : glm::ivec2{16, getRect().size.y / 2};
         const auto thumb_pos = rect.pos + offset;
-        r.circle(thumb_pos,thumb_size);
+        r.circle(thumb_pos,static_cast<float>(thumb_size));
         r.fill(m_switch ? theme.palette.background : theme.palette.outline);
     }
 

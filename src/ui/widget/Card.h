@@ -23,6 +23,7 @@ namespace circuits {
     private:
         CardType m_type;
         WidgetPtr m_inner;
+        glm::ivec2 m_child_size{0};
     };
 
 }

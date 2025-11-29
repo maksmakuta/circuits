@@ -18,6 +18,7 @@ namespace circuits {
 
         glm::ivec2 onMeasure(const glm::ivec2 &max) override;
         void onDraw(Renderer &) override;
+        void onEvent(const Event &e) override;
 
         void select(bool);
         [[nodiscard]] bool isSelected() const;

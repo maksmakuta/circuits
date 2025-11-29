@@ -16,6 +16,11 @@ namespace circuits {
         auto size = glm::ivec2(0);
 
         if(m_inner != nullptr) {
+
+            if (m_inner->getParent() != shared_from_this()) {
+                m_inner->setParent(shared_from_this());
+            }
+
             const auto& child = m_inner;
             const auto child_size = WidgetUtils::preferredSize(
                 child->getModifier().getParams(),
@@ -24,7 +29,7 @@ namespace circuits {
             );
             m_child_size = child_size;
             size = glm::max(size, child_size);
-        }else {
+        } else {
             size += glm::ivec2{50,30};
         }
 
@@ -47,7 +52,6 @@ namespace circuits {
         );
         const auto rect = Rect(offset + g_offset, child_size);
         child->onLayout(WidgetUtils::removePadding(rect,mod.getPadding()));
-
     }
 
     void Button::onDraw(Renderer& r) {
